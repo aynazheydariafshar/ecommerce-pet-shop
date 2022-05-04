@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './Assest/Styles/index.css';
 import App from './App';
 
 
