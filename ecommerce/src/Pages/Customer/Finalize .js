@@ -1,7 +1,12 @@
+import CustomerLayout from 'Layout/CustomerLayout';
 import React from 'react';
 
 const Finalize  = () => {
-    return <div>Finalize</div>;
+    return <>
+    <CustomerLayout>
+        <h1>Finalize</h1>
+    </CustomerLayout>
+    </>;
 }
 
 
