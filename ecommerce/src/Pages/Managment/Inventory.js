@@ -1,7 +1,12 @@
+import ManagementLayout from 'Layout/ManagementLayout';
 import React from 'react';
 
 const Inventory = () => {
-    return <div>Inventory</div>;
+    return <>
+        <ManagementLayout>
+            <h1>Inventory</h1>
+        </ManagementLayout>
+    </>;
 }
 
 

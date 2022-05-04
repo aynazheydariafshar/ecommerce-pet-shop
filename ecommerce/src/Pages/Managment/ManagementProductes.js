@@ -1,7 +1,12 @@
+import ManagementLayout from 'Layout/ManagementLayout';
 import React from 'react';
 
 const ManagementProductes = () => {
-    return <div>Management Productes</div>
+    return <>
+        <ManagementLayout>
+            <h1>ManagementProductes</h1>
+        </ManagementLayout>
+    </>
 }
 
 
