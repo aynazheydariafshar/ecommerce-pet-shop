@@ -1,6 +1,6 @@
 import React from 'react';
-import NavbarManagment from '../Components/NavbarManagment';
-import Footer from '../Components/Footer';
+import NavbarManagment from 'Components/NavbarManagment';
+import Footer from 'Components/Footer';
 
 const ManagementLayout = ({children}) => {
     return <>

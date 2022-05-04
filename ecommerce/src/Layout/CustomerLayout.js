@@ -1,7 +1,7 @@
 import React from 'react';
-import Footer from '../Components/Footer';
-import Header from '../Components/Header';
-import NavbarSide from '../Components/NavbarSide';
+import Footer from 'Components/Footer';
+import Header from 'Components/Header';
+import NavbarSide from 'Components/NavbarSide';
 
 const CustomerLayout = ({children}) => {
     return <>
