@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ManagementProductes = () => {
-    return <div>Management Productes</div>;
+    return <div>Management Productes</div>
 }
 
 
