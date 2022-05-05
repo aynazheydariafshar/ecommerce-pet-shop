@@ -1,16 +1,16 @@
-import './Assets/Styles/css/App.css';
+import './assets/styles/css/App.css';
 import { Route, Routes } from 'react-router-dom';
-import Home from 'Pages/Customer/Home';
-import Product from 'Pages/Customer/Product';
-import Card from 'Pages/Customer/Card';
-import Finalize from 'Pages/Customer/Finalize ';
-import Successful from 'Pages/Customer/Successful';
-import Unsuccessful from 'Pages/Customer/Unsuccessful';
-import Login from 'Pages/Managment/Login';
-import Inventory from 'Pages/Managment/Inventory';
-import ManagementProductes from 'Pages/Managment/ManagementProductes';
-import Orders from 'Pages/Managment/Orders';
-import NotFound from 'Pages/NotFound';
+import Home from 'pages/Home';
+import Product from 'pages/Product';
+import Card from 'pages/Card';
+import Finalize from 'pages/Finalize ';
+import Successful from 'pages/Successful';
+import Unsuccessful from 'pages/Unsuccessful';
+import Login from 'pages/Login';
+import Inventory from 'pages/Inventory';
+import ManagementProductes from 'pages/ManagementProductes';
+import Orders from 'pages/Orders';
+import NotFound from 'pages/NotFound';
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
-import NavbarManagment from 'Layout/structerLayout/NavbarManagment';
-import Footer from 'Layout/structerLayout/Footer';
+import NavbarManagment from 'layout/structerLayout/NavbarManagment';
+import Footer from 'layout/structerLayout/Footer';
 
 const ManagementLayout = (Component) => {
     return function(...props){

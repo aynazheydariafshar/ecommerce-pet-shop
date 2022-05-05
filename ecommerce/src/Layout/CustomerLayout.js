@@ -1,7 +1,7 @@
 import React from 'react';
-import Footer from 'Layout/structerLayout/Footer';
-import Header from 'Layout/structerLayout/Header';
-import NavbarSide from 'Layout/structerLayout/NavbarSide';
+import Footer from 'layout/structerLayout/Footer';
+import Header from 'layout/structerLayout/Header';
+import NavbarSide from 'layout/structerLayout/NavbarSide';
 
 const CustomerLayout = (Component) => {
     return function(...props) {

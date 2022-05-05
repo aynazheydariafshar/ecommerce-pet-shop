@@ -1,4 +1,4 @@
-import ManagementLayout from 'Layout/ManagementLayout';
+import ManagementLayout from 'layout/ManagementLayout';
 import React from 'react';
 
 const Orders = () => {

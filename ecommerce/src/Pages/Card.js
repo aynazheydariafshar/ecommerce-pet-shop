@@ -1,4 +1,4 @@
-import CustomerLayout from 'Layout/CustomerLayout';
+import CustomerLayout from 'layout/CustomerLayout';
 import React from 'react';
 
 const Card = () => {
