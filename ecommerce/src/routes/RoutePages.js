@@ -11,17 +11,17 @@ import Successful from "pages/Successful";
 import Unsuccessful from "pages/Unsuccessful";
 
 const RoutePages = [
-    {path : '/' , element : <Home />},
-    {path : '/product:id' , element : <Product />},
-    {path : '/card' , element : <Card />},
-    {path : '/finalize' , element : <Finalize />},
-    {path : '/successful' , element : <Successful />},
-    {path : '/unsuccessful' , element : <Unsuccessful />},
-    {path : '/login-manager' , element : <Login />},
-    {path : '/inventory' , element : <Inventory />},
-    {path : '/management-productes' , element : <ManagementProductes />},
-    {path : '/orders' , element : <Orders />},
-    {path :'*' , element: <NotFound />}
+    {path : '/' , element : <Home /> , isPrivate : false},
+    {path : '/product:id' , element : <Product /> , isPrivate : false},
+    {path : '/card' , element : <Card /> , isPrivate : false},
+    {path : '/finalize' , element : <Finalize /> , isPrivate : false},
+    {path : '/successful' , element : <Successful /> , isPrivate : false},
+    {path : '/unsuccessful' , element : <Unsuccessful /> , isPrivate : false},
+    {path : '/login-manager' , element : <Login /> , isPrivate : false},
+    {path : '/inventory' , element : <Inventory /> , isPrivate : true},
+    {path : '/management-productes' , element : <ManagementProductes /> , isPrivate : true},
+    {path : '/orders' , element : <Orders /> , isPrivate : true},
+    {path :'*' , element: <NotFound /> , isPrivate : false}
 ]
 
 
