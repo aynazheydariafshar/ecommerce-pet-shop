@@ -3,11 +3,9 @@ import React from 'react';
 
 const ManagementProductes = () => {
     return <>
-        <ManagementLayout>
-            <h1>ManagementProductes</h1>
-        </ManagementLayout>
-    </>
-}
+        <h1>ManagementProductes</h1>
+    </>;
+};
 
 
-export default ManagementProductes;
+export default ManagementLayout(ManagementProductes);

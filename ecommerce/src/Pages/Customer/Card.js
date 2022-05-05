@@ -3,11 +3,9 @@ import React from 'react';
 
 const Card = () => {
     return <>
-        <CustomerLayout>
-            <h1>Card</h1>
-        </CustomerLayout>
+        <h1>Card</h1>
     </>;
-}
+};
 
 
-export default Card;
+export default CustomerLayout(Card);

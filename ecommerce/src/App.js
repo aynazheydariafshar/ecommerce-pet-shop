@@ -23,9 +23,9 @@ function App() {
         <Route path='/Finalize' element={<Finalize />}/>
         <Route path='/Successful' element={<Successful />}/>
         <Route path='/UnSuccessful' element={<Unsuccessful />}/>
-        <Route path='/LoginManager' element={<Login />}/>
+        <Route path='/Login-Manager' element={<Login />}/>
         <Route path='/Inventory' element={<Inventory />}/>
-        <Route path='/ManagementProductes' element={<ManagementProductes />}/>
+        <Route path='/Management-Productes' element={<ManagementProductes />}/>
         <Route path='/Orders' element={<Orders />}/>
         <Route path='*' element={<NotFound />}/>
       </Routes>

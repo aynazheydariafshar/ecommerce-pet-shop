@@ -3,10 +3,8 @@ import React from 'react';
 
 const Product = () => {
     return <>
-        <CustomerLayout>
-            <h1>Product</h1>
-        </CustomerLayout>
+        <h1>Product</h1>
     </>;
-}
+};
 
-export default Product;
+export default CustomerLayout(Product);

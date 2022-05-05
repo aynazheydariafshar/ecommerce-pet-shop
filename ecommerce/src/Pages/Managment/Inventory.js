@@ -3,11 +3,9 @@ import React from 'react';
 
 const Inventory = () => {
     return <>
-        <ManagementLayout>
-            <h1>Inventory</h1>
-        </ManagementLayout>
+        <h1>Inventory</h1>
     </>;
-}
+};
 
 
-export default Inventory;
+export default ManagementLayout(Inventory);
