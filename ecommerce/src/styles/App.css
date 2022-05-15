@@ -1,6 +1,6 @@
 @font-face {
   font-family: iranSans;
-  src: url("../../public/assets/fonts/Iranian Sans.ttf");
+  src: url("assets/fonts/Iranian Sans.ttf");
 }
 body {
   margin: 0;
