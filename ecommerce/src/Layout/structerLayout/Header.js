@@ -119,10 +119,21 @@ export default function Header() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1}}>
       <AppBar position="static">
         <Toolbar>
           <Box sx={{ display: { xs: "none", md: "flex" } }}></Box>
+          <Toolbar sx={{padding : '10px'}}>
+            <img src={Logo} alt="logo" width='50px' height='50px'/>
+          </Toolbar>
+          <Typography
+            variant="h5"
+            noWrap
+            component="div"
+            sx={{ display: { xs: "none", sm: "block" } }}
+          >
+            Dr Afshar
+          </Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -132,17 +143,6 @@ export default function Header() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <Toolbar>
-            <img src={Logo} alt="logo" />
-          </Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            MUI
-          </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <IconButton
             size="large"
@@ -153,7 +153,7 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          {/* <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="show more"
@@ -164,7 +164,7 @@ export default function Header() {
             >
               <MoreIcon />
             </IconButton>
-          </Box>
+          </Box> */}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
