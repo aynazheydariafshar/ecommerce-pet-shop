@@ -10,8 +10,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import Logo from 'assets/images/logo.png'
+import Badge from '@mui/material/Badge';
+import Logo from 'assets/images/logo.png';
+import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
+import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -121,38 +123,72 @@ export default function Header() {
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static">
-        <Toolbar>
-          <Box sx={{ display: { xs: "none", md: "flex" } }}></Box>
-          <Toolbar sx={{padding : '10px'}}>
-            <img src={Logo} alt="logo" width='50px' height='50px'/>
-          </Toolbar>
-          <Typography
-            variant="h5"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            Dr Afshar
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+          <Box sx={{display: "flex" , justifyContent: 'space-between' }}>
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={1} color="error">
+                  <ShoppingBasketRoundedIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <ManageAccountsRoundedIcon />
+              </IconButton>
+            </Box>
+            <Box sx={{ display: "flex" , alignItems : 'center' , marginLeft : '120px'}}>
+              <Typography
+                variant="h5"
+                noWrap
+                component="div"
+                sx={{ display: { xs: "none" , sm: 'block' } }}
+              >
+                Dr
+              </Typography>
+              <Toolbar sx={{padding : '5px'}}>
+                <img src={Logo} alt="logo" width='50px' height='50px'/>
+              </Toolbar>
+              <Typography
+                variant="h5"
+                noWrap
+                component="div"
+                sx={{ display: { xs: "none" , sm: 'block' } }}
+              >
+                Afshar
+              </Typography>
+            </Box>
+            <Box sx={{ display: "flex" , alignItems : 'center'}}>
+
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            </Box>  
+          </Box>
           {/* <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -165,7 +201,6 @@ export default function Header() {
               <MoreIcon />
             </IconButton>
           </Box> */}
-        </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
