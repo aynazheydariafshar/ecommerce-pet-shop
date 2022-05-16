@@ -13,13 +13,13 @@ const Login = () => {
     
     const validationSchema = yup.object({
         username: yup
-          .string('Enter your email')
-          .min(4, 'Password should be of minimum 8 characters length')
-          .required('Email is required'),
+          .string()
+          .min(4, 'نام کاربری باید حداقل شامل 4 کارکتر باشد ')
+          .required('پر کردن این فیلد الزامی می باشد'),
         password: yup
-          .string('Enter your password')
-          .min(8, 'Password should be of minimum 8 characters length')
-          .required('Password is required'),
+          .string()
+          .min(6, 'رمز عبور باید حداقل شامل 6 کارکتر باشد')
+          .required('پر کردن این فیلد الزامی می باشد'),
     });
     const history = useNavigate()
     useEffect(() => {
