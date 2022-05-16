@@ -17,7 +17,7 @@ const RoutePages = [
     {path : '/finalize' , element : <Finalize /> , isPrivate : false},
     {path : '/successful' , element : <Successful /> , isPrivate : false},
     {path : '/unsuccessful' , element : <Unsuccessful /> , isPrivate : false},
-    {path : '/login-manager' , element : <Login /> , isPrivate : false},
+    {path : '/login' , element : <Login /> , isPrivate : false},
     {path : '/inventory' , element : <Inventory /> , isPrivate : true},
     {path : '/management-productes' , element : <ManagementProductes /> , isPrivate : true},
     {path : '/orders' , element : <Orders /> , isPrivate : true},
