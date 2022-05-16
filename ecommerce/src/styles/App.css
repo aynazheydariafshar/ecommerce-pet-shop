@@ -1,14 +1,14 @@
 @font-face {
   font-family: iranSans;
-  src: url("../../public/assets/fonts/Iranian Sans.ttf");
+  src: url("assets/fonts/Iranian Sans.ttf");
 }
-body {
+* {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: "iranSans";
+  font-family: "iranSans" !important;
 }
 
 /*# sourceMappingURL=App.css.map */
