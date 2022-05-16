@@ -24,8 +24,8 @@ const Footer = () => {
                 >
                 فروشگاه ما را در شبکه‌های اجتماعی دنبال کنید  
                 <Box sx={{mt : '10px'}}>
-                    <InstagramIcon />
-                    <FacebookRoundedIcon />
+                    <InstagramIcon className='icon-navbar'/>
+                    <FacebookRoundedIcon className='icon-navbar'/>
                 </Box>
             </Typography>
         </FooterContainer>    

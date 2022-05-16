@@ -1,5 +1,4 @@
 import * as React from "react";
-import 'styles/Header.css'
 import { styled, alpha} from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -44,6 +43,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
+  fontSize : '15px',
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -165,7 +165,6 @@ export default function Header() {
                   <SearchIcon />
                 </SearchIconWrapper>
                 <StyledInputBase
-                  className="serach"
                   placeholder="...جتسجو"
                   inputProps={{ "aria-label": "search" }}
                 />

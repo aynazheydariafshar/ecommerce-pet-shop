@@ -2,6 +2,7 @@
   font-family: iranSans;
   src: url("assets/fonts/Iranian Sans.ttf");
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -11,4 +12,9 @@
   font-family: "iranSans" !important;
 }
 
-/*# sourceMappingURL=App.css.map */
+.icon-navbar:hover {
+  color: rgb(255, 196, 0);
+  cursor: pointer;
+}
+
+
