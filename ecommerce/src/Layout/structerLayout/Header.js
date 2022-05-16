@@ -1,5 +1,6 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import 'styles/Header.css'
+import { styled, alpha} from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -123,15 +124,15 @@ export default function Header() {
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static">
-          <Box sx={{display: "flex" , justifyContent: 'space-between' }}>
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box sx={{display: "flex" , justifyContent: 'space-between' , backgroundColor : 'black' , padding :{xs : '15px' , sm : '0px'}}}>
+            <Box sx={{ display: "flex" , alignItems : 'center'}}>
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
                 color="inherit"
               >
                 <Badge badgeContent={1} color="error">
-                  <ShoppingBasketRoundedIcon />
+                  <ShoppingBasketRoundedIcon  className="icon-navbar"/>
                 </Badge>
               </IconButton>
               <IconButton
@@ -140,10 +141,10 @@ export default function Header() {
                 aria-label="account of current user"
                 aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
+                // onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <ManageAccountsRoundedIcon />
+                <ManageAccountsRoundedIcon className="icon-navbar"/>
               </IconButton>
             </Box>
             <Box sx={{ display: "flex" , alignItems : 'center' , marginLeft : '120px'}}>
@@ -151,42 +152,43 @@ export default function Header() {
                 variant="h5"
                 noWrap
                 component="div"
-                sx={{ display: { xs: "none" , sm: 'block' } }}
               >
                 Dr
               </Typography>
-              <Toolbar sx={{padding : '5px'}}>
+              <Toolbar sx={{ display: { xs: "none" , sm: 'block' } , padding : '5px' }}>
                 <img src={Logo} alt="logo" width='50px' height='50px'/>
               </Toolbar>
               <Typography
                 variant="h5"
                 noWrap
                 component="div"
-                sx={{ display: { xs: "none" , sm: 'block' } }}
+                sx={{marginRight : {xs : '55px' , sm : '0px'}}}
               >
-                Afshar
+                Afshar 
               </Typography>
             </Box>
             <Box sx={{ display: "flex" , alignItems : 'center'}}>
+              <Search sx={{display : {xs : 'none' , sm : 'flex'}}}>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
+              <Box>
 
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
+              </Box>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon  className="icon-navbar"/>
+              </IconButton>
             </Box>  
           </Box>
           {/* <Box sx={{ display: { xs: "flex", md: "none" } }}>
