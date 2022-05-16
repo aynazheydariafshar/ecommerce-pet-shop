@@ -1,6 +1,6 @@
 import { useState , useEffect} from "react"
 
-const useFetch = () => {
+const useFetch = (url) => {
     const [data , setData] = useState([]);
     const [loading , setLoading] = useState(true);
     const [error , setError] = useState(null);
@@ -9,7 +9,7 @@ const useFetch = () => {
        (async() => {
            try {
                setLoading(true);
-               const response = await fetch();
+               const response = await fetch(`http://localhost:3002/${url}`);
                const resault = await response.json();
                setData(resault);
            } catch (error) {
@@ -20,6 +20,7 @@ const useFetch = () => {
        })
     }, [])
 
+    return {data , loading , error}
 }
 
 export default useFetch
