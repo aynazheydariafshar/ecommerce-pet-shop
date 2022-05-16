@@ -20,7 +20,7 @@ const Login = () => {
                 xs={12} 
                 sm={6}
             >
-                <div style={{display : 'flex' , flexDirection :'column' , maxWidth : 400 , minWidth : 300}}>
+                <div style={{display : 'flex' , flexDirection :'column' , maxWidth : 400 ,boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px', minWidth : 300 , padding : '20px'}}>
                     <Grid container justifyContent='center'>
                         <img src={Logo} alt="logo" width='50px' height='50px'/>
                     </Grid>
