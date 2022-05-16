@@ -1,3 +1,8 @@
 .icon-navbar:hover {
     color: rgb(255, 196, 0);
 }
+
+.serach {
+    font-family: iranSans !important;
+    font-size: 15px !important;
+}

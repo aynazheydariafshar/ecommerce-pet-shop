@@ -63,10 +63,6 @@ export default function Header() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -74,10 +70,6 @@ export default function Header() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const menuId = "primary-search-account-menu";
@@ -147,7 +139,7 @@ export default function Header() {
                 <ManageAccountsRoundedIcon className="icon-navbar"/>
               </IconButton>
             </Box>
-            <Box sx={{ display: "flex" , alignItems : 'center' , marginLeft : '120px'}}>
+            <Box sx={{ display: "flex" , alignItems : 'center' , ml : '120px'}}>
               <Typography
                 variant="h5"
                 noWrap
@@ -155,7 +147,7 @@ export default function Header() {
               >
                 Dr
               </Typography>
-              <Toolbar sx={{ display: { xs: "none" , sm: 'block' } , padding : '5px' }}>
+              <Toolbar sx={{ display: { xs: "none" , sm: 'block' } , padding : '5px' , mt : '10px' }}>
                 <img src={Logo} alt="logo" width='50px' height='50px'/>
               </Toolbar>
               <Typography
@@ -168,24 +160,21 @@ export default function Header() {
               </Typography>
             </Box>
             <Box sx={{ display: "flex" , alignItems : 'center'}}>
-              <Search sx={{display : {xs : 'none' , sm : 'flex'}}}>
+              <Search>
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
                 <StyledInputBase
-                  placeholder="Search…"
+                  className="serach"
+                  placeholder="...جتسجو"
                   inputProps={{ "aria-label": "search" }}
                 />
               </Search>
-              <Box>
-
-              </Box>
               <IconButton
                 size="large"
                 edge="start"
                 color="inherit"
                 aria-label="open drawer"
-                sx={{ mr: 2 }}
               >
                 <MenuIcon  className="icon-navbar"/>
               </IconButton>
