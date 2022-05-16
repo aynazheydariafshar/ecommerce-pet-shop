@@ -19,6 +19,7 @@ const Login = () => {
                 justifyContent='space-around' 
                 xs={12} 
                 sm={6}
+                sx={{mt : {xs : '30px' , sm :'0px'}}}
             >
                 <div style={{display : 'flex' , flexDirection :'column' , maxWidth : 400 ,boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px', minWidth : 300 , padding : '25px'}}>
                     <Grid container justifyContent='center'>
