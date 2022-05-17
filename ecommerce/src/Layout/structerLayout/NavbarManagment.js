@@ -13,6 +13,8 @@ import Stack from '@mui/material/Stack';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
 import {Link} from 'react-router-dom';
+import { removeUserSession } from 'utils/Common';
+import { useNavigate } from 'react-router-dom';
 
 export default function NavbarManagment() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -21,9 +23,7 @@ export default function NavbarManagment() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const navigate = useNavigate()
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -36,7 +36,13 @@ export default function NavbarManagment() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
-  };
+};
+
+//logout func
+const handleLogOut = () => {
+    removeUserSession();
+    navigate('/login');
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -94,7 +100,7 @@ export default function NavbarManagment() {
       </MenuItem>
       <MenuItem>
             <Stack direction="row" spacing={2}>
-                <Button className="icon-navbar btn-color"> خروج</Button>
+                <Button onClick={handleLogOut} className="icon-navbar btn-color"> خروج</Button>
             </Stack>
       </MenuItem>
       <MenuItem>
@@ -138,7 +144,7 @@ export default function NavbarManagment() {
                     <Button className="icon-navbar btn-color" sx={{mr : '70px'}}>کالاها</Button>
                 </Stack>   
                 <IconButton size="large" color="inherit">
-                    <LogoutIcon className="icon-navbar"/>
+                    <LogoutIcon onClick={handleLogOut} className="icon-navbar"/>
                 </IconButton> 
                 <IconButton size="large" color="inherit">
                     <Link to='/' className="link">

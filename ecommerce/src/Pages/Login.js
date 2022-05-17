@@ -139,7 +139,7 @@ const Login = (props) => {
                         </div>
                         <div>
                             <Link to='/'>
-                                <HomeIcon color="action"/>
+                                <HomeIcon className='icon-navbar' color="action"/>
                             </Link>
                         </div>
                     </form>
