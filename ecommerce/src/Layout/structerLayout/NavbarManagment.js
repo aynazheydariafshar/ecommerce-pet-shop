@@ -99,7 +99,9 @@ export default function NavbarManagment() {
       </MenuItem>
       <MenuItem>
             <Stack direction="row" spacing={2}>
-                <Button className="icon-navbar btn-color"> خانه اصلی</Button>
+                <Link to='/' className='link'>
+                    <Button className="icon-navbar btn-color"> خانه اصلی</Button>
+                </Link>
             </Stack>
       </MenuItem>
     </Menu>
