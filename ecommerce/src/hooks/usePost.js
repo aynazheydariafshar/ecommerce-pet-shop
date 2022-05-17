@@ -11,9 +11,9 @@ const useFetch = (url , dataObj) => {
            axios.post(`http://localhost:3002/${url}` , dataObj)
            .then(response => {
                setLoading(true);
-            }).catch (error) {
+            }).catch (error => {
                 setLoading(true);
-            }
+            })
        })();
     }, [url])
 
