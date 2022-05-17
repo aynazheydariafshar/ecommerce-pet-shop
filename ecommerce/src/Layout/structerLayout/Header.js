@@ -14,6 +14,7 @@ import Badge from '@mui/material/Badge';
 import Logo from 'assets/images/logo.png';
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
+import {Link} from 'react-router-dom';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -68,8 +69,6 @@ export default function Header() {
 
   const menuId = "primary-search-account-menu";
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static">
@@ -86,11 +85,6 @@ export default function Header() {
               </IconButton>
               <IconButton
                 size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                // onClick={handleProfileMenuOpen}
                 color="inherit"
               >
                 <ManageAccountsRoundedIcon className="icon-navbar"/>
@@ -98,7 +92,9 @@ export default function Header() {
             </Box>
             <Box sx={{ display: "flex" , alignItems : 'center' , ml : '120px'}}>
               <Toolbar sx={{ display: { xs: "none" , sm: 'block' } , padding : '5px' , mt : '10px' }}>
-                <img src={Logo} alt="logo" width='50px' height='50px'/>
+                <Link to='/'>
+                  <img src={Logo} alt="logo" width='50px' height='50px'/>
+                </Link>
               </Toolbar>
               <Typography
                 variant="h5"

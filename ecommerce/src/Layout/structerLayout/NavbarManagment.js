@@ -4,18 +4,15 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Logo from 'assets/images/logo.png';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-
+import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
+import {Link} from 'react-router-dom';
 
 export default function NavbarManagment() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -90,9 +87,19 @@ export default function NavbarManagment() {
                 <Button className="icon-navbar btn-color">موجودی و قیمت ها</Button>
             </Stack>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem>
             <Stack direction="row" spacing={2}>
                 <Button className="icon-navbar btn-color">سفارش ها</Button>
+            </Stack>
+      </MenuItem>
+      <MenuItem>
+            <Stack direction="row" spacing={2}>
+                <Button className="icon-navbar btn-color"> خروج</Button>
+            </Stack>
+      </MenuItem>
+      <MenuItem>
+            <Stack direction="row" spacing={2}>
+                <Button className="icon-navbar btn-color"> خانه اصلی</Button>
             </Stack>
       </MenuItem>
     </Menu>
@@ -104,7 +111,9 @@ export default function NavbarManagment() {
           <Box sx={{ display: "flex" , alignItems : 'center'}}>
             <Box sx={{ display: "flex" , alignItems : 'center'}}>
                 <Toolbar sx={{ display: { xs: "none" , sm: 'block' } , padding : '5px' , mt : '10px' }}>
-                    <img src={Logo} alt="logo" width='50px' height='50px'/>
+                    <Link to='/'>
+                        <img src={Logo} alt="logo" width='50px' height='50px'/>
+                    </Link>
                 </Toolbar>
                 <Typography
                     variant="h5"
@@ -116,7 +125,7 @@ export default function NavbarManagment() {
                 </Typography>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: 'none', md: 'flex'} }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex'}  , marginRight : '15px'}}>
                 <Stack direction="row" spacing={2}>
                     <Button className="icon-navbar btn-color">سفارش ها</Button>
                 </Stack>  
@@ -124,8 +133,16 @@ export default function NavbarManagment() {
                     <Button className="icon-navbar btn-color">موجودی و قیمت ها</Button>
                 </Stack>  
                 <Stack direction="row" spacing={2}>
-                    <Button className="icon-navbar btn-color">کالاها</Button>
-                </Stack>    
+                    <Button className="icon-navbar btn-color" sx={{mr : '70px'}}>کالاها</Button>
+                </Stack>   
+                <IconButton size="large" color="inherit">
+                    <LogoutIcon className="icon-navbar"/>
+                </IconButton> 
+                <IconButton size="large" color="inherit">
+                    <Link to='/' className="link">
+                        <HomeIcon className="icon-navbar"/>
+                    </Link>
+                </IconButton> 
             </Box>
             <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                 <IconButton

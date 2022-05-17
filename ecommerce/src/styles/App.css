@@ -13,12 +13,16 @@
 }
 
 .icon-navbar:hover {
-  color: #652AD2;
+  color: #652AD2 !important;
   cursor: pointer;
 }
 
 .btn-color{
   color: black !important;
+}
+
+.link{
+  color: black;
 }
 
 

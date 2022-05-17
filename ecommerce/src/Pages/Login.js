@@ -4,7 +4,6 @@ import LoginImage from 'assets/images/24237-Cat-Dog-CorgiCat-Dog-HD-Wallpaper.jp
 import Logo from 'assets/images/logo.png';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import KeyRoundedIcon from '@mui/icons-material/KeyRounded';
-import DoorBackRoundedIcon from '@mui/icons-material/DoorBackRounded';
 import {Link , useNavigate} from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -12,6 +11,7 @@ import axios from 'axios';
 import { setUserSession } from 'utils/Common';
 import ErrorField from 'components/modal/ModalField'
 import ModalField from 'components/modal/ModalField';
+import HomeIcon from '@mui/icons-material/Home';
 
 const Login = (props) => {
 
@@ -139,7 +139,7 @@ const Login = (props) => {
                         </div>
                         <div>
                             <Link to='/'>
-                                <DoorBackRoundedIcon color="action"/>
+                                <HomeIcon color="action"/>
                             </Link>
                         </div>
                     </form>
