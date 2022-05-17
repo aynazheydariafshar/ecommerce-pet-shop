@@ -1,6 +1,14 @@
-import Orders from "pages/Orders";
-import ManagementProductes from "pages/ManagementProductes";
+import Card from "pages/Card";
+import Finalize from "pages/Finalize ";
+import Home from "pages/Home";
 import Inventory from "pages/Inventory";
+import Login from "pages/Login";
+import ManagementProductes from "pages/ManagementProductes";
+import NotFound from "pages/NotFound";
+import Orders from "pages/Orders";
+import Product from "pages/Product";
+import Successful from "pages/Successful";
+import Unsuccessful from "pages/Unsuccessful";
 import { Routes , Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 
