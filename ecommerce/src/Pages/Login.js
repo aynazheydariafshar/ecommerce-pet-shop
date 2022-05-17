@@ -1,5 +1,5 @@
 import { Button, Grid, InputAdornment, TextField } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginImage from 'assets/images/24237-Cat-Dog-CorgiCat-Dog-HD-Wallpaper.jpg'
 import Logo from 'assets/images/logo.png';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
@@ -8,9 +8,13 @@ import DoorBackRoundedIcon from '@mui/icons-material/DoorBackRounded';
 import {Link , useNavigate} from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import axios from 'axios';
+import { setUserSession } from 'utils/Common';
 
-const Login = () => {
-    
+const Login = (props) => {
+    const [loading , setLoading] = useState(true);
+    const [error , setError] = useState(null);
+
     const validationSchema = yup.object({
         username: yup
           .string()
@@ -18,25 +22,37 @@ const Login = () => {
           .required('پر کردن این فیلد الزامی می باشد'),
         password: yup
           .string()
-          .min(6, 'رمز عبور باید حداقل شامل 6 کارکتر باشد')
+          .min(5, 'رمز عبور باید حداقل شامل 5 کارکتر باشد')
           .required('پر کردن این فیلد الزامی می باشد'),
     });
+
     const history = useNavigate()
-    useEffect(() => {
-       if(localStorage.getItem('user-Info')){
-           history.push('/management-productes')
-       }
-    }, [])
 
     const formik = useFormik({
         initialValues: {
             username: '',
             password: '',
-            },
-        validationSchema: validationSchema,
-        onSubmit: (values) => {
-        alert(JSON.stringify(values, null, 2));
         },
+        validationSchema: validationSchema,
+        onSubmit: (values)=>{
+            setError(null);
+            setLoading(false);
+            axios.post('http://localhost:3002/auth/login' , {
+                username : values.username,
+                password : values.password
+            }).then(response => {
+                setLoading(true);
+                setUserSession(response.data.token , response.data.user);
+                history('/management-productes');
+            }).catch(error => {
+                setLoading(true);
+                if(error.response.status === 401 || error.response.status === 400){
+                    setError(error.response.data.message)
+                }else{
+                    setError('دوباره تلاش کنید')
+                } 
+            })
+        }
     });
 
 
