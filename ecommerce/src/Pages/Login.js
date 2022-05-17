@@ -10,10 +10,26 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
 import { setUserSession } from 'utils/Common';
+import ErrorField from 'components/modal/ModalField'
+import ModalField from 'components/modal/ModalField';
 
 const Login = (props) => {
+
+    //check for api
     const [loading , setLoading] = useState(true);
     const [error , setError] = useState(null);
+
+    //check for modal
+    const [isOpen , setIsOpen] = useState(false);
+
+    const handleDialogOpen = () => {
+        setIsOpen(true)
+    }
+
+    const handleDialogClose = () => {
+        setIsOpen(false)
+    }
+
 
     const validationSchema = yup.object({
         username: yup
@@ -51,6 +67,7 @@ const Login = (props) => {
                 }else{
                     setError('دوباره تلاش کنید')
                 } 
+                setIsOpen(true)
             })
         }
     });
@@ -129,6 +146,13 @@ const Login = (props) => {
                 </div>
             </Grid>
         </Grid>
+        {error !== null && 
+        <ModalField 
+            isOpen={isOpen}
+            handleClose = {handleDialogClose}
+            title = 'هشدار'
+            text='دوباره تلاش کنید'
+         />}
     </div>;
 }
 
