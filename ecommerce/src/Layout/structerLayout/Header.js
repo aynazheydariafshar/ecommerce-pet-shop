@@ -29,6 +29,7 @@ const Search = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: "auto",
   },
+  backgroundColor : '#F5F0FF',
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -116,7 +117,7 @@ export default function Header() {
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static">
-          <Box sx={{display: "flex" , justifyContent: 'space-between' , backgroundColor : 'black' , padding :{xs : '15px' , sm : '0px'}}}>
+          <Box sx={{display: "flex" , justifyContent: 'space-between' , backgroundColor : '#F8F9FD', color : 'black' , padding :{xs : '15px' , sm : '0px'}}}>
             <Box sx={{ display: "flex" , alignItems : 'center'}}>
               <IconButton
                 size="large"
@@ -140,13 +141,6 @@ export default function Header() {
               </IconButton>
             </Box>
             <Box sx={{ display: "flex" , alignItems : 'center' , ml : '120px'}}>
-              <Typography
-                variant="h5"
-                noWrap
-                component="div"
-              >
-                Dr
-              </Typography>
               <Toolbar sx={{ display: { xs: "none" , sm: 'block' } , padding : '5px' , mt : '10px' }}>
                 <img src={Logo} alt="logo" width='50px' height='50px'/>
               </Toolbar>
@@ -156,7 +150,7 @@ export default function Header() {
                 component="div"
                 sx={{marginRight : {xs : '55px' , sm : '0px'}}}
               >
-                Afshar 
+               Dr Afshar 
               </Typography>
             </Box>
             <Box sx={{ display: "flex" , alignItems : 'center'}}>
