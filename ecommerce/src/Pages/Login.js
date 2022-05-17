@@ -26,7 +26,7 @@ const Login = (props) => {
           .required('پر کردن این فیلد الزامی می باشد'),
     });
 
-    const history = useNavigate()
+    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -43,7 +43,7 @@ const Login = (props) => {
             }).then(response => {
                 setLoading(true);
                 setUserSession(response.data.token , response.data.user);
-                history('/management-productes');
+                navigate('/management-productes');
             }).catch(error => {
                 setLoading(true);
                 if(error.response.status === 401 || error.response.status === 400){
