@@ -16,6 +16,7 @@ const useFetch = (url) => {
                setLoading(true);
             }).catch (error => {
                 setLoading(true);
+                setError("لطفا دوباره تلاش کنید")
             })
        })();
     }, [url])
