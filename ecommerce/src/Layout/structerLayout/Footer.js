@@ -10,9 +10,9 @@ const FooterContainer = styled('div')({
     backgroundColor: 'black',
     paddingTop: 10,
     height: 100,
-    position: 'absolute',
     bottom: 0,
     width: '100%',
+    marginTop : '50px'
 });
 
 const Footer = () => {
