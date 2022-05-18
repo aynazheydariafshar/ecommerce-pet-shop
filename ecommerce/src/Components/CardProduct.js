@@ -29,8 +29,8 @@ export default function CardProduct({imageSrc , titleCard , price}) {
   );
 }
 
-ModalField.propTypes = {
+CardProduct.propTypes = {
     imageSrc : PropTypes.string,
     titleCard : PropTypes.string,
-    childeren : PropTypes.number,
+    price : PropTypes.number,
 }

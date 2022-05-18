@@ -7,18 +7,13 @@ const useFetch = (url) => {
     const [data , setdata] = useState([]);
 
     useEffect(() => {
-       (async() => {
-           setError(null);
-           setLoading(false);
-           axios.get(`http://localhost:3002/${url}`)
-           .then(response => {
-               setdata(response.data)
-               setLoading(true);
-            }).catch (error => {
-                setLoading(true);
-                setError("لطفا دوباره تلاش کنید")
+            setLoading(true);
+            axios.get(`http://localhost:3002/${url}`)
+            .then(response => {
+                setdata(response.data)
             })
-       })();
+            .catch(err => setError("لطفا دوباره تلاش کنید"))
+            .finally(res =>setLoading(false))
     }, [url])
 
     return {data , loading , error}
