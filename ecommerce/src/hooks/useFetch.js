@@ -1,16 +1,18 @@
 import axios from "axios";
 import { useState , useEffect} from "react"
 
-const useFetch = (url , dataObj) => {
+const useFetch = (url) => {
     const [loading , setLoading] = useState(true);
     const [error , setError] = useState(null);
+    const [data , setdata] = useState([]);
 
     useEffect(() => {
        (async() => {
            setError(null);
            setLoading(false);
-           axios.post(`http://localhost:3002/${url}` , dataObj)
+           axios.get(`http://localhost:3002/${url}`)
            .then(response => {
+               setdata(response.data)
                setLoading(true);
             }).catch (error => {
                 setLoading(true);
@@ -18,7 +20,7 @@ const useFetch = (url , dataObj) => {
        })();
     }, [url])
 
-    return {loading , error}
+    return {data , loading , error}
 }
 
 export default useFetch

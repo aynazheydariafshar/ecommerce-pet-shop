@@ -13,8 +13,17 @@
 }
 
 .icon-navbar:hover {
-  color: rgb(255, 196, 0);
+  color: #652AD2 !important;
   cursor: pointer;
+}
+
+.btn-color{
+  color: black !important;
+}
+
+.link{
+  color: black;
+  text-decoration: none;
 }
 
 

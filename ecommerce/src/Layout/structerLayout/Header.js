@@ -14,6 +14,7 @@ import Badge from '@mui/material/Badge';
 import Logo from 'assets/images/logo.png';
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
+import {Link} from 'react-router-dom';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -29,6 +30,7 @@ const Search = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: "auto",
   },
+  backgroundColor : '#F5F0FF',
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -60,63 +62,17 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    ></Menu>
-  );
 
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static">
-          <Box sx={{display: "flex" , justifyContent: 'space-between' , backgroundColor : 'black' , padding :{xs : '15px' , sm : '0px'}}}>
+          <Box sx={{display: "flex" , justifyContent: 'space-between' , backgroundColor : '#F8F9FD', color : 'black' , padding :{xs : '15px' , sm : '0px'}}}>
             <Box sx={{ display: "flex" , alignItems : 'center'}}>
               <IconButton
                 size="large"
@@ -129,26 +85,16 @@ export default function Header() {
               </IconButton>
               <IconButton
                 size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                // onClick={handleProfileMenuOpen}
                 color="inherit"
               >
                 <ManageAccountsRoundedIcon className="icon-navbar"/>
               </IconButton>
             </Box>
             <Box sx={{ display: "flex" , alignItems : 'center' , ml : '120px'}}>
-              <Typography
-                variant="h5"
-                noWrap
-                component="div"
-              >
-                Dr
-              </Typography>
               <Toolbar sx={{ display: { xs: "none" , sm: 'block' } , padding : '5px' , mt : '10px' }}>
-                <img src={Logo} alt="logo" width='50px' height='50px'/>
+                <Link to='/'>
+                  <img src={Logo} alt="logo" width='50px' height='50px'/>
+                </Link>
               </Toolbar>
               <Typography
                 variant="h5"
@@ -156,7 +102,7 @@ export default function Header() {
                 component="div"
                 sx={{marginRight : {xs : '55px' , sm : '0px'}}}
               >
-                Afshar 
+               Dr Afshar 
               </Typography>
             </Box>
             <Box sx={{ display: "flex" , alignItems : 'center'}}>
@@ -179,21 +125,7 @@ export default function Header() {
               </IconButton>
             </Box>  
           </Box>
-          {/* <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box> */}
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
     </Box>
   );
 }
