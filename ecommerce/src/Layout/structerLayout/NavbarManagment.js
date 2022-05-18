@@ -85,29 +85,29 @@ const handleLogOut = () => {
     >
       <MenuItem>
             <Stack direction="row" spacing={2}>
-                <Button className="icon-navbar btn-color">کالا ها</Button>
+                <Link to='/' className='link'>
+                    <Button className="btn-color"> خانه اصلی</Button>
+                </Link>
+            </Stack>
+      </MenuItem>
+      <MenuItem>
+            <Stack direction="row" spacing={2}>
+                <Button className="btn-color">کالا ها</Button>
             </Stack>  
       </MenuItem>
       <MenuItem>
             <Stack direction="row" spacing={2}>
-                <Button className="icon-navbar btn-color">موجودی و قیمت ها</Button>
+                <Button className="btn-color">موجودی و قیمت ها</Button>
             </Stack>
       </MenuItem>
       <MenuItem>
             <Stack direction="row" spacing={2}>
-                <Button className="icon-navbar btn-color">سفارش ها</Button>
+                <Button className="btn-color">سفارش ها</Button>
             </Stack>
       </MenuItem>
       <MenuItem>
             <Stack direction="row" spacing={2}>
-                <Button onClick={handleLogOut} className="icon-navbar btn-color"> خروج</Button>
-            </Stack>
-      </MenuItem>
-      <MenuItem>
-            <Stack direction="row" spacing={2}>
-                <Link to='/' className='link'>
-                    <Button className="icon-navbar btn-color"> خانه اصلی</Button>
-                </Link>
+                <Button onClick={handleLogOut} className="btn-color"> خروج</Button>
             </Stack>
       </MenuItem>
     </Menu>
@@ -133,9 +133,9 @@ const handleLogOut = () => {
                 </Typography>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: 'none', md: 'flex'}  , marginRight : '15px'}}>
+            <Box sx={{ display: { xs: 'none', md: 'flex'}  , marginRight : '15px' , alignItems : 'center'}}>
                 <Stack direction="row" spacing={2}>
-                    <Button className="icon-navbar btn-color">سفارش ها</Button>
+                    <Button className="btn-color">سفارش ها</Button>
                 </Stack>  
                 <Stack direction="row" spacing={2}>
                     <Button className="icon-navbar btn-color">موجودی و قیمت ها</Button>
