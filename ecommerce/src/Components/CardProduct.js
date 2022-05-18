@@ -8,20 +8,21 @@ import PropTypes from 'prop-types';
 
 export default function CardProduct({imageSrc , titleCard , price}) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 445 , width: {md :'30%' , sm:'100%' }  , my:'20px' , backgroundColor : 'F5F0FF'}} >
       <CardActionArea>
         <CardMedia
           component="img"
-          height="140"
+          height="400"
           image={imageSrc}
-          alt="green iguana"
+          alt="imgProduct"
+          sx={{padding : '20px'}}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography textAlign='right' gutterBottom variant="h7" component="div" sx={{fontWeight : 'bold'}}>
             {titleCard}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {price}
+          <Typography variant="body2" sx={{ color: 'error.main' }} padding='10px'>
+            {`${price}`}تومان
           </Typography>
         </CardContent>
       </CardActionArea>
