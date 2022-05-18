@@ -1,7 +1,10 @@
+import { Grid } from '@mui/material';
 import React from 'react';
 
 const NavbarSide = () => {
-    return <div>NavbarSide</div>;
+    return <div>
+        d
+    </div>;
 }
 
 
