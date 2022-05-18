@@ -26,4 +26,8 @@
   text-decoration: none;
 }
 
+.menu:hover{
+  background-color: #F8F9FD !important;
+  color: #652AD2 !important;
+}
 
