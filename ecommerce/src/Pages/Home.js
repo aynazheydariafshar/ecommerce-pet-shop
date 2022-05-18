@@ -14,6 +14,7 @@ const Home = () => {
                 imageSrc={`http://localhost:3002/files/${item.image}`}
                 titleCard={item.name}
                 price = {item.price}
+                brand = {item.brand}
             />
         }) 
         }

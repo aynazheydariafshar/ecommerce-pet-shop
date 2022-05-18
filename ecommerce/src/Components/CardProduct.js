@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import PropTypes from 'prop-types';
 
-export default function CardProduct({imageSrc , titleCard , price}) {
+export default function CardProduct({imageSrc , titleCard , price , brand}) {
   return (
     <Card sx={{ maxWidth: 445 , width: {md :'30%' , sm:'100%' }  , my:'20px' , backgroundColor : 'F5F0FF'}} >
       <CardActionArea>
@@ -21,6 +21,9 @@ export default function CardProduct({imageSrc , titleCard , price}) {
           <Typography textAlign='right' gutterBottom variant="h7" component="div" sx={{fontWeight : 'bold'}}>
             {titleCard}
           </Typography>
+          <Typography variant="body2" textAlign='right' padding='10px'>
+            برند : {`${brand}`}
+          </Typography>
           <Typography variant="body2" sx={{ color: 'error.main' }} padding='10px'>
             {`${price}`}تومان
           </Typography>
@@ -34,4 +37,5 @@ CardProduct.propTypes = {
     imageSrc : PropTypes.string,
     titleCard : PropTypes.string,
     price : PropTypes.number,
+    brand : PropTypes.string,
 }
