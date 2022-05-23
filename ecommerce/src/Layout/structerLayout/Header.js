@@ -6,13 +6,13 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Badge from '@mui/material/Badge';
 import Logo from 'assets/images/logo.png';
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 import {Link} from 'react-router-dom';
+import HamburgerMenu from "react-hamburger-menu";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -64,11 +64,15 @@ export default function Header() {
     setMobileMoreAnchorEl(null);
   };
 
+  const [open , setOpen] = React.useState(false)
+  const handleClickOpen = () => {
+    setOpen(!open)
+  }
 
   const menuId = "primary-search-account-menu";
 
   return (
-    <Box sx={{ flexGrow: 1}}>
+    <Box sx={{ flexGrow: 1 , overflowX : 'hidden'}}>
       <AppBar position="static">
           <Box sx={{display: "flex" , justifyContent: 'space-between' , backgroundColor : '#F8F9FD', color : 'black' , padding :{xs : '15px' , sm : '0px'}}}>
             <Box sx={{ display: "flex" , alignItems : 'center'}}>
@@ -82,10 +86,12 @@ export default function Header() {
                 </Badge>
               </IconButton>
               <IconButton
-                size="large"
+                sx={{mt : '8px'}}
                 color="inherit"
               >
-                <ManageAccountsRoundedIcon className="icon-navbar"/>
+                <Link to='./management-productes' className="link">
+                  <ManageAccountsRoundedIcon className="icon-navbar"/>
+                </Link>
               </IconButton>
             </Box>
             <Box sx={{ display: "flex" , alignItems : 'center' , ml : '120px'}}>
@@ -103,7 +109,7 @@ export default function Header() {
                Dr Afshar 
               </Typography>
             </Box>
-            <Box sx={{ display: "flex" , alignItems : 'center'}}>
+            <Box sx={{ display:"flex" , alignItems : 'center'}}>
               <Search>
                 <SearchIconWrapper>
                   <SearchIcon />
@@ -119,7 +125,18 @@ export default function Header() {
                 color="inherit"
                 aria-label="open drawer"
               >
-                <MenuIcon  className="icon-navbar"/>
+                <HamburgerMenu 
+                  className="icon-navbar"
+                  isOpen={open}
+                  menuClicked={handleClickOpen}
+                  width={18}
+                  height={15}
+                  strokeWidth={1}
+                  rotate={0}
+                  color='black'
+                  borderRadius={0}
+                  animationDuration={0.5}
+                />
               </IconButton>
             </Box>  
           </Box>
