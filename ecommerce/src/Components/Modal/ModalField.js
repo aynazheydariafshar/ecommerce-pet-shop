@@ -9,9 +9,8 @@ const ModalField = ({
 }) => {
     return <>
         <Dialog
-            fullWidth
             maxWidth='md'
-            sx={{textAlign : 'right'}}
+            sx={{textAlign : 'right' , padding : '30px'}}
             open = {isOpen}
             onClose={handleClose}
             aria-labelledby = 'max-width-dialog-title'
