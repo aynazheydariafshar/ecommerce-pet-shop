@@ -9,15 +9,14 @@ const CustomerLayout = (Component) => {
         return<div>
             <Header />
             <Grid container>
-                <Grid item sm={9}>
+                <Grid item sm={9} xs={11}>
                     <Component>{props}</Component>
                 </Grid>
-                <Grid item sm={3}>
+                <Grid item sm={3} xs={1}>
                     <NavbarSide />
                 </Grid>
             </Grid>
             <Footer />
-            
         </div> 
     };
 };
