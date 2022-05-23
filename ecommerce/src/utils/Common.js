@@ -1,19 +1,19 @@
 export const getUser = () => {
-    const user = sessionStorage.getItem('user');
+    const user = localStorage.getItem('user');
     if(user) return JSON.parse(user)
     else return null
 }
 
 export const getToken = () => {
-    return sessionStorage.getItem('token') || null;
+    return localStorage.getItem('token') || null;
 }
 
 export const setUserSession = (token , user) => {
-    sessionStorage.setItem('token' , token);
-    sessionStorage.setItem('user' , JSON.stringify(user));
+    localStorage.setItem('token' , token);
+    localStorage.setItem('user' , JSON.stringify(user));
 }
 
 export const removeUserSession = () => {
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
 }
