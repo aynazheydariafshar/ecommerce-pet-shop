@@ -12,7 +12,6 @@ const FooterContainer = styled('div')({
     height: 100,
     bottom: 0,
     width: '100%',
-    marginTop : '50px'
 });
 
 const Footer = () => {
