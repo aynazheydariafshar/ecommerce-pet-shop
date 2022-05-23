@@ -34,11 +34,9 @@ const Login = (props) => {
     const validationSchema = yup.object({
         username: yup
           .string()
-          .min(4, 'نام کاربری باید حداقل شامل 4 کارکتر باشد ')
           .required('پر کردن این فیلد الزامی می باشد'),
         password: yup
           .string()
-          .min(5, 'رمز عبور باید حداقل شامل 5 کارکتر باشد')
           .required('پر کردن این فیلد الزامی می باشد'),
     });
 
