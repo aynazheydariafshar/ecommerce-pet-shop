@@ -183,7 +183,7 @@ export default function Header() {
                 component="div"
                 sx={{marginRight : {xs : '55px' , sm : '0px'} , fontWeight : 'bold'}}
               >
-              Pet Store Dr Afshar
+              Pet Store <span style={{color : '#9e64ff'}}>Dr Afshar</span>
               </Typography>
               <Toolbar sx={{ display: { sm: "none" , md: 'block' } , padding : '5px' , mt : '10px' }}>
                 <Link to='/'>
