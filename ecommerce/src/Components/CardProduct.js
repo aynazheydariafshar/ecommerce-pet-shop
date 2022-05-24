@@ -8,14 +8,14 @@ import PropTypes from 'prop-types';
 
 export default function CardProduct({imageSrc , titleCard , price , brand}) {
   return (
-    <Card sx={{ maxWidth: 445 , width: {md :'30%' , sm:'100%' }  , my:'20px'}} >
+    <Card sx={{ maxWidth: 355 , width: {md :'30%' , sm:'100%' }  , my:'20px'}} >
       <CardActionArea>
         <CardMedia
           component="img"
-          height="400"
+          height="200"
           image={imageSrc}
           alt="imgProduct"
-          sx={{padding : '20px'}}
+          sx={{objectFit : 'contain' , padding : '5px'}}
         />
         <CardContent>
           <Typography textAlign='right' gutterBottom variant="h7" component="div" sx={{fontWeight : 'bold'}}>
