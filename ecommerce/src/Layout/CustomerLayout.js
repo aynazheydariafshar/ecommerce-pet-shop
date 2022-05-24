@@ -9,7 +9,12 @@ const CustomerLayout = (Component) => {
         return<div>
             <Header />
             <Grid container>
-                <Component>{props}</Component>
+                <Grid item md={9} sm={8} xs={7}>
+                    <Component>{props}</Component>
+                </Grid>
+                <Grid item md={3} sm={4} xs={5}>
+                    <NavbarSide />
+                </Grid>
             </Grid>
             <Footer />
         </div> 
