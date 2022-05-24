@@ -1,3 +1,4 @@
+import Category from "pages/Category";
 import Card from "pages/Card";
 import Finalize from "pages/Finalize ";
 import Home from "pages/Home";
@@ -17,11 +18,12 @@ const RoutePages = () => {
         <Route path='/' element={<Home />}>
             <Route path=':id' element={<Product /> }/>
         </Route>
+        <Route path='/category/:idcategory' element={<Category /> }/>
         <Route path='/card' element={<Card />} />
         <Route path='/finalize' element={<Finalize />} />
         <Route path='/successful' element={<Successful />} />
         <Route path='/Unsuccessful' element={<Unsuccessful />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/login' element={<Login />} />    
 
         <Route element={<PrivateRoute />}>
             <Route path='/inventory' element={<Inventory />}/>
