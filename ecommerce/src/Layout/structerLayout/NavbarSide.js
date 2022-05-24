@@ -29,28 +29,30 @@ const NavbarSide = () => {
                     <FaCat fontSize='23px'/>
                 </IconButton> 
                 {showCat && <>
-                {/* <Link to='/category/1' className='link'> */}
+                <Link to='/category/1' className='link'>
                     <IconButton sx={{marginRight : '28px'}} className='menu'>
                         <Typography  fontSize='18px' marginRight='8px'>
                             غذای خشک گربه    
                         </Typography>
                         <GiOpenedFoodCan fontSize='18px'/>
                     </IconButton>
-                {/* </Link> */}
-                {/* <Link to='/category/2' className='link'> */}
+                </Link>
+                <Link to='/category/2' className='link'>
                     <IconButton sx={{marginRight : '28px'}} className='menu'>
                         <Typography  fontSize='18px' marginRight='8px'>
                             سلامتی گربه    
                         </Typography>
                         <GiHealthNormal fontSize='16px'/>
                     </IconButton>
-                {/* </Link>     */}
+                </Link>    
+                <Link to='/category/6' className='link'>
                 <IconButton sx={{marginRight : '28px'}} className='menu'>
                     <Typography  fontSize='18px' marginRight='8px'>
                         آرایش و بهداشتی  گربه    
                     </Typography>
                     <RiScissors2Line fontSize='18px'/>
                 </IconButton>
+                </Link>
                 </> }
                 <IconButton className='menu' onClick={() => setShowDog(!showDog)}>
                     <Typography  fontSize='20px' marginRight='8px'>
@@ -59,31 +61,39 @@ const NavbarSide = () => {
                     <FaDog fontSize='23px'/>
                 </IconButton> 
                 {showDog && <>
-                <IconButton sx={{marginRight : '28px'}} className='menu'>
-                    <Typography  fontSize='18px' marginRight='8px'>
-                        غذای خشک سگ     
-                    </Typography>
-                    <GiOpenedFoodCan fontSize='18px'/>
-                </IconButton>
-                <IconButton sx={{marginRight : '28px'}} className='menu'>
-                    <Typography  fontSize='18px' marginRight='8px'>
-                        سلامتی سگ     
-                    </Typography>
-                    <GiHealthNormal fontSize='16px'/>
-                </IconButton>
+                <Link to='/category/3' className='link'>
+                    <IconButton sx={{marginRight : '28px'}} className='menu'>
+                        <Typography  fontSize='18px' marginRight='8px'>
+                            غذای خشک سگ     
+                        </Typography>
+                        <GiOpenedFoodCan fontSize='18px'/>
+                    </IconButton>
+                </Link>    
+                <Link to='/category/4' className='link'>
+                    <IconButton sx={{marginRight : '28px'}} className='menu'>
+                        <Typography  fontSize='18px' marginRight='8px'>
+                            سلامتی سگ     
+                        </Typography>
+                        <GiHealthNormal fontSize='16px'/>
+                    </IconButton>
+                </Link>
+                <Link to='/category/7' className='link'>    
                 <IconButton sx={{marginRight : '28px'}} className='menu'>
                     <Typography  fontSize='18px' marginRight='8px'>
                         آرایش و بهداشتی  سگ     
                     </Typography>
                     <RiScissors2Line fontSize='18px'/>
                 </IconButton>
+                </Link>
                 </> }
-                <IconButton className='menu'>
-                    <Typography  fontSize='20px' marginRight='8px'>
-                        محصولات پرندگان 
-                    </Typography>
-                    <GiHummingbird fontSize='23px'/>
-                </IconButton> 
+                <Link to='/category/5' className='link'>
+                    <IconButton className='menu'>
+                        <Typography  fontSize='20px' marginRight='8px'>
+                            محصولات پرندگان 
+                        </Typography>
+                        <GiHummingbird fontSize='23px'/>
+                    </IconButton> 
+                </Link>    
             </Container> 
         </div>
 }
