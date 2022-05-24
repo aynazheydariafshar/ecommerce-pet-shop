@@ -6,20 +6,10 @@ import { Grid } from '@mui/material';
 
 const CustomerLayout = (Component) => {
     const WithCustomerLayout = (...props) => {
-        const [show , setshow] = useState(false)
-        const handleClickshow = () => {
-            setshow(!show)
-        }
         return<div>
             <Header />
             <Grid container>
-                <Grid item md={9} sm={8} xs={7}>
-                    <Component>{props}</Component>
-                </Grid>
-                <Grid item md={3} sm={4} xs={5}>
-                    <NavbarSide />
-                </Grid>
-               
+                <Component>{props}</Component>
             </Grid>
             <Footer />
         </div> 
