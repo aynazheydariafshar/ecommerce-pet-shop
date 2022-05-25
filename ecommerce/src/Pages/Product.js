@@ -31,7 +31,7 @@ const Product = () => {
             <Box sx={{display : 'flex', flexDirection : 'column' , justifyContent : 'space-around', alignItems : 'center',}}>
                 <Box
                     sx={{
-                    overflowY : 'hidden',    
+                    overflow : 'hidden',    
                     width: '85%',
                     height: '70%',
                     display : 'flex',
@@ -65,16 +65,16 @@ const Product = () => {
                         <Typography style={{fontWeight : 'bold'}} color='error.main' variant="h6" component="div" sx={{paddingY : '5px'}}>
                             قیمت : {item.price} تومان
                         </Typography>
-                        <Typography style={{fontWeight : 'bold'}} variant="h6" component="div" sx={{paddingY : '5px'}}>
+                        <Typography style={{fontWeight : 'bold'}} variant="h7" component="div" sx={{paddingY : '5px'}}>
                             برند : {item.brand} 
                         </Typography>
-                        <Typography style={{fontWeight : 'bold'}} variant="h6" component="div" sx={{paddingY : '5px'}}>
+                        <Typography style={{fontWeight : 'bold'}} variant="h7" component="div" sx={{paddingY : '5px'}}>
                             گونه حیوان : {item.type} 
                         </Typography>
-                        <Typography style={{fontWeight : 'bold'}} variant="h6" component="div" sx={{paddingY : '5px'}}>
+                        <Typography style={{fontWeight : 'bold'}} variant="h7" component="div" sx={{paddingY : '5px'}}>
                             وزن  : {`${item.weight} گرم`} 
                         </Typography>
-                        <Typography variant="h6" component="div" sx={{paddingY : '15px'}}>
+                        <Typography variant="h7" component="div" sx={{paddingY : '15px'}}>
                            : سایر مشخصات 
                             <ul style={{listStyleType : 'none'}}>
                                 {item.detailes.map(i => <li style={{marginRight : '30px'}}>{i}</li>)}
