@@ -48,7 +48,7 @@ function ManagementProductes() {
 
     // //pagination data
     let [page, setPage] = React.useState(1);
-    const perPage = 6;
+    const perPage = 5;
   
     const count = Math.ceil(data.length / perPage);
     const product = PaginationPage(data, perPage);
@@ -60,7 +60,7 @@ function ManagementProductes() {
 
   return (
       <>
-        <Button color = "secondary"  variant="contained" sx={{padding : '20px' , margin : '30px'}} endIcon={<MdOutlineAddCircleOutline />}>
+        <Button color = "secondary"  variant="contained" sx={{padding : '15px' , margin : '30px'}} endIcon={<MdOutlineAddCircleOutline />}>
             افزودن کالا
         </Button>
         <Box sx={{display : 'flex' , flexDirection : 'column' , alignItems : 'center'}}>
