@@ -27,7 +27,7 @@ const Home = () => {
     return <Box sx={{display : 'flex' , flexDirection : 'column' , alignItems : 'center'}}>
         <Box sx={{display : 'flex' , flexDirection : {md : 'row' , sm : 'column'} , justifyContent : 'space-around' , alignItems : 'center' , flexWrap : 'wrap' , py : '30px'}}>
         {product.currentData().map(item => {
-            return <Link className='link' to={`/${item.id}`}>
+            return <Link className='link' to={`/products/${item.id}`}>
                     <CardProduct 
                         imageSrc={`http://localhost:3002/files/${item.image}`}
                         titleCard={item.name}

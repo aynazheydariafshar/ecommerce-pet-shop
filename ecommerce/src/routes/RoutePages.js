@@ -16,7 +16,7 @@ import PrivateRoute from "./PrivateRoute";
 const RoutePages = () => {
     return <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/:id' element={<Product /> }/>
+        <Route path='/products/:id' element={<Product /> }/>
         <Route path='/category/:idcategory' element={<Category /> }/>
         <Route path='/card' element={<Card />} />
         <Route path='/finalize' element={<Finalize />} />
