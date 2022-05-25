@@ -6,10 +6,6 @@ import { Grid } from '@mui/material';
 
 const CustomerLayout = (Component) => {
     const WithCustomerLayout = (...props) => {
-        const [show , setshow] = useState(false)
-        const handleClickshow = () => {
-            setshow(!show)
-        }
         return<div>
             <Header />
             <Grid container>
@@ -19,7 +15,6 @@ const CustomerLayout = (Component) => {
                 <Grid item md={3} sm={4} xs={5}>
                     <NavbarSide />
                 </Grid>
-               
             </Grid>
             <Footer />
         </div> 
