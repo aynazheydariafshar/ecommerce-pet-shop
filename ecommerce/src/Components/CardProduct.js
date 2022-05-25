@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 export default function CardProduct({imageSrc , titleCard , price , brand}) {
   return (
-    <Card sx={{maxWidth:300 , width: {md :'100%' , sm:'100%' }  , my:'20px'}} >
+    <Card sx={{maxWidth:300 , width:'100%' , my:'20px'}} >
       <CardActionArea>
         <CardMedia
           component="img"
