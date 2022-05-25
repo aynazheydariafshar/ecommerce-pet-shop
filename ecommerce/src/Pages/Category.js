@@ -15,7 +15,6 @@ const Category = () => {
     
     useEffect(() => {
         setproduct(filterProduct())
-        console.log(product)
     }, [product])
 
     return (
