@@ -4,6 +4,7 @@ import PaginationPage from 'components/PaginationPage';
 import useFetch from 'hooks/useFetch';
 import CustomerLayout from 'layout/CustomerLayout';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
@@ -26,12 +27,14 @@ const Home = () => {
     return <Box sx={{display : 'flex' , flexDirection : 'column' , alignItems : 'center'}}>
         <Box sx={{display : 'flex' , flexDirection : {md : 'row' , sm : 'column'} , justifyContent : 'space-around' , alignItems : 'center' , flexWrap : 'wrap' , py : '30px'}}>
         {product.currentData().map(item => {
-            return <CardProduct 
-                imageSrc={`http://localhost:3002/files/${item.image}`}
-                titleCard={item.name}
-                price = {item.price}
-                brand = {item.brand}
-            />
+            return <Link className='link' to={`/${item.id}`}>
+                    <CardProduct 
+                        imageSrc={`http://localhost:3002/files/${item.image}`}
+                        titleCard={item.name}
+                        price = {item.price}
+                        brand = {item.brand}
+                    />
+                </Link>
         }) 
         }
         </Box> 
