@@ -35,9 +35,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-function createData(id ,name, calories, fat, carbs, protein) {
-  return {id , name, calories, fat, carbs, protein };
-}
 
 function ManagementProductes() {
 
@@ -52,7 +49,7 @@ function ManagementProductes() {
         <Button color = "secondary"  variant="contained" sx={{padding : '20px' , margin : '30px'}} endIcon={<MdOutlineAddCircleOutline />}>
             افزودن کالا
         </Button>
-        <TableContainer dir='rtl' component={Paper}>
+        <TableContainer dir='rtl' component={Paper} sx={{padding : '30px'}}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
             <TableRow>
@@ -91,10 +88,10 @@ function ManagementProductes() {
                             )
                         }
                     })}
-                <StyledTableCell component="th" scope="row">
+                <StyledTableCell component="th" scope="row" className='icon-navbar'>
                     <FaRegEdit />
                 </StyledTableCell>
-                <StyledTableCell component="th" scope="row">
+                <StyledTableCell component="th" scope="row" className='icon-trash'>
                     <FaTrash />
                 </StyledTableCell>
                 </StyledTableRow>
