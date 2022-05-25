@@ -80,9 +80,9 @@ const Product = () => {
                                 {item.detailes.map(i => <li style={{marginRight : '30px'}}>{i}</li>)}
                             </ul>    
                         </Typography>
-                        {/* <Button color = "secondary"  variant="contained" sx={{float : 'left'}} endIcon={<MdOutlineAddCircleOutline />}>
+                        <Button color = "secondary"  variant="contained" sx={{float : 'left'}} endIcon={<MdOutlineAddCircleOutline />}>
                             افزودن به سبد خرید
-                        </Button> */}
+                        </Button>
                     </Box>
                     <Box padding='10px'>
                         <img src={`http://localhost:3002/files/${item.image}`} width="300px" height='300px'/>
