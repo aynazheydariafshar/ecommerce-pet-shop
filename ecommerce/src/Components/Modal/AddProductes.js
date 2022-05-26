@@ -29,7 +29,7 @@ export default function AddProductes({open , handleClose}) {
     const {category , loadingcategory , errorcategory} = useCategory();
 
     //validation
-    const validationSchema = yup.object({
+    const validationSchema = yup.object().shape({
     Name: yup
         .string()
         .required('پر کردن این فیلد الزامی می باشد'),
@@ -39,8 +39,16 @@ export default function AddProductes({open , handleClose}) {
             // return file && file.size <-- u can use this if you don't want to allow empty files to be uploaded;
             if (file) return true;
             return false;
-        })
-    });
+        }),
+    group : yup
+    .string()
+    .required('پر کردن این فیلد الزامی می باشد'),   
+    subgroup : yup.string().when("group", {
+        is:(group) => group !== 'محصولات پرندگان',
+        then: yup.string().required("پر کردن این فیلد الزامی می باشد")
+      })
+
+    })
 
     const formik = useFormik({
         initialValues: {
@@ -139,7 +147,8 @@ export default function AddProductes({open , handleClose}) {
                     }
                     )} 
                 </TextField>} 
-                <TextField 
+                <TextField
+                    inputProps={{ accept: 'image/*' }} 
                     fullWidth 
                     variant="standard" 
                     type='file' 
