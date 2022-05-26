@@ -42,7 +42,7 @@ const Product = () => {
                     boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px',                  
                     borderRadius : 2,
                     padding : '75px',
-                    marginY : '20px',
+                    marginY : '30px',
                     marginLeft : {md:'100px' , sm : '50px'},
                 }}
                 >
