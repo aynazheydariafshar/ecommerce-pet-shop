@@ -25,8 +25,8 @@ const RoutePages = () => {
         <Route path='/login' element={<Login />} />    
 
         <Route element={<PrivateRoute />}>
-            <Route path='/inventory' element={<Inventory />}/>
             <Route path='/management-productes' element={<ManagementProductes />}/>
+            <Route path='/inventory' element={<Inventory />}/>
             <Route path='/orders' element={<Orders />}/>
         </Route>
 
