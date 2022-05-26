@@ -7,6 +7,8 @@ import { useFormik } from 'formik';
 import {TextField } from '@mui/material';
 import useCategory from 'hooks/useCategory';
 import * as yup from 'yup';
+import axios from 'axios';
+import useFetch from 'hooks/useFetch';
 
 
 const style = {
@@ -27,6 +29,10 @@ export default function AddProductes({open , handleClose}) {
 
     //category
     const {category , loadingcategory , errorcategory} = useCategory();
+
+    //check for api
+    const [loadingtwo , setLoadingtwo] = React.useState(true);
+    const [errortwo , setErrortwo] = React.useState(null);
 
     //validation
     const validationSchema = yup.object().shape({
@@ -50,6 +56,27 @@ export default function AddProductes({open , handleClose}) {
 
     })
 
+    // const postData = (values , codei) => {
+    //     setErrortwo(null);
+    //     setLoadingtwo(false);
+    //     axios.post('http://localhost:3002/products' , {
+    //         name : values.Name,
+    //         group : values.group,
+    //         subgroup : values.subgroup,
+    //         image : codei
+    //     }).then(response => {
+    //         setLoadingtwo(true);
+    //         setdata([...response.data]);
+    //     }).catch(error => {
+    //         setLoadingtwo(true);
+    //         setErrortwo('دوباره تلاش کنید')
+    //     })
+    // }
+
+    // const getImage = (codeimage) => {
+    //     axios.post('http://localhost:3002/files') , {codeimage}
+    // }
+
     const formik = useFormik({
         initialValues: {
           Name: '',
@@ -58,8 +85,10 @@ export default function AddProductes({open , handleClose}) {
           image : ''
         },
         validationSchema: validationSchema,
-        onSubmit: values => {
-          alert(JSON.stringify(values, null, 2));
+        onSubmit: (values) => {
+            // e.preventDefault();
+            // postData(values , getImage());
+            alert(JSON.stringify(values, null, 2));
         },
       });
   return (
