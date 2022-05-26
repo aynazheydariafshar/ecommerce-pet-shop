@@ -17,6 +17,11 @@
   cursor: pointer;
 }
 
+.icon-trash:hover{
+  color:red !important;
+  cursor: pointer;
+}
+
 .btn-color{
   color: black !important;
 }
