@@ -127,9 +127,9 @@ const handleLogOut = () => {
                     variant="h5"
                     noWrap
                     component="div"
-                    sx={{marginRight : {xs : '55px' , sm : '0px'}}}
+                    sx={{marginRight : {xs : '55px' , sm : '0px'} , fontWeight : 'bold'}}
                 >
-                Dr Afshar 
+                Pet Store Dr Afshar 
                 </Typography>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
