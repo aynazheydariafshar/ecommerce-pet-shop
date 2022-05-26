@@ -3,6 +3,11 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { useFormik } from 'formik';
+import {TextField } from '@mui/material';
+import useCategory from 'hooks/useCategory';
+import * as yup from 'yup';
+
 
 const style = {
   position: 'absolute',
@@ -16,11 +21,39 @@ const style = {
   p: 4,
 };
 
-export default function AddProductes({open , handleClose}) {
-//   const [open, setOpen] = React.useState(false);
-//   const handleOpen = () => setOpen(true);
-//   const handleClose = () => setOpen(false);
 
+
+export default function AddProductes({open , handleClose}) {
+
+    //category
+    const {category , loadingcategory , errorcategory} = useCategory();
+
+    //validation
+    const validationSchema = yup.object({
+    Name: yup
+        .string()
+        .required('پر کردن این فیلد الزامی می باشد'),
+    image: yup
+        .mixed()
+        .test("required", "پر کردن این فیلد الزامی می باشد", (file) => {
+            // return file && file.size <-- u can use this if you don't want to allow empty files to be uploaded;
+            if (file) return true;
+            return false;
+        })
+    });
+
+    const formik = useFormik({
+        initialValues: {
+          Name: '',
+          group: '',
+          subgroup: '',
+          image : ''
+        },
+        validationSchema: validationSchema,
+        onSubmit: values => {
+          alert(JSON.stringify(values, null, 2));
+        },
+      });
   return (
     <div>
       <Modal
@@ -31,12 +64,104 @@ export default function AddProductes({open , handleClose}) {
         aria-describedby="keep-mounted-modal-description"
       >
         <Box sx={style}>
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+            <form onSubmit={formik.handleSubmit}>
+                <Typography variant='h5' align='right'>
+                    افزودن کالا
+                </Typography>
+                <TextField 
+                    fullWidth 
+                    variant="standard" 
+                    type='text' 
+                    label='نام کالا' 
+                    margin='normal'
+                    id="Name"
+                    name="Name"
+                    value={formik.values.Name}
+                    onChange={formik.handleChange}
+                    error={formik.touched.Name && Boolean(formik.errors.Name)}
+                    helperText={formik.touched.Name && formik.errors.Name}
+                />
+                <TextField 
+                    select
+                    SelectProps={{
+                    native: true,
+                    }}
+                    fullWidth 
+                    variant="standard" 
+                    type='text' 
+                    label='گروه' 
+                    margin='normal'
+                    id="group"
+                    name="group"
+                    value={formik.values.group}
+                    onChange={formik.handleChange}
+                    error={formik.touched.group && Boolean(formik.errors.group)}
+                    helperText={formik.touched.group && formik.errors.group}
+                >
+                    <option>انتخاب کنید</option>
+                    <option value='محصولات گربه'>
+                        محصولات گربه
+                    </option>
+                    <option value='محصولات سگ ها'>
+                        محصولات سگ ها
+                    </option>
+                    <option value='محصولات پرندگان'>
+                        محصولات پرندگان
+                    </option>
+                </TextField>   
+                {formik.values.group !== 'محصولات پرندگان' &&
+                <TextField 
+                    select
+                    SelectProps={{
+                    native: true,
+                    }}
+                    fullWidth 
+                    variant="standard" 
+                    type='text' 
+                    label='زیر گروه' 
+                    margin='normal'
+                    id="subgroup"
+                    name="subgroup"
+                    value={formik.values.subgroup}
+                    onChange={formik.handleChange}
+                    error={formik.touched.subgroup && Boolean(formik.errors.subgroup)}
+                    helperText={formik.touched.subgroup && formik.errors.subgroup}
+                >
+                    <option>انتخاب کنید</option>
+                    {category.map(el => {
+                        if(formik.values.group ===  el.group){
+                            return (
+                                <>
+                                {el.subgroup && <option key={el.id} value={el.subgroup}>{el.subgroup}</option>}
+                                </>
+                            ) 
+                        }
+                    }
+                    )} 
+                </TextField>} 
+                <TextField 
+                    fullWidth 
+                    variant="standard" 
+                    type='file' 
+                    label='عکس' 
+                    margin='normal'
+                    id="image"
+                    name="image"
+                    value={formik.values.image}
+                    onChange={formik.handleChange}
+                    error={formik.touched.image && Boolean(formik.errors.image)}
+                    helperText={formik.touched.image && formik.errors.image}
+                />   
+                <Button
+                    fullWidth 
+                    type="submit"
+                    color="success"
+                    variant="contained"
+                    sx={{marginY : '20px'}}
+                >
+                    افزودن
+                </Button>
+            </form>
         </Box>
       </Modal>
     </div>
