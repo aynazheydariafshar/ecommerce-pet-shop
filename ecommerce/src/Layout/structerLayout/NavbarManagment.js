@@ -92,18 +92,24 @@ const handleLogOut = () => {
       </MenuItem>
       <MenuItem>
             <Stack direction="row" spacing={2}>
+              <Link to='/management-productes' className='link'>
                 <Button className="btn-color">کالا ها</Button>
+              </Link>
             </Stack>  
       </MenuItem>
       <MenuItem>
-            <Stack direction="row" spacing={2}>
-                <Button className="btn-color">موجودی و قیمت ها</Button>
-            </Stack>
+        <Stack direction="row" spacing={2}>
+          <Link to='/inventory' className='link'>
+            <Button className="btn-color">موجودی و قیمت ها</Button>
+          </Link>    
+        </Stack>
       </MenuItem>
       <MenuItem>
-            <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2}>
+            <Link to='/orders' className='link'>
                 <Button className="btn-color">سفارش ها</Button>
-            </Stack>
+            </Link>    
+          </Stack>
       </MenuItem>
       <MenuItem>
             <Stack direction="row" spacing={2}>

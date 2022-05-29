@@ -12,7 +12,7 @@ export default function CardProduct({imageSrc , titleCard , price , brand}) {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="200"
+          height="250"
           image={imageSrc}
           alt="imgProduct"
           sx={{objectFit : 'contain' , padding : '5px'}}
