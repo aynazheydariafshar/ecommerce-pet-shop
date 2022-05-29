@@ -162,7 +162,7 @@ export default function Header() {
                 sx={{mt : '8px'}}
                 color="inherit"
               >
-                <Link to='./management-productes' className="link">
+                <Link to='/management-productes' className="link">
                   <ManageAccountsRoundedIcon className="icon-navbar"/>
                 </Link>
               </IconButton>

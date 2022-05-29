@@ -92,18 +92,24 @@ const handleLogOut = () => {
       </MenuItem>
       <MenuItem>
             <Stack direction="row" spacing={2}>
+              <Link to='/management-productes' className='link'>
                 <Button className="btn-color">کالا ها</Button>
+              </Link>
             </Stack>  
       </MenuItem>
       <MenuItem>
-            <Stack direction="row" spacing={2}>
-                <Button className="btn-color">موجودی و قیمت ها</Button>
-            </Stack>
+        <Stack direction="row" spacing={2}>
+          <Link to='/inventory' className='link'>
+            <Button className="btn-color">موجودی و قیمت ها</Button>
+          </Link>    
+        </Stack>
       </MenuItem>
       <MenuItem>
-            <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2}>
+            <Link to='/orders' className='link'>
                 <Button className="btn-color">سفارش ها</Button>
-            </Stack>
+            </Link>    
+          </Stack>
       </MenuItem>
       <MenuItem>
             <Stack direction="row" spacing={2}>
@@ -127,22 +133,28 @@ const handleLogOut = () => {
                     variant="h5"
                     noWrap
                     component="div"
-                    sx={{marginRight : {xs : '55px' , sm : '0px'}}}
+                    sx={{marginRight : {xs : '55px' , sm : '0px'} , fontWeight : 'bold'}}
                 >
-                Dr Afshar 
+                Pet Store Dr Afshar 
                 </Typography>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex'}  , marginRight : '15px' , alignItems : 'center'}}>
-                <Stack direction="row" spacing={2}>
-                    <Button className="btn-color">سفارش ها</Button>
-                </Stack>  
-                <Stack direction="row" spacing={2}>
-                    <Button className="icon-navbar btn-color">موجودی و قیمت ها</Button>
-                </Stack>  
-                <Stack direction="row" spacing={2}>
-                    <Button className="icon-navbar btn-color" sx={{mr : '70px'}}>کالاها</Button>
-                </Stack>   
+                <Link to='/orders' className='link'>
+                  <Stack direction="row" spacing={2}>
+                      <Button className="btn-color">سفارش ها</Button>
+                  </Stack>  
+                </Link>
+                <Link to='/inventory' className='link'>
+                  <Stack direction="row" spacing={2}>
+                      <Button className="icon-navbar btn-color">موجودی و قیمت ها</Button>
+                  </Stack>  
+                </Link>
+                <Link to='/management-productes' className='link'>
+                  <Stack direction="row" spacing={2}>
+                      <Button className="icon-navbar btn-color" sx={{mr : '70px'}}>کالاها</Button>
+                  </Stack>   
+                </Link>
                 <IconButton size="large" color="inherit">
                     <LogoutIcon onClick={handleLogOut} className="icon-navbar"/>
                 </IconButton> 

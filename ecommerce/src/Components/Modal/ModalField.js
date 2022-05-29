@@ -14,14 +14,15 @@ const ModalField = ({
             open = {isOpen}
             onClose={handleClose}
             aria-labelledby = 'max-width-dialog-title'
+            color = 'txt.error'
         >
-            <DialogTitle id='max-width-dialog-title'>{title}</DialogTitle>
+            <DialogTitle color='red' id='max-width-dialog-title' sx={{fontWeight : 'bold'}}>{title}</DialogTitle>
             <DialogContent>
                 <DialogContentText>{subtitle}</DialogContentText>
                 <DialogContentText>{text}</DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color='primary'>
+                <Button sx={{color : "red"}} onClick={handleClose}>
                     خروج
                 </Button>
             </DialogActions>
