@@ -13,6 +13,8 @@ import useCategory from "hooks/useCategory";
 import { Button, Pagination, Stack } from "@mui/material";
 import PaginationPage from "components/PaginationPage";
 import { Box } from "@mui/system";
+import EasyEdit from 'react-easy-edit';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -78,10 +80,26 @@ const Inventory = () => {
                     {row.name}
                   </StyledTableCell>
                   <StyledTableCell align="right" component="th" scope="row">
-                    {row.price}
+                    <EasyEdit
+                      type="number"
+                      onSave={() => {}}
+                      onCancel={() => {}}
+                      saveButtonLabel="ذخیره"
+                      cancelButtonLabel="خروج"
+                      value={row.price}
+                      // editComponent={}
+                    />
                   </StyledTableCell>
                   <StyledTableCell align="right" component="th" scope="row">
-                    {row.count}
+                    <EasyEdit
+                      type="number"
+                      onSave={() => {}}
+                      onCancel={() => {}}
+                      saveButtonLabel="ذخیره"
+                      cancelButtonLabel="خروج"
+                      value= {row.count}
+                      // editComponent={}
+                    />
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
