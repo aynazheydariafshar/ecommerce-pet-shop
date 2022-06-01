@@ -12,10 +12,12 @@ import useFetch from "hooks/useFetch";
 import useCategory from "hooks/useCategory";
 import { FaRegEdit, FaTrash } from "react-icons/fa";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
-import { Button, Pagination, Stack } from "@mui/material";
+import { Button, IconButton, Pagination, Stack } from "@mui/material";
 import PaginationPage from "components/PaginationPage";
 import { Box } from "@mui/system";
 import AddProductes from "components/modal/AddProductes";
+import axios from "axios";
+import EditeProduct from "components/modal/EditeProduct";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,7 +41,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function ManagementProductes() {
   //data
-  const { data, loading, error } = useFetch("products");
+  const [loading , setLoading] = React.useState(true);
+  const [error , setError] = React.useState(null);
+  const [data , setdata] = React.useState([]);
 
   //category
   const { category, loadingcategory, errorcategory } = useCategory();
@@ -47,6 +51,20 @@ function ManagementProductes() {
   //show modal  
   const [showModal,setShowModal] = React.useState(false);
 
+  //edit modal
+  const [showModalEdite,setShowModalEdite] = React.useState(false);
+
+
+  //get data
+  const getdata = () => {
+    setLoading(true);
+    axios.get(`http://localhost:3002/products`)
+    .then(response => {
+        setdata(response.data)
+    })
+    .catch(err => setError("لطفا دوباره تلاش کنید"))
+    .finally(res =>setLoading(false))
+  }
 
   // //pagination data
   let [page, setPage] = React.useState(1);
@@ -60,11 +78,28 @@ function ManagementProductes() {
     product.jump(p);
   };
 
+  React.useEffect(() => {
+    getdata();
+  }, [])
+
+
   //add product
   const handleAddProduct = () => {
     setShowModal(!showModal);
   }
 
+  //edit product
+  const handleEditeProduct = () => {
+    setShowModalEdite(!showModalEdite);
+  }
+
+  //delete data
+  const removeItem = (itemId) => {
+    axios.delete(`http://localhost:3002/products/${itemId}`)
+      .then(res => getdata())
+  };
+
+  
   return (
     <>
       <Button
@@ -77,6 +112,7 @@ function ManagementProductes() {
         افزودن کالا
       </Button>
       {showModal ? <AddProductes open={showModal} handleClose={() => setShowModal(false)}/>: null }
+      {showModalEdite ? <EditeProduct open={showModalEdite} handleClose={() => setShowModalEdite(false)}/>: null }
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
@@ -89,8 +125,8 @@ function ManagementProductes() {
                 <StyledTableCell align="right">عکس</StyledTableCell>
                 <StyledTableCell align="right">گروه</StyledTableCell>
                 <StyledTableCell align="right">زیر گروه</StyledTableCell>
-                <StyledTableCell align="right">ویرایش</StyledTableCell>
-                <StyledTableCell align="right">حذف</StyledTableCell>
+                <StyledTableCell align="right"></StyledTableCell>
+                <StyledTableCell align="right"></StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -130,16 +166,18 @@ function ManagementProductes() {
                   <StyledTableCell
                     component="th"
                     scope="row"
-                    className="icon-navbar"
                   >
-                    <FaRegEdit />
+                    <IconButton className="icon-navbar" onClick={handleEditeProduct}>
+                      <FaRegEdit />
+                    </IconButton>
                   </StyledTableCell>
                   <StyledTableCell
                     component="th"
                     scope="row"
-                    className="icon-trash"
                   >
-                    <FaTrash />
+                    <IconButton className="icon-trash" onClick={() => removeItem(row.id)}>
+                      <FaTrash />
+                    </IconButton>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
