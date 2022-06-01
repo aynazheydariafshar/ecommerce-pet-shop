@@ -8,7 +8,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import useFetch from "hooks/useFetch";
 import useCategory from "hooks/useCategory";
 import { FaRegEdit, FaTrash } from "react-icons/fa";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
@@ -42,6 +41,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function ManagementProductes() {
 
+  //context data
   const productContext = React.useContext(DataContext)
 
   //category
@@ -53,6 +53,8 @@ function ManagementProductes() {
   //edit modal
   const [showModalEdite,setShowModalEdite] = React.useState(false);
 
+  //edit data
+  const [edite , setEdite] = React.useState(null)
 
   // //pagination data
   let [page, setPage] = React.useState(1);
@@ -72,8 +74,9 @@ function ManagementProductes() {
   }
 
   //edit product
-  const handleEditeProduct = () => {
+  const handleEditeProduct = (row) => {
     setShowModalEdite(!showModalEdite);
+    setEdite(row)
   }
 
   //delete data
@@ -95,10 +98,9 @@ function ManagementProductes() {
         افزودن کالا
       </Button>
       {showModal ? <AddProductes open={showModal} handleClose={() => setShowModal(false)}/>: null }
-      {showModalEdite ? <EditeProduct open={showModalEdite} handleClose={() => setShowModalEdite(false)}/>: null }
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-      >
+        >
         <TableContainer dir="rtl" component={Paper} sx={{ padding: "30px" }}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
@@ -115,54 +117,55 @@ function ManagementProductes() {
             <TableBody>
               {product.currentData()?.map((row) => (
                 <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.id}
-                  </StyledTableCell>
-                  <StyledTableCell align="right" component="th" scope="row">
-                    {row.name}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    <img
-                      src={`http://localhost:3002/files/${row.image}`}
-                      width="50px"
-                      height="50px"
-                    />
-                  </StyledTableCell>
-                  {category?.map((el) => {
-                    if (row.category === el.id) {
-                      return (
-                        <StyledTableCell align="right">
-                          {el.group}
-                        </StyledTableCell>
-                      );
-                    }
-                  })}
-                  {category?.map((el) => {
-                    if (row.category === el.id) {
-                      return (
-                        <StyledTableCell align="right">
-                          {el.subgroup}
-                        </StyledTableCell>
-                      );
-                    }
-                  })}
-                  <StyledTableCell
-                    component="th"
-                    scope="row"
-                  >
-                    <IconButton className="icon-navbar" onClick={handleEditeProduct}>
-                      <FaRegEdit fontSize='20px'/>
-                    </IconButton>
-                  </StyledTableCell>
-                  <StyledTableCell
-                    component="th"
-                    scope="row"
-                  >
-                    <IconButton className="icon-trash" onClick={() => removeItem(row.id)} sx={{marginLeft : '10px'}}>
-                      <FaTrash fontSize='20px' />
-                    </IconButton>
-                  </StyledTableCell>
-                </StyledTableRow>
+                      {showModalEdite ? <EditeProduct employee={edite} open={showModalEdite} handleClose={() => setShowModalEdite(false)}/>: null }
+                      <StyledTableCell component="th" scope="row">
+                        {row.id}
+                      </StyledTableCell>
+                      <StyledTableCell align="right" component="th" scope="row">
+                        {row.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <img
+                          src={`http://localhost:3002/files/${row.image}`}
+                          width="50px"
+                          height="50px"
+                          />
+                      </StyledTableCell>
+                      {category?.map((el) => {
+                        if (row.category === el.id) {
+                          return (
+                            <StyledTableCell align="right">
+                              {el.group}
+                            </StyledTableCell>
+                          );
+                        }
+                      })}
+                      {category?.map((el) => {
+                        if (row.category === el.id) {
+                          return (
+                            <StyledTableCell align="right">
+                              {el.subgroup}
+                            </StyledTableCell>
+                          );
+                        }
+                      })}
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        >
+                        <IconButton className="icon-navbar" onClick={() => handleEditeProduct(row)}>
+                          <FaRegEdit fontSize='20px'/>
+                        </IconButton>
+                      </StyledTableCell>
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        >
+                        <IconButton className="icon-trash" onClick={() => removeItem(row.id)} sx={{marginLeft : '10px'}}>
+                          <FaTrash fontSize='20px' />
+                        </IconButton>
+                      </StyledTableCell>
+                    </StyledTableRow>
               ))}
             </TableBody>
           </Table>
