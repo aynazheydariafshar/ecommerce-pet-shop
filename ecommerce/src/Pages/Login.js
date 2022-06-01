@@ -149,7 +149,7 @@ const Login = (props) => {
             isOpen={isOpen}
             handleClose = {handleDialogClose}
             title = 'هشدار'
-            text='دوباره تلاش کنید'
+            text='نام کاربری یا رمز عبور اشتباه است'
          />}
     </div>;
 }
