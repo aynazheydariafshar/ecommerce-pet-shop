@@ -8,9 +8,9 @@ import {TextField } from '@mui/material';
 import useCategory from 'hooks/useCategory';
 import * as yup from 'yup';
 import axios from 'axios';
-import useFetch from 'hooks/useFetch';
 import { CKEditor } from 'ckeditor4-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { DataContext } from 'Context/DataContext';
 
 
 const style = {
@@ -31,6 +31,9 @@ export default function AddProductes({open , handleClose}) {
 
     //category
     const {category , loadingcategory , errorcategory} = useCategory();
+
+    //context data
+    const productContext = React.useContext(DataContext)
 
     //show
     const [show , setShow] = React.useState(true);
@@ -63,8 +66,8 @@ export default function AddProductes({open , handleClose}) {
             return false;
         }),
     group : yup
-    .string()
-    .required('پر کردن این فیلد الزامی می باشد'),   
+        .string()
+        .required('پر کردن این فیلد الزامی می باشد'),   
     subgroup : yup.string().when("group", {
         is:(group) => group !== 'محصولات پرندگان',
         then: yup.string().required("پر کردن این فیلد الزامی می باشد")
@@ -72,6 +75,7 @@ export default function AddProductes({open , handleClose}) {
 
     })
  
+    //find category data
     const findGroupOfProduct = (subgroup) => {
         let resault = category.find(item =>item.subgroup ? item.subgroup === subgroup : 5);
         return resault.id
@@ -93,6 +97,7 @@ export default function AddProductes({open , handleClose}) {
         }, 500);
     }
 
+    //find type data
     const findType = (group) => {
         if(group === "محصولات گربه"){
             return 'گربه';
@@ -103,6 +108,7 @@ export default function AddProductes({open , handleClose}) {
         }
     }
 
+    //post data
     const postData = (values) => {
         setErrortwo(null);
         setLoadingtwo(false);
@@ -118,6 +124,7 @@ export default function AddProductes({open , handleClose}) {
             description : values.description,
         }).then(response => {
             setLoadingtwo(true);
+            productContext.getdata();
         }).catch(error => {
             setLoadingtwo(true);
             setErrortwo('دوباره تلاش کنید')
@@ -139,10 +146,9 @@ export default function AddProductes({open , handleClose}) {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            // alert(JSON.stringify(values, null, 2));
             postData(values);
         },
-      });
+      });     
 
     return (<>
         {show && 
