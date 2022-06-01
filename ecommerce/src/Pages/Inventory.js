@@ -14,6 +14,8 @@ import { Button, Pagination, Stack } from "@mui/material";
 import PaginationPage from "components/PaginationPage";
 import { Box } from "@mui/system";
 import EasyEdit from 'react-easy-edit';
+import { DataContext } from 'Context/DataContext';
+import axios from 'axios';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -37,24 +39,77 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
 
 const Inventory = () => {
-    //data
-  const { data, loading, error } = useFetch("products");
 
-  //category
-  const { category, loadingcategory, errorcategory } = useCategory();
+  //context data
+  const productContext = React.useContext(DataContext);
 
+  //check for api
+  const [loadingtwo , setLoadingtwo] = React.useState(true);
+  const [errortwo , setErrortwo] = React.useState(null);
+
+  //edit state price
+  const [editePrice , seteditePrice] = React.useState()
 
   // //pagination data
   let [page, setPage] = React.useState(1);
   const perPage = 10;
 
-  const count = Math.ceil(data.length / perPage);
-  const product = PaginationPage(data, perPage);
+  const count = Math.ceil(productContext.data.length / perPage);
+  const product = PaginationPage(productContext.data, perPage);
 
   const handleChange = (e, p) => {
     setPage(p);
     product.jump(p);
   };
+
+  //update price on data
+  const savePriceEdite = (value , row) => {
+    setErrortwo(null);
+    setLoadingtwo(false);
+    axios.put(`http://localhost:3002/products/${row.id}` , {
+      name : row.name,
+      brand : row.brand,
+      image: row.image,
+      price : value,
+      category : row.category,
+      count : row.count,
+      type : row.type,
+      weight : row.weight,
+      description : row.description,
+    }).then(response => {
+        productContext.getdata();
+        setLoadingtwo(true);
+    }).catch(error => {
+        setLoadingtwo(true);
+        setErrortwo('دوباره تلاش کنید')
+    })
+  }
+
+  //update price on data
+  const saveCountEdite = (value , row) => {
+    setErrortwo(null);
+    setLoadingtwo(false);
+    axios.put(`http://localhost:3002/products/${row.id}` , {
+      name : row.name,
+      brand : row.brand,
+      image: row.image,
+      price : row.price,
+      category : row.category,
+      count : value,
+      type : row.type,
+      weight : row.weight,
+      description : row.description,
+    }).then(response => {
+        productContext.getdata();
+        setLoadingtwo(true);
+    }).catch(error => {
+        setLoadingtwo(true);
+        setErrortwo('دوباره تلاش کنید')
+    })
+  }
+
+
+
 
   return <>
       <Box
@@ -82,23 +137,21 @@ const Inventory = () => {
                   <StyledTableCell align="right" component="th" scope="row">
                     <EasyEdit
                       type="number"
-                      onSave={() => {}}
+                      onSave={(value) => savePriceEdite(value , row)}
                       onCancel={() => {}}
                       saveButtonLabel="ذخیره"
                       cancelButtonLabel="خروج"
-                      value={row.price}
-                      // editComponent={}
+                      value={row.price}                      
                     />
                   </StyledTableCell>
                   <StyledTableCell align="right" component="th" scope="row">
                     <EasyEdit
                       type="number"
-                      onSave={() => {}}
+                      onSave={(value) => saveCountEdite(value , row)}
                       onCancel={() => {}}
                       saveButtonLabel="ذخیره"
                       cancelButtonLabel="خروج"
                       value= {row.count}
-                      // editComponent={}
                     />
                   </StyledTableCell>
                 </StyledTableRow>
