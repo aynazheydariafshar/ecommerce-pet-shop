@@ -90,13 +90,6 @@ export default function AddProductes({open , handleClose}) {
         formik.setFieldValue('image' , filename.data.filename , false)
     }
 
-    //hide modal with time
-    const handleClick = () => {
-        setTimeout(() => {
-            setShow(!show)
-        }, 500);
-    }
-
     //find type data
     const findType = (group) => {
         if(group === "محصولات گربه"){
@@ -147,6 +140,9 @@ export default function AddProductes({open , handleClose}) {
         validationSchema: validationSchema,
         onSubmit: (values) => {
             postData(values);
+            setTimeout(() => {
+                setShow(!show)
+            }, 700);
         },
       });     
 
@@ -330,7 +326,6 @@ export default function AddProductes({open , handleClose}) {
                         color="success"
                         variant="contained"
                         sx={{marginY : '20px'}}
-                        onClick = {handleClick}
                     >
                         افزودن
                     </Button>
