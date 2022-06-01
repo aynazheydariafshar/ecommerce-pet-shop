@@ -11,6 +11,7 @@ import axios from 'axios';
 import useFetch from 'hooks/useFetch';
 import { CKEditor } from 'ckeditor4-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { DataContext } from 'Context/DataContext';
 
 
 const style = {
@@ -27,7 +28,10 @@ const style = {
 
 
 
-export default function EditeProduct({open , handleClose}) {
+export default function EditeProduct({open , handleClose , employee}) {
+
+    //context data
+    const productContext = React.useContext(DataContext);
 
     //category
     const {category , loadingcategory , errorcategory} = useCategory();
@@ -38,27 +42,6 @@ export default function EditeProduct({open , handleClose}) {
     //check for api
     const [loadingtwo , setLoadingtwo] = React.useState(true);
     const [errortwo , setErrortwo] = React.useState(null);
-
-    //data
-    const [loading , setLoading] = React.useState(true);
-    const [error , setError] = React.useState(null);
-    const [data , setdata] = React.useState([]);
-
-  
-    //get data
-    const getdata = () => {
-        setLoading(true);
-        axios.get(`http://localhost:3002/products`)
-        .then(response => {
-            setdata(response.data)
-        })
-        .catch(err => setError("لطفا دوباره تلاش کنید"))
-        .finally(res =>setLoading(false))
-    }
-
-    React.useEffect(() => {
-        getdata()
-    }, [])
 
     //validation
     const validationSchema = yup.object().shape({
@@ -107,13 +90,6 @@ export default function EditeProduct({open , handleClose}) {
         formik.setFieldValue('image' , filename.data.filename , false)
     }
 
-    //hide modal with time
-    const handleClick = () => {
-        setTimeout(() => {
-            setShow(!show)
-        }, 500);
-    }
-
     const findType = (group) => {
         if(group === "محصولات گربه"){
             return 'گربه';
@@ -124,13 +100,10 @@ export default function EditeProduct({open , handleClose}) {
         }
     }
 
-    const editeData = async(values ,) => {
-
-
-
+    const editeData = (values) => {
         setErrortwo(null);
         setLoadingtwo(false);
-        await axios.post('http://localhost:3002/products' , {
+        axios.put(`http://localhost:3002/products/${employee.id}` , {
             name : values.Name,
             brand : values.brand,
             image: values.image,
@@ -141,6 +114,7 @@ export default function EditeProduct({open , handleClose}) {
             weight : values.weight,
             description : values.description,
         }).then(response => {
+            productContext.getdata();
             setLoadingtwo(true);
         }).catch(error => {
             setLoadingtwo(true);
@@ -148,27 +122,32 @@ export default function EditeProduct({open , handleClose}) {
         })
     }
 
-    const findProduct = () => {
-        
-    }
+    // const findCategoryOfProduct = (id) => {
+    //     let res = category.find(item => item.id === id);
+    //     console.log(res.group)
+    //     return res.group
+    // }
+    
 
 
     const formik = useFormik({
         initialValues: {
-          Name: data.name,
+          Name: employee.name,
           group: '',
           subgroup: '',
-          image : '',
-          weight : 0,
-          brand : '',
-          price : 0,
-          count : 0,
-          description : ''
+          image : employee.image,
+          weight :employee.weight,
+          brand : employee.brand,
+          price :employee.price,
+          count :employee.count,
+          description : employee.description
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            // alert(JSON.stringify(values, null, 2));
-            postData(values);
+            editeData(values);
+            setTimeout(() => {
+                setShow(!show)
+            }, 700);
         },
       });
 
@@ -352,7 +331,6 @@ export default function EditeProduct({open , handleClose}) {
                         color="success"
                         variant="contained"
                         sx={{marginY : '20px'}}
-                        onClick = {handleClick}
                     >
                         ویرایش
                     </Button>
