@@ -1,18 +1,6 @@
 import ManagementLayout from 'layout/ManagementLayout';
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import useFetch from "hooks/useFetch";
-import { Button, Checkbox, FormControlLabel, IconButton, Pagination, Radio, RadioGroup, Stack } from "@mui/material";
-import PaginationPage from "components/PaginationPage";
-import { Box } from "@mui/system";
-import {BiDetail} from 'react-icons/bi';
+import {FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import DeleveryOrders from 'components/DeleveryOrders';
 import WaiteOrders from 'components/WaiteOrders';
 
