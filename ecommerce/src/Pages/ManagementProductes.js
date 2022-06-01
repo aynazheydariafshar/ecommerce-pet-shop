@@ -18,6 +18,7 @@ import { Box } from "@mui/system";
 import AddProductes from "components/modal/AddProductes";
 import axios from "axios";
 import EditeProduct from "components/modal/EditeProduct";
+import { DataContext } from "Context/DataContext";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,10 +41,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function ManagementProductes() {
-  //data
-  const [loading , setLoading] = React.useState(true);
-  const [error , setError] = React.useState(null);
-  const [data , setdata] = React.useState([]);
+
+  const productContext = React.useContext(DataContext)
 
   //category
   const { category, loadingcategory, errorcategory } = useCategory();
@@ -55,33 +54,17 @@ function ManagementProductes() {
   const [showModalEdite,setShowModalEdite] = React.useState(false);
 
 
-  //get data
-  const getdata = () => {
-    setLoading(true);
-    axios.get(`http://localhost:3002/products`)
-    .then(response => {
-        setdata(response.data)
-    })
-    .catch(err => setError("لطفا دوباره تلاش کنید"))
-    .finally(res =>setLoading(false))
-  }
-
   // //pagination data
   let [page, setPage] = React.useState(1);
   const perPage = 5;
 
-  const count = Math.ceil(data.length / perPage);
-  const product = PaginationPage(data, perPage);
+  const count = Math.ceil(productContext.data.length / perPage);
+  const product = PaginationPage(productContext.data, perPage);
 
   const handleChange = (e, p) => {
     setPage(p);
     product.jump(p);
   };
-
-  React.useEffect(() => {
-    getdata();
-  }, [])
-
 
   //add product
   const handleAddProduct = () => {
@@ -96,7 +79,7 @@ function ManagementProductes() {
   //delete data
   const removeItem = (itemId) => {
     axios.delete(`http://localhost:3002/products/${itemId}`)
-      .then(res => getdata())
+      .then(res => productContext.getdata())
   };
 
   
