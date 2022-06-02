@@ -60,6 +60,8 @@ export default function OrderCheck({ open, handleClose, employee }) {
   const [loadingtwo, setLoadingtwo] = React.useState(true);
   const [errortwo, setErrortwo] = React.useState(null);
 
+  
+
   //add time delevery
   const handleTimeDelevery = () => {
     setErrortwo(null);
@@ -89,20 +91,21 @@ export default function OrderCheck({ open, handleClose, employee }) {
       )
       .then((response) => {
         setLoadingtwo(true);
+        productContext.getOrders();
       })
       .catch((error) => {
         setLoadingtwo(true);
         setErrortwo("دوباره تلاش کنید");
       });
+      setTimeout(() => {
+        setShow(!show)
+      }, 700);
   };
-
 
   //find product on card 
   const findProduct = (id) => {
       return productContext.data.filter(item => item.id === id);
   }
-
-  
 
   return (
     <>
