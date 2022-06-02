@@ -98,6 +98,7 @@ function ManagementProductes() {
         افزودن کالا
       </Button>
       {showModal ? <AddProductes open={showModal} handleClose={() => setShowModal(false)}/>: null }
+      {showModalEdite ? <EditeProduct employee={edite} open={showModalEdite} handleClose={() => setShowModalEdite(false)}/>: null }
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
         >
@@ -117,7 +118,6 @@ function ManagementProductes() {
             <TableBody>
               {product.currentData()?.map((row , index) => (
                 <StyledTableRow key={row.id}>
-                      {showModalEdite ? <EditeProduct employee={edite} open={showModalEdite} handleClose={() => setShowModalEdite(false)}/>: null }
                       <StyledTableCell component="th" scope="row">
                         {index+1}
                       </StyledTableCell>

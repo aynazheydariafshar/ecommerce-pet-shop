@@ -122,19 +122,22 @@ export default function EditeProduct({open , handleClose , employee}) {
         })
     }
 
-    // const findCategoryOfProduct = (id) => {
-    //     let res = category.find(item => item.id === id);
-    //     console.log(res.group)
-    //     return res.group
+    // const findCategoryOfProduct = () => {
+    //     let res = category.filter(item => item.id === employee.category);
+    //     formik.setFieldValue('group' , res[0]?.group , false)
+    //     formik.setFieldValue('subgroup' , res[0]?.subgroup , false)
     // }
-    
+
+    // React.useEffect(() => {
+    //     findCategoryOfProduct()
+    // }, [])
 
 
     const formik = useFormik({
         initialValues: {
           Name: employee.name,
-          group: '',
-          subgroup: '',
+          group:' ' ,
+          subgroup: ' ',
           image : employee.image,
           weight :employee.weight,
           brand : employee.brand,

@@ -85,6 +85,7 @@ const DeleveryOrders = () => {
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
+        {showModal ? <OrderCheck employee={see} open={showModal} handleClose={() => setShowModal(false)}/>: null }
         <TableContainer dir="rtl" component={Paper} sx={{ padding: "30px" }}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
@@ -99,7 +100,6 @@ const DeleveryOrders = () => {
             <TableBody>
               {product.currentData()?.map((row, index) => (
                 <StyledTableRow key={row.id}>
-                  {showModal ? <OrderCheck employee={see} open={showModal} handleClose={() => setShowModal(false)}/>: null }
                   <StyledTableCell component="th" scope="row">
                     {index+1}
                   </StyledTableCell>
