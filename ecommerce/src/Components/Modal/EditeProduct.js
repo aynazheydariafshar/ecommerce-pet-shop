@@ -325,12 +325,11 @@ export default function EditeProduct({open , handleClose , employee}) {
                             formik.setFieldValue('description' , editor.getData() , false)
                         }}
                     />  
-                    <Button
-                        fullWidth 
+                    <Button 
                         type="submit"
                         color="success"
                         variant="contained"
-                        sx={{marginY : '20px'}}
+                        sx={{marginY : '10px' , paddingX : '40px' , fontSize:'15px'}}
                     >
                         ویرایش
                     </Button>
