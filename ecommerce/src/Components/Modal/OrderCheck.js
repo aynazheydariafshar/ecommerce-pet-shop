@@ -209,7 +209,7 @@ export default function OrderCheck({ open, handleClose, employee }) {
                   </TableBody>
                 </Table>
               </TableContainer>
-              {
+              {employee.orderStatus === 3 ?
                 <Button
                   type="submit"
                   color="success"
@@ -217,7 +217,16 @@ export default function OrderCheck({ open, handleClose, employee }) {
                   sx={{marginY : '10px' , paddingX : '40px' , fontSize:'15px'}}
                   >
                   تحویل شد
-                </Button>
+                </Button> :
+                <Typography 
+                    textAlign="center"
+                    gutterBottom
+                    variant="h7"
+                    component="div"
+                    marginTop='50px'
+                >
+                    زمان تحویل : 
+                </Typography>
               }
             </Box>
           </Modal>
