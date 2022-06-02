@@ -126,10 +126,10 @@ const Inventory = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-            {product.currentData()?.map((row) => (
-                <StyledTableRow key={row.name}>
+            {product.currentData()?.map((row , index) => (
+                <StyledTableRow key={row.id}>
                   <StyledTableCell component="th" scope="row">
-                    {row.id}
+                    {index+1}
                   </StyledTableCell>
                   <StyledTableCell align="right" component="th" scope="row">
                     {row.name}

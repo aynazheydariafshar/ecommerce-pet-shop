@@ -115,11 +115,11 @@ function ManagementProductes() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {product.currentData()?.map((row) => (
-                <StyledTableRow key={row.name}>
+              {product.currentData()?.map((row , index) => (
+                <StyledTableRow key={row.id}>
                       {showModalEdite ? <EditeProduct employee={edite} open={showModalEdite} handleClose={() => setShowModalEdite(false)}/>: null }
                       <StyledTableCell component="th" scope="row">
-                        {row.id}
+                        {index+1}
                       </StyledTableCell>
                       <StyledTableCell align="right" component="th" scope="row">
                         {row.name}
