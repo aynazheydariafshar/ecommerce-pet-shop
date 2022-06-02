@@ -2,12 +2,9 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import useCategory from "hooks/useCategory";
 import { styled } from "@mui/material/styles";
-import * as yup from "yup";
 import axios from "axios";
 import { DataContext } from "Context/DataContext";
-import useFetch from "hooks/useFetch";
 import { Table, Typography } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -15,6 +12,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import * as shamsi from 'shamsi-date-converter';
 
 const style = {
   position: "absolute",
@@ -52,43 +50,44 @@ export default function OrderCheck({ open, handleClose, employee }) {
   //get token
   const token = localStorage.getItem("token");
 
-  //data
-  const { data, loading, error } = useFetch(`orders?token=${token}`);
-
   //show
   const [show, setShow] = React.useState(true);
 
   //context dat
   const productContext = React.useContext(DataContext)
 
-  //data product
-  const [product , setProduct] = React.useState()
-
   //check for api
   const [loadingtwo, setLoadingtwo] = React.useState(true);
   const [errortwo, setErrortwo] = React.useState(null);
 
-  //update orderStatus on data
-  const handleorderStatus = (row) => {
+  //add time delevery
+  const handleTimeDelevery = () => {
     setErrortwo(null);
     setLoadingtwo(false);
-    axios
-      .put(`http://localhost:3002/products/${row.id}`, {
+    axios.put(`http://localhost:3002/orders/${employee.id}`, {
         customerDetail: {
-          firstName: row.customerDetail.firstName,
-          lastName: row.customerDetail.lastName,
-          phone: row.customerDetail.phone,
-          billingAddress: row.customerDetail.billingAddress,
+          firstName: employee.customerDetail.firstName,
+          lastName: employee.customerDetail.lastName,
+          phone: employee.customerDetail.phone,
+          billingAddress: employee.customerDetail.billingAddress,
         },
-        orderNumber: row.orderNumber,
-        orderDate: row.orderDate,
-        purchaseTotal: row.purchaseTotal,
+        orderNumber: employee.orderNumber,
+        orderDate: employee.orderDate,
+        purchaseTotal: employee.purchaseTotal,
         orderStatus: 1,
-        delivery: row.delivery,
-        deliveredAt: row.deliveredAt,
-      })
+        delivery: employee.delivery,
+        deliveredAt: new Date(),
+        orderItems: employee.orderItems.map(item => {
+            return {
+              productId: item.productId,
+              quantity: item.quantity
+            }
+        })
+      },{
+        headers : {token : token}
+      }
+      )
       .then((response) => {
-        productContext.getdata();
         setLoadingtwo(true);
       })
       .catch((error) => {
@@ -97,13 +96,13 @@ export default function OrderCheck({ open, handleClose, employee }) {
       });
   };
 
+
+  //find product on card 
   const findProduct = (id) => {
       return productContext.data.filter(item => item.id === id);
   }
+
   
-  React.useEffect(() => {
-      console.log(findProduct(2,0))
-  }, [])
 
   return (
     <>
@@ -159,7 +158,7 @@ export default function OrderCheck({ open, handleClose, employee }) {
                 </Box>
               <Typography
                 textAlign="right"
-                marginBottom = '5px'
+                marginBottom = '15px'
                 gutterBottom
                 variant="h7"
                 component="div"
@@ -215,6 +214,7 @@ export default function OrderCheck({ open, handleClose, employee }) {
                   color="success"
                   variant="contained"
                   sx={{marginY : '10px' , paddingX : '40px' , fontSize:'15px'}}
+                  onClick={handleTimeDelevery}
                   >
                   تحویل شد
                 </Button> :
@@ -225,7 +225,7 @@ export default function OrderCheck({ open, handleClose, employee }) {
                     component="div"
                     marginTop='50px'
                 >
-                    زمان تحویل : 
+                    زمان تحویل : {shamsi.gregorianToJalali(employee.deliveredAt)?.join('/')}
                 </Typography>
               }
             </Box>
