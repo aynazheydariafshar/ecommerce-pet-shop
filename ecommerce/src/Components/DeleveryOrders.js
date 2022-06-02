@@ -16,6 +16,7 @@ import {
 import PaginationPage from "components/PaginationPage";
 import { Box } from "@mui/system";
 import { BiDetail } from "react-icons/bi";
+import OrderCheck from "./modal/OrderCheck";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -45,6 +46,18 @@ const DeleveryOrders = () => {
 
   //product change
   const [delevery, setdelevery] = React.useState(data);
+
+  //see data
+  const [see , setsee] = React.useState(null)
+
+  //show modal  
+  const [showModal,setShowModal] = React.useState(false);
+
+  //show detailes
+  const handleShowDetailes = (row) => {
+    setShowModal(!showModal);
+    setsee(row)
+  }
 
   //pagination delevery
   let [page, setPage] = React.useState(1);
@@ -86,6 +99,7 @@ const DeleveryOrders = () => {
             <TableBody>
               {product.currentData()?.map((row, index) => (
                 <StyledTableRow key={row.id}>
+                  {showModal ? <OrderCheck employee={see} open={showModal} handleClose={() => setShowModal(false)}/>: null }
                   <StyledTableCell component="th" scope="row">
                     {index+1}
                   </StyledTableCell>
@@ -99,7 +113,7 @@ const DeleveryOrders = () => {
                     {row.purchaseTotal}
                   </StyledTableCell>
                   <StyledTableCell align="right" component="th" scope="row">
-                    <IconButton className="icon-navbar">
+                    <IconButton className="icon-navbar" onClick={() => handleShowDetailes(row)}>
                       <BiDetail />
                     </IconButton>
                   </StyledTableCell>
