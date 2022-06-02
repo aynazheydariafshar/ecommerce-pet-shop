@@ -12,10 +12,12 @@ const FooterContainer = styled('div')({
     height: 100,
     bottom: 0,
     width: '100%',
+    position:'fixed',
+    left:0,
 });
 
 const Footer = () => {
-    return <FooterContainer>
+    return <FooterContainer className='footer'>
             <Typography
                     noWrap
                     component="div"

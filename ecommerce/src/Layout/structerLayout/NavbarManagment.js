@@ -83,38 +83,28 @@ const handleLogOut = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-            <Stack direction="row" spacing={2}>
-                <Link to='/' className='link'>
-                    <Button className="btn-color"> خانه اصلی</Button>
+      <Link to='/' className='link'>
+        <MenuItem>
+          <Button className="btn-color"> خانه اصلی</Button>
+        </MenuItem>
                 </Link>
-            </Stack>
-      </MenuItem>
-      <MenuItem>
-            <Stack direction="row" spacing={2}>
               <Link to='/management-productes' className='link'>
+      <MenuItem>
                 <Button className="btn-color">کالا ها</Button>
+      </MenuItem>
               </Link>
-            </Stack>  
-      </MenuItem>
-      <MenuItem>
-        <Stack direction="row" spacing={2}>
           <Link to='/inventory' className='link'>
+      <MenuItem>
             <Button className="btn-color">موجودی و قیمت ها</Button>
+      </MenuItem>
           </Link>    
-        </Stack>
-      </MenuItem>
-      <MenuItem>
-          <Stack direction="row" spacing={2}>
             <Link to='/orders' className='link'>
-                <Button className="btn-color">سفارش ها</Button>
-            </Link>    
-          </Stack>
-      </MenuItem>
       <MenuItem>
-            <Stack direction="row" spacing={2}>
+                <Button className="btn-color">سفارش ها</Button>
+      </MenuItem>
+            </Link>    
+      <MenuItem>
                 <Button onClick={handleLogOut} className="btn-color"> خروج</Button>
-            </Stack>
       </MenuItem>
     </Menu>
   );
@@ -142,7 +132,7 @@ const handleLogOut = () => {
             <Box sx={{ display: { xs: 'none', md: 'flex'}  , marginRight : '15px' , alignItems : 'center'}}>
                 <Link to='/orders' className='link'>
                   <Stack direction="row" spacing={2}>
-                      <Button className="btn-color">سفارش ها</Button>
+                      <Button className="icon-navbar btn-color">سفارش ها</Button>
                   </Stack>  
                 </Link>
                 <Link to='/inventory' className='link'>

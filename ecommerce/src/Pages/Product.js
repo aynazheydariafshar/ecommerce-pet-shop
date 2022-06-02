@@ -74,13 +74,13 @@ const Product = () => {
                         <Typography style={{fontWeight : 'bold'}} variant="h7" component="div" sx={{paddingY : '5px'}}>
                             وزن  : {`${item.weight} گرم`} 
                         </Typography>
-                        <Typography variant="h7" component="div" sx={{paddingY : '15px'}}>
+                        {item.detailes && <Typography variant="h7" component="div" sx={{paddingY : '15px'}}>
                            : سایر مشخصات 
                             <ul style={{listStyleType : 'none'}}>
-                                {item.detailes.map(i => <li style={{marginRight : '30px'}}>{i}</li>)}
+                                {item.detailes?.map(i => <li style={{marginRight : '30px'}}>{i}</li>)}
                             </ul>    
-                        </Typography>
-                        <Button color = "secondary"  variant="contained" sx={{float : 'left'}} endIcon={<MdOutlineAddCircleOutline />}>
+                        </Typography>}
+                        <Button color = "secondary"  variant="contained" sx={{float : 'left' , marginTop : '20px'}} endIcon={<MdOutlineAddCircleOutline />}>
                             افزودن به سبد خرید
                         </Button>
                     </Box>
