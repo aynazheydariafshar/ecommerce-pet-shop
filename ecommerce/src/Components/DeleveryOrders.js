@@ -91,6 +91,7 @@ const DeleveryOrders = () => {
                 <StyledTableCell align="right">نام </StyledTableCell>
                 <StyledTableCell align="right">نام خانوادگی</StyledTableCell>
                 <StyledTableCell align="right">مجموع مبلغ</StyledTableCell>
+                <StyledTableCell align="right">زمان ثبت سفارش</StyledTableCell>
                 <StyledTableCell align="right">جزییات سفارش</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -109,6 +110,9 @@ const DeleveryOrders = () => {
                       </StyledTableCell>
                       <StyledTableCell align="right" component="th" scope="row">
                         {row.purchaseTotal}
+                      </StyledTableCell>
+                      <StyledTableCell align="right" component="th" scope="row">
+                        {new Date(row.orderDate).toLocaleDateString('fa-IR')}
                       </StyledTableCell>
                       <StyledTableCell align="right" component="th" scope="row">
                         <IconButton className="icon-navbar" onClick={() => handleShowDetailes(row)}>
