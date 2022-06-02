@@ -8,6 +8,7 @@ import {TextField } from '@mui/material';
 import useCategory from 'hooks/useCategory';
 import * as yup from 'yup';
 import axios from 'axios';
+import useFetch from 'hooks/useFetch';
 import { CKEditor } from 'ckeditor4-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { DataContext } from 'Context/DataContext';
@@ -27,13 +28,13 @@ const style = {
 
 
 
-export default function AddProductes({open , handleClose}) {
+export default function EditeProduct({open , handleClose , employee}) {
+
+    //context data
+    const productContext = React.useContext(DataContext);
 
     //category
     const {category , loadingcategory , errorcategory} = useCategory();
-
-    //context data
-    const productContext = React.useContext(DataContext)
 
     //show
     const [show , setShow] = React.useState(true);
@@ -66,16 +67,15 @@ export default function AddProductes({open , handleClose}) {
             return false;
         }),
     group : yup
-        .string()
-        .required('پر کردن این فیلد الزامی می باشد'),   
+    .string()
+    .required('پر کردن این فیلد الزامی می باشد'),   
     subgroup : yup.string().when("group", {
         is:(group) => group !== 'محصولات پرندگان',
         then: yup.string().required("پر کردن این فیلد الزامی می باشد")
       })
 
     })
- 
-    //find category data
+
     const findGroupOfProduct = (subgroup) => {
         let resault = category.find(item =>item.subgroup ? item.subgroup === subgroup : 5);
         return resault.id
@@ -83,14 +83,13 @@ export default function AddProductes({open , handleClose}) {
 
     //post image
     const handleChangeimage = async(e) => {
-        const dataimage = e.target.files[0];
+        const data = e.target.files[0];
         const formData = new FormData();
-        formData.append('image' , dataimage);
+        formData.append('image' , data);
         const filename = await axios.post("http://localhost:3002/upload" , formData);
         formik.setFieldValue('image' , filename.data.filename , false)
     }
 
-    //find type data
     const findType = (group) => {
         if(group === "محصولات گربه"){
             return 'گربه';
@@ -101,11 +100,10 @@ export default function AddProductes({open , handleClose}) {
         }
     }
 
-    //post data
-    const postData = (values) => {
+    const editeData = (values) => {
         setErrortwo(null);
         setLoadingtwo(false);
-         axios.post('http://localhost:3002/products' , {
+        axios.put(`http://localhost:3002/products/${employee.id}` , {
             name : values.Name,
             brand : values.brand,
             image: values.image,
@@ -116,35 +114,42 @@ export default function AddProductes({open , handleClose}) {
             weight : values.weight,
             description : values.description,
         }).then(response => {
-            setLoadingtwo(true);
             productContext.getdata();
+            setLoadingtwo(true);
         }).catch(error => {
             setLoadingtwo(true);
             setErrortwo('دوباره تلاش کنید')
         })
     }
 
+    // const findCategoryOfProduct = (id) => {
+    //     let res = category.find(item => item.id === id);
+    //     console.log(res.group)
+    //     return res.group
+    // }
+    
+
 
     const formik = useFormik({
         initialValues: {
-          Name: '',
+          Name: employee.name,
           group: '',
           subgroup: '',
-          image : '',
-          weight : 0,
-          brand : '',
-          price : 0,
-          count : 0,
-          description : ''
+          image : employee.image,
+          weight :employee.weight,
+          brand : employee.brand,
+          price :employee.price,
+          count :employee.count,
+          description : employee.description
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            postData(values);
+            editeData(values);
             setTimeout(() => {
                 setShow(!show)
             }, 700);
         },
-      });     
+      });
 
     return (<>
         {show && 
@@ -159,7 +164,7 @@ export default function AddProductes({open , handleClose}) {
             <Box sx={style}>
                 <form onSubmit={formik.handleSubmit}>
                     <Typography variant='h5' align='center' fontWeight='bold'>
-                        افزودن کالا
+                        ویرایش کالا
                     </Typography>
                     <Box sx={{display : 'flex'}}>
                         <TextField 
@@ -327,7 +332,7 @@ export default function AddProductes({open , handleClose}) {
                         variant="contained"
                         sx={{marginY : '20px'}}
                     >
-                        افزودن
+                        ویرایش
                     </Button>
                 </form>
             </Box>
