@@ -161,7 +161,7 @@ function ManagementProductes() {
                         component="th"
                         scope="row"
                         >
-                        <IconButton className="icon-trash" onClick={() => removeItem(row.id)} sx={{marginLeft : '10px'}}>
+                        <IconButton className="icon-trash" onClick={() => removeItem(row.id)} sx={{marginLeft : '50px'}}>
                           <FaTrash fontSize='20px' />
                         </IconButton>
                       </StyledTableCell>
