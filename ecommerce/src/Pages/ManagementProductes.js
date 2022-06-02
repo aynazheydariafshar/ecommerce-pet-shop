@@ -171,7 +171,7 @@ function ManagementProductes() {
           </Table>
         </TableContainer>
 
-        <Stack padding="30px">
+        <Stack className="pager" padding="30px">
           <Pagination
             size="large"
             count={count}

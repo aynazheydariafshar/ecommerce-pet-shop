@@ -72,7 +72,7 @@ const WaiteOrders = () => {
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        <TableContainer dir="rtl" component={Paper} sx={{ padding: "30px" }}>
+        <TableContainer dir="rtl" component={Paper} sx={{ padding: "30px" , margin : '30px' }}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
@@ -109,7 +109,7 @@ const WaiteOrders = () => {
           </Table>
         </TableContainer>
 
-        <Stack padding="30px">
+        <Stack className="pager" padding="30px">
           <Pagination
             size="large"
             count={count}
