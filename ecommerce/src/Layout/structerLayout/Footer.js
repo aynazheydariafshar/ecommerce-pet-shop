@@ -14,6 +14,7 @@ const FooterContainer = styled('div')({
     width: '100%',
     position:'fixed',
     left:0,
+    zIndex : 2
 });
 
 const Footer = () => {

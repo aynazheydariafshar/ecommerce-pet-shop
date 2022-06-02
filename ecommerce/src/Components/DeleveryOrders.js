@@ -16,6 +16,8 @@ import {
 import PaginationPage from "components/PaginationPage";
 import { Box } from "@mui/system";
 import { BiDetail } from "react-icons/bi";
+import OrderCheck from "./modal/OrderCheck";
+import { DataContext } from "Context/DataContext";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -38,40 +40,49 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const DeleveryOrders = () => {
+
+  //get token
   const token = localStorage.getItem("token");
 
   //data
   const { data, loading, error } = useFetch(`orders?token=${token}`);
 
-  //product change
-  const [delevery, setdelevery] = React.useState(data);
+  //see data
+  const [see , setsee] = React.useState(null)
+
+  //show modal  
+  const [showModal,setShowModal] = React.useState(false);
+
+  const productContext = React.useContext(DataContext);
+
+  //show detailes
+  const handleShowDetailes = (row) => {
+    setShowModal(!showModal);
+    setsee(row)
+  }
 
   //pagination delevery
   let [page, setPage] = React.useState(1);
   const perPage = 10;
 
-  const count = Math.ceil(delevery.length / perPage);
-  const product = PaginationPage(delevery, perPage);
+  const count = Math.ceil(productContext.dataOrders.length / perPage);
+  const product = PaginationPage(productContext.dataOrders, perPage);
 
   const handleChange = (e, p) => {
     setPage(p);
     product.jump(p);
   };
 
-  //filter data to find delvery orders
-  const filterData = () => {
-    setdelevery(data?.filter((item) => item.orderStatus === 1));
-  };
-
   React.useEffect(() => {
-    filterData();
-  }, [data]);
+    productContext.getOrders();
+  }, []);
 
   return (
     <>
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
+        {showModal ? <OrderCheck employee={see} open={showModal} handleClose={() => setShowModal(false)}/>: null }
         <TableContainer dir="rtl" component={Paper} sx={{ padding: "30px" }}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
@@ -84,27 +95,29 @@ const DeleveryOrders = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {product.currentData()?.map((row, index) => (
-                <StyledTableRow key={row.id}>
-                  <StyledTableCell component="th" scope="row">
-                    {index+1}
-                  </StyledTableCell>
-                  <StyledTableCell align="right" component="th" scope="row">
-                    {row.customerDetail?.firstName}
-                  </StyledTableCell>
-                  <StyledTableCell align="right" component="th" scope="row">
-                    {row.customerDetail?.lastName}
-                  </StyledTableCell>
-                  <StyledTableCell align="right" component="th" scope="row">
-                    {row.purchaseTotal}
-                  </StyledTableCell>
-                  <StyledTableCell align="right" component="th" scope="row">
-                    <IconButton className="icon-navbar">
-                      <BiDetail />
-                    </IconButton>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
+              {product.currentData()?.map((row, index) => {
+                if(row.orderStatus === 1){
+                   return <StyledTableRow key={row.id}>
+                      <StyledTableCell component="th" scope="row">
+                        {index+1}
+                      </StyledTableCell>
+                      <StyledTableCell align="right" component="th" scope="row">
+                        {row.customerDetail?.firstName}
+                      </StyledTableCell>
+                      <StyledTableCell align="right" component="th" scope="row">
+                        {row.customerDetail?.lastName}
+                      </StyledTableCell>
+                      <StyledTableCell align="right" component="th" scope="row">
+                        {row.purchaseTotal}
+                      </StyledTableCell>
+                      <StyledTableCell align="right" component="th" scope="row">
+                        <IconButton className="icon-navbar" onClick={() => handleShowDetailes(row)}>
+                          <BiDetail />
+                        </IconButton>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                }
+              })}
             </TableBody>
           </Table>
         </TableContainer>

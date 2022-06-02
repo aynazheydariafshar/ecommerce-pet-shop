@@ -7,7 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import useFetch from "hooks/useFetch";
 import {
   IconButton,
   Pagination,
@@ -16,6 +15,8 @@ import {
 import PaginationPage from "components/PaginationPage";
 import { Box } from "@mui/system";
 import { BiDetail } from "react-icons/bi";
+import OrderCheck from "./modal/OrderCheck";
+import { DataContext } from "Context/DataContext";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -38,40 +39,47 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const WaiteOrders = () => {
+
+  //get token
   const token = localStorage.getItem("token");
 
-  //data
-  const { data, loading, error } = useFetch(`orders?token=${token}`);
+  //see data
+  const [see , setsee] = React.useState(null)
 
-  //product change
-  const [waite, setwaite] = React.useState(data);
+  //show modal  
+  const [showModal,setShowModal] = React.useState(false);
+  const productContext = React.useContext(DataContext)
+
+
+  //show detailes
+  const handleShowDetailes = (row) => {
+    setShowModal(!showModal);
+    setsee(row)
+  }
 
   //pagination waite
   let [page, setPage] = React.useState(1);
   const perPage = 10;
 
-  const count = Math.ceil(waite.length / perPage);
-  const product = PaginationPage(waite, perPage);
+  const count = Math.ceil(productContext.dataOrders.length / perPage);
+  const product = PaginationPage(productContext.dataOrders, perPage);
 
   const handleChange = (e, p) => {
     setPage(p);
     product.jump(p);
   };
 
-  //filter data to find delvery orders
-  const filterData = () => {
-    setwaite(data?.filter((item) => item.orderStatus === 3));
-  };
 
   React.useEffect(() => {
-    filterData();
-  }, [data]);
+    productContext.getOrders();
+  }, []);
 
   return (
     <>
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
+        {showModal ? <OrderCheck employee={see} open={showModal} handleClose={() => setShowModal(false)}/>: null }
         <TableContainer dir="rtl" component={Paper} sx={{ padding: "30px" , margin : '30px' }}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
@@ -84,8 +92,9 @@ const WaiteOrders = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {product.currentData()?.map((row , index) => (
-                <StyledTableRow key={row.id}>
+              {product.currentData()?.map((row , index) => {
+                if(row.orderStatus === 3){
+                 return <StyledTableRow key={row.id}>
                   <StyledTableCell component="th" scope="row">
                     {index+1}
                   </StyledTableCell>
@@ -99,12 +108,13 @@ const WaiteOrders = () => {
                     {row.purchaseTotal}
                   </StyledTableCell>
                   <StyledTableCell align="right" component="th" scope="row">
-                    <IconButton className="icon-navbar">
+                    <IconButton className="icon-navbar"  onClick={() => handleShowDetailes(row)}>
                       <BiDetail />
                     </IconButton>
                   </StyledTableCell>
                 </StyledTableRow>
-              ))}
+                }
+              })}
             </TableBody>
           </Table>
         </TableContainer>
