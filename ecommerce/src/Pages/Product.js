@@ -7,6 +7,7 @@ import CustomerLayout from 'layout/CustomerLayout';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import {MdOutlineAddCircleOutline} from 'react-icons/md'
+import {CgUnavailable} from 'react-icons/cg'
 import Cart from 'components/Cart';
 const Product = () => {
 
@@ -46,16 +47,16 @@ const Product = () => {
                             }
                         })}
                     </Typography>
-                        <Typography style={{fontWeight : 'bold'}} color='error.main' variant="h6" component="div" sx={{paddingY : '5px'}}>
+                        <Typography color='error.main' variant="h6" component="div" sx={{paddingY : '5px' , fontWeight : 'bold'}}>
                             قیمت : {item.price} تومان
                         </Typography>
-                        <Typography style={{fontWeight : 'bold'}} variant="h7" component="div" sx={{paddingY : '5px'}}>
+                        <Typography variant="h7" component="div" sx={{paddingY : '5px' , fontWeight : 'bold'}}>
                             برند : {item.brand} 
                         </Typography>
-                        <Typography style={{fontWeight : 'bold'}} variant="h7" component="div" sx={{paddingY : '5px'}}>
+                        <Typography variant="h7" component="div" sx={{paddingY : '5px' , fontWeight : 'bold'}}>
                             گونه حیوان : {item.type} 
                         </Typography>
-                        <Typography style={{fontWeight : 'bold'}} variant="h7" component="div" sx={{paddingY : '5px'}}>
+                        <Typography variant="h7" component="div" sx={{paddingY : '5px' , fontWeight : 'bold'}}>
                             وزن  : {`${item.weight} گرم`} 
                         </Typography>
                         {item.detailes && <Typography variant="h7" component="div" sx={{paddingY : '15px'}}>
@@ -64,9 +65,14 @@ const Product = () => {
                                 {item.detailes?.map(i => <li style={{marginRight : '30px'}}>{i}</li>)}
                             </ul>    
                         </Typography>}
+                        {item.count === 0 ? 
+                        <Box sx={{display : 'flex' , alignItems : 'center'}}>
+                            <Typography variant="h5" component="div" sx={{float : 'left',paddingY : '15px' , fontWeight : 'bold' , color : 'red'}}>ناموجود </Typography> 
+                            <CgUnavailable color='red' fontSize='30px'/>
+                        </Box> :
                         <Button color = "secondary"  variant="contained" sx={{float : 'left' , marginTop : '20px' }} endIcon={<MdOutlineAddCircleOutline />}>
                             افزودن به سبد خرید
-                        </Button>
+                        </Button>}
                     </Box>
                     <Box padding='10px'>
                         <img src={`http://localhost:3002/files/${item.image}`} width="300px" height='300px'/>
