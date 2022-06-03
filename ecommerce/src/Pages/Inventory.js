@@ -8,8 +8,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import useFetch from "hooks/useFetch";
-import useCategory from "hooks/useCategory";
 import { Button, Pagination, Stack } from "@mui/material";
 import PaginationPage from "components/PaginationPage";
 import { Box } from "@mui/system";
@@ -70,7 +68,7 @@ const Inventory = () => {
       name : row.name,
       brand : row.brand,
       image: row.image,
-      price : value,
+      price : +value,
       category : row.category,
       count : row.count,
       type : row.type,
@@ -95,7 +93,7 @@ const Inventory = () => {
       image: row.image,
       price : row.price,
       category : row.category,
-      count : value,
+      count : +value,
       type : row.type,
       weight : row.weight,
       description : row.description,

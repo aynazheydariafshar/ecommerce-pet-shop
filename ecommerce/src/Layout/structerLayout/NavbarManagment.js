@@ -114,7 +114,7 @@ const handleLogOut = () => {
       <AppBar position="static" sx={{backgroundColor : '#F8F9FD' , color : 'black'}}>
           <Box sx={{ display: "flex" , alignItems : 'center'}}>
             <Box sx={{ display: "flex" , alignItems : 'center'}}>
-                <Toolbar sx={{ display: { xs: "none" , sm: 'block' } , padding : '5px' , mt : '10px' }}>
+                <Toolbar sx={{padding : '10px' , mt : '10px' }}>
                     <Link to='/'>
                         <img src={Logo} alt="logo" width='50px' height='50px'/>
                     </Link>

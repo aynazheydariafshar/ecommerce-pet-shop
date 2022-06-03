@@ -21,7 +21,6 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: '50%',
   bgcolor: 'background.paper',
-  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
@@ -122,19 +121,22 @@ export default function EditeProduct({open , handleClose , employee}) {
         })
     }
 
-    // const findCategoryOfProduct = (id) => {
-    //     let res = category.find(item => item.id === id);
-    //     console.log(res.group)
-    //     return res.group
+    // const findCategoryOfProduct = () => {
+    //     let res = category.filter(item => item.id === employee.category);
+    //     formik.setFieldValue('group' , res[0]?.group , false)
+    //     formik.setFieldValue('subgroup' , res[0]?.subgroup , false)
     // }
-    
+
+    // React.useEffect(() => {
+    //     findCategoryOfProduct()
+    // }, [])
 
 
     const formik = useFormik({
         initialValues: {
           Name: employee.name,
-          group: '',
-          subgroup: '',
+          group:' ' ,
+          subgroup: ' ',
           image : employee.image,
           weight :employee.weight,
           brand : employee.brand,
@@ -325,12 +327,11 @@ export default function EditeProduct({open , handleClose , employee}) {
                             formik.setFieldValue('description' , editor.getData() , false)
                         }}
                     />  
-                    <Button
-                        fullWidth 
+                    <Button 
                         type="submit"
                         color="success"
                         variant="contained"
-                        sx={{marginY : '20px'}}
+                        sx={{marginY : '10px' , paddingX : '40px' , fontSize:'15px'}}
                     >
                         ویرایش
                     </Button>

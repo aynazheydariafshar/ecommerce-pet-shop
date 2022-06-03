@@ -39,3 +39,9 @@
 .pager{
   margin-bottom: 150px;
 }
+
+td {
+  height: 40px !important;
+  padding: 5px !important;
+  text-align: center !important;
+}

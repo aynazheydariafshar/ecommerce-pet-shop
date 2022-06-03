@@ -20,7 +20,6 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: '50%',
   bgcolor: 'background.paper',
-  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
@@ -321,11 +320,10 @@ export default function AddProductes({open , handleClose}) {
                         }}
                     />  
                     <Button
-                        fullWidth 
                         type="submit"
                         color="success"
                         variant="contained"
-                        sx={{marginY : '20px'}}
+                        sx={{marginY : '10px' , paddingX : '40px' , fontSize:'15px'}}
                     >
                         افزودن
                     </Button>
