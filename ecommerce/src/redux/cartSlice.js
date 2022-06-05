@@ -23,8 +23,6 @@ const cartSlice = createSlice({
                 state.cartItems.push(tempProduct);
                 toast.success(`محصول ${action.payload.name} به سبد خرید شما اضافه شد`)
             }
-
-            // setcartItems(state.cartItems);
         },
     },
 });

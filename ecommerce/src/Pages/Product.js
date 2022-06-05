@@ -5,7 +5,7 @@ import useCategory from 'hooks/useCategory';
 import useFetch from 'hooks/useFetch';
 import CustomerLayout from 'layout/CustomerLayout';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import {MdOutlineAddCircleOutline} from 'react-icons/md'
 import {CgUnavailable} from 'react-icons/cg'
 import Cart from 'components/Cart';
@@ -14,8 +14,10 @@ import { addToCart } from 'redux/cartSlice';
 
 const Product = () => {
 
+    const navigate = useNavigate();
+
     //get state from redux
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     //add params for every single product
     const dataParams = useParams();
@@ -29,7 +31,8 @@ const Product = () => {
 
     //add product to card when click on button
     const handleAddToCard = (item) => {
-        dispatch(addToCart(item))
+        dispatch(addToCart(item));
+        navigate('/card');
     }
 
     //find single product with filter
