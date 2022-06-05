@@ -48,7 +48,7 @@ const Product = () => {
         {product?.map(item =>{
             return (
             <>
-                <Cart>
+                <Cart padding='75px'>
                     <Box sx={{textAlign : 'right'}}>
                         <Typography variant="h5" sx={{fontWeight : 'bold' , paddingY : '10px'}} component="div">
                             {item.name} 
