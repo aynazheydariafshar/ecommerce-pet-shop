@@ -329,7 +329,7 @@ export default function EditeProduct({open , handleClose , employee}) {
                     />  
                     <Button 
                         type="submit"
-                        color="success"
+                        color="secondary"
                         variant="contained"
                         sx={{marginY : '10px' , paddingX : '40px' , fontSize:'15px'}}
                     >
