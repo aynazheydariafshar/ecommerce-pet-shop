@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { setcartItems } from 'utils/Common';
 
 const initialState = {
     cartItems : [] ,
@@ -16,12 +17,14 @@ const cartSlice = createSlice({
 
             if(itemIndex >= 0){
                 state.cartItems[itemIndex].cartQuantity += 1;
-                toast.success('تعداد این محصول افزایش یافت')
+                toast.success(`تعداد محصول ${state.cartItems[itemIndex].name} افزایش یافت`)
             } else {
                 const tempProduct = {...action.payload , cartQuantity : 1};
                 state.cartItems.push(tempProduct);
                 toast.success(`محصول ${action.payload.name} به سبد خرید شما اضافه شد`)
             }
+
+            // setcartItems(state.cartItems);
         },
     },
 });
