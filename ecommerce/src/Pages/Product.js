@@ -9,16 +9,30 @@ import { useParams } from 'react-router';
 import {MdOutlineAddCircleOutline} from 'react-icons/md'
 import {CgUnavailable} from 'react-icons/cg'
 import Cart from 'components/Cart';
+import { useDispatch } from 'react-redux';
+import { addToCart } from 'redux/cartSlice';
 
 const Product = () => {
 
+    //get state from redux
+    const dispatch = useDispatch()
+
+    //add params for every single product
     const dataParams = useParams();
+
+    //get data from products
     const {data , loading , error} = useFetch('products');
-    const {category , loadingcategory , errorcategory} = useCategory();
-
-
     const [product , setProduct] = useState();
 
+    //get data from category
+    const {category , loadingcategory , errorcategory} = useCategory();
+
+    //add product to card when click on button
+    const handleAddToCard = (item) => {
+        dispatch(addToCart(item))
+    }
+
+    //find single product with filter
     const filterData = () => {
         return data.filter(item => item.id === +dataParams.id)
     }
@@ -72,10 +86,15 @@ const Product = () => {
                             <CgUnavailable color='red' fontSize='20px'/>
                         </Box> :
                         <Box sx={{display : 'flex' , alignItems : 'center'}}>
-                            <Button color = "secondary"  variant="contained" sx={{float : 'left' , marginTop : '20px' }} endIcon={<MdOutlineAddCircleOutline />}>
+                            <Button 
+                                color = "secondary"  
+                                variant="contained" 
+                                sx={{float : 'left' , marginTop : '20px' }} 
+                                endIcon={<MdOutlineAddCircleOutline />}
+                                onClick = {() => handleAddToCard(item)}
+                            >
                                 افزودن به سبد خرید
                             </Button>
-                            
                         </Box>}
                     </Box>
                     <Box padding='10px'>
