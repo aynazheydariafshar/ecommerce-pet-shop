@@ -1,5 +1,5 @@
 import { Button, Grid, InputAdornment, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import LoginImage from 'assets/images/24237-Cat-Dog-CorgiCat-Dog-HD-Wallpaper.jpg'
 import Logo from 'assets/images/logo.png';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
@@ -9,15 +9,14 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
 import { setUserSession } from 'utils/Common';
-import ErrorField from 'components/modal/ModalField'
-import ModalField from 'components/modal/ModalField';
 import HomeIcon from '@mui/icons-material/Home';
+import { toast } from 'react-toastify';
 
 const Login = (props) => {
 
     //check for api
     const [loading , setLoading] = useState(true);
-    const [error , setError] = useState(null);
+    const [error , setError] = useState('');
 
     //check for modal
     const [isOpen , setIsOpen] = useState(false);
@@ -58,12 +57,15 @@ const Login = (props) => {
                 setLoading(true);
                 setUserSession(response.data.token , response.data.user);
                 navigate('/management-productes');
+                toast.success('کاربر با موفقیت وارد می شود', {
+                    position : 'bottom-right'
+                })
             }).catch(error => {
                 setLoading(true);
                 if(error.response.status === 401 || error.response.status === 400){
-                    setError(error.response.data.message)
+                    toast.error('درخواست با کد وضعیت 400 ناموفق بود')
                 }else{
-                    setError('دوباره تلاش کنید')
+                    toast.error('نام کاربری یا رمز عبور اشتباه است')
                 } 
                 setIsOpen(true)
             })
@@ -144,13 +146,6 @@ const Login = (props) => {
                 </div>
             </Grid>
         </Grid>
-        {error !== null && 
-        <ModalField 
-            isOpen={isOpen}
-            handleClose = {handleDialogClose}
-            title = 'هشدار'
-            text='نام کاربری یا رمز عبور اشتباه است'
-         />}
     </div>;
 }
 
