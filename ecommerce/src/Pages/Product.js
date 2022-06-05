@@ -9,6 +9,7 @@ import { useParams } from 'react-router';
 import {MdOutlineAddCircleOutline} from 'react-icons/md'
 import {CgUnavailable} from 'react-icons/cg'
 import Cart from 'components/Cart';
+
 const Product = () => {
 
     const dataParams = useParams();
@@ -47,7 +48,7 @@ const Product = () => {
                             }
                         })}
                     </Typography>
-                        <Typography color='error.main' variant="h6" component="div" sx={{paddingY : '5px' , fontWeight : 'bold'}}>
+                        <Typography color='success.main' variant="h6" component="div" sx={{paddingY : '5px' , fontWeight : 'bold'}}>
                             قیمت : {item.price} تومان
                         </Typography>
                         <Typography variant="h7" component="div" sx={{paddingY : '5px' , fontWeight : 'bold'}}>
@@ -67,12 +68,15 @@ const Product = () => {
                         </Typography>}
                         {item.count === 0 ? 
                         <Box sx={{display : 'flex' , alignItems : 'center'}}>
-                            <Typography variant="h5" component="div" sx={{float : 'left',paddingY : '15px' , fontWeight : 'bold' , color : 'red'}}>ناموجود </Typography> 
-                            <CgUnavailable color='red' fontSize='30px'/>
+                            <Typography variant="h6" component="div" sx={{float : 'left',paddingY : '15px' , fontWeight : 'bold' , color : 'red'}}>ناموجود </Typography> 
+                            <CgUnavailable color='red' fontSize='20px'/>
                         </Box> :
-                        <Button color = "secondary"  variant="contained" sx={{float : 'left' , marginTop : '20px' }} endIcon={<MdOutlineAddCircleOutline />}>
-                            افزودن به سبد خرید
-                        </Button>}
+                        <Box sx={{display : 'flex' , alignItems : 'center'}}>
+                            <Button color = "secondary"  variant="contained" sx={{float : 'left' , marginTop : '20px' }} endIcon={<MdOutlineAddCircleOutline />}>
+                                افزودن به سبد خرید
+                            </Button>
+                            
+                        </Box>}
                     </Box>
                     <Box padding='10px'>
                         <img src={`http://localhost:3002/files/${item.image}`} width="300px" height='300px'/>
