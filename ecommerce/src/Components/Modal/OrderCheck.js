@@ -13,6 +13,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import * as shamsi from 'shamsi-date-converter';
+import PN from "persian-number";
 
 const style = {
   position: "absolute",
@@ -128,7 +129,7 @@ export default function OrderCheck({ open, handleClose, employee }) {
                         variant="h7"
                         component="div"
                     >
-                        تلفن : {employee.customerDetail.phone}
+                        تلفن : {PN.convertEnToPe(employee.customerDetail.phone)}
                     </Typography>
                     <Typography
                         textAlign="right"
@@ -186,7 +187,7 @@ export default function OrderCheck({ open, handleClose, employee }) {
                     {employee.orderItems?.map((row, index) => (
                       <StyledTableRow key={row.id}>
                         <StyledTableCell component="th" scope="row">
-                          {index + 1}
+                          {PN.convertEnToPe(index+1)}
                         </StyledTableCell>
                                 <StyledTableCell
                                 align="right"
@@ -200,10 +201,10 @@ export default function OrderCheck({ open, handleClose, employee }) {
                                 component="th"
                                 scope="row"
                                 >
-                                    {findProduct(row.productId)[0]?.price}
+                                    {PN.convertEnToPe(PN.sliceNumber(findProduct(row.productId)[0]?.price))}
                                 </StyledTableCell>
                          <StyledTableCell component="th" scope="row">
-                          {row.quantity}
+                          {PN.convertEnToPe(row.quantity)}
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -227,7 +228,7 @@ export default function OrderCheck({ open, handleClose, employee }) {
                     component="div"
                     marginTop='50px'
                 >
-                    زمان تحویل : {shamsi.gregorianToJalali(employee.deliveredAt)?.join('/')}
+                    زمان تحویل : {PN.convertEnToPe(shamsi.gregorianToJalali(employee.deliveredAt)?.join('/'))}
                 </Typography>
               }
             </Box>

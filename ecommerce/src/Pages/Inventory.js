@@ -14,6 +14,7 @@ import { Box } from "@mui/system";
 import EasyEdit from 'react-easy-edit';
 import { DataContext } from 'Context/DataContext';
 import axios from 'axios';
+import PN from "persian-number";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -127,7 +128,7 @@ const Inventory = () => {
             {product.currentData()?.map((row , index) => (
                 <StyledTableRow key={row.id}>
                   <StyledTableCell component="th" scope="row">
-                    {index+1}
+                    {PN.convertEnToPe(index+1)}
                   </StyledTableCell>
                   <StyledTableCell align="right" component="th" scope="row">
                     {row.name}
@@ -139,7 +140,7 @@ const Inventory = () => {
                       onCancel={() => {}}
                       saveButtonLabel="ذخیره"
                       cancelButtonLabel="خروج"
-                      value={row.price}                      
+                      value={PN.convertEnToPe(PN.sliceNumber(row.price))}                      
                     />
                   </StyledTableCell>
                   <StyledTableCell align="right" component="th" scope="row">
@@ -149,7 +150,7 @@ const Inventory = () => {
                       onCancel={() => {}}
                       saveButtonLabel="ذخیره"
                       cancelButtonLabel="خروج"
-                      value= {row.count}
+                      value= {PN.convertEnToPe(row.count)}
                     />
                   </StyledTableCell>
                 </StyledTableRow>

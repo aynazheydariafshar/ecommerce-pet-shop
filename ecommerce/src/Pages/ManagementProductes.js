@@ -18,6 +18,7 @@ import AddProductes from "components/modal/AddProductes";
 import axios from "axios";
 import EditeProduct from "components/modal/EditeProduct";
 import { DataContext } from "Context/DataContext";
+import PN from "persian-number";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -119,7 +120,7 @@ function ManagementProductes() {
               {product.currentData()?.map((row , index) => (
                 <StyledTableRow key={row.id}>
                       <StyledTableCell component="th" scope="row">
-                        {index+1}
+                        {PN.convertEnToPe(index+1)}
                       </StyledTableCell>
                       <StyledTableCell align="right" component="th" scope="row">
                         {row.name}
