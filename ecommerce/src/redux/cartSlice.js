@@ -23,9 +23,11 @@ const cartSlice = createSlice({
                 toast.success(`محصول ${action.payload.name} به سبد خرید شما اضافه شد`)
             }
         },
+        
         removeFromCart(state , action){
           const nextCart = state.cartItems.filter(item => item.id !== action.payload.id);
           state.cartItems = nextCart;
+          toast.error(`محصول ${action.payload.name} از سبد خرید شما حذف شد`)
         }
     },
 });

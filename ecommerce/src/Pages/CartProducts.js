@@ -114,7 +114,7 @@ const CartProducts = () => {
             </Cart>
           })}
           <div style={{display: "flex",flexDirection : {lg : 'row' , md : 'column' , sm:'column' , xs:'column'}, justifyContent : 'space-around' , alignItems : 'baseline'}}>
-            <Button variant="contained" color='success' sx={{marginBottom : '200px' , marginLeft : '30px' , marginTop : '20px' , fontSize : '17px'}}>نهایی کردن سبد خرید</Button>
+            <Button variant="contained" color='success' sx={{marginBottom : '200px' , marginLeft : '100px' , marginTop : '20px' , fontSize : '17px'}}>نهایی کردن سبد خرید</Button>
             <Typography variant="h5" fontWeight='bold' marginX='30px'>
               جمع تمام محصولات : {cart.cartTotalQuantity}
             </Typography>
