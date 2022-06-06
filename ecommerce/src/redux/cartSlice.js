@@ -50,9 +50,15 @@ const cartSlice = createSlice({
                 toast.error(`محصول ${action.payload.name} از سبد خرید شما حذف شد`)
             }
         },
+
+        //clear all of product on cart
+        clearAllProduct(state , action){
+            state.cartItems = [];
+            toast.error('تمام محصولات از سبد خرید شما حذف شد')
+        }
     },
 });
 
-export const {addToCart , removeFromCart , decreaseCount} = cartSlice.actions;
+export const {addToCart , removeFromCart , decreaseCount , clearAllProduct} = cartSlice.actions;
 
 export default cartSlice.reducer;

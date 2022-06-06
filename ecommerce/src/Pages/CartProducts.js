@@ -9,7 +9,7 @@ import { GrFormAdd, GrClose } from "react-icons/gr";
 import { BiMinus } from "react-icons/bi";
 import PN from "persian-number";
 import { Box } from "@mui/system";
-import { addToCart, decreaseCount, removeFromCart } from "redux/cartSlice";
+import { addToCart, clearAllProduct, decreaseCount, removeFromCart } from "redux/cartSlice";
 
 const CartProducts = () => {
   //select cart from redux
@@ -31,6 +31,10 @@ const CartProducts = () => {
   //add product from cart
   const handleaddCounter = (item) => {
     dispatch(addToCart(item))
+  }
+
+  const handleclearAll = () => {
+    dispatch(clearAllProduct())
   }
 
   return (
@@ -123,7 +127,8 @@ const CartProducts = () => {
             </Cart>
           })}
           <div style={{display: "flex",flexDirection : {lg : 'row' , md : 'column' , sm:'column' , xs:'column'}, justifyContent : 'space-around' , alignItems : 'baseline'}}>
-            <Button variant="contained" color='success' sx={{marginBottom : '200px' , marginLeft : '100px' , marginTop : '20px' , fontSize : '17px'}}>نهایی کردن سبد خرید</Button>
+          <Button variant="contained" color='success' sx={{marginBottom : '200px' , marginLeft : '100px' , marginTop : '20px' , fontSize : '17px'}}>نهایی کردن سبد خرید</Button>
+          <Button variant="contained" color='error' sx={{marginTop : '20px' , fontSize : '17px'}} onClick={handleclearAll}>حذف تمام محصولات </Button>
             <Typography variant="h5" fontWeight='bold' marginX='30px'>
               جمع تمام محصولات : {cart.cartTotalQuantity}
             </Typography>

@@ -5,7 +5,7 @@ import useFetch from 'hooks/useFetch';
 import CustomerLayout from 'layout/CustomerLayout';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import {MdOutlineAddCircleOutline} from 'react-icons/md'
+import {VscEye} from 'react-icons/vsc'
 import {CgUnavailable} from 'react-icons/cg'
 import Cart from 'components/Cart';
 import { useDispatch, useSelector } from 'react-redux';
@@ -112,10 +112,10 @@ const Product = () => {
                                 color = "secondary"  
                                 variant="contained" 
                                 sx={{float : 'left' , marginTop : '20px' }} 
-                                endIcon={<MdOutlineAddCircleOutline />}
+                                endIcon={<VscEye />}
                                 onClick = {() => handleAddToCard(item)}
                             >
-                                افزودن به سبد خرید
+                                 مشاهده سبد خرید 
                             </Button>
                             <Typography
                                 sx={{
