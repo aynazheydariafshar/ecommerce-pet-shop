@@ -2,14 +2,14 @@ import react from 'react';
 import { Box } from '@mui/material';
 
 const Cart = (props) => {
-        return <Box sx={{marginBottom : '150px' , display : 'flex', flexDirection : 'column' , justifyContent : 'space-around', alignItems : 'center',}}>
+        return <Box sx={{marginBottom : props.mbottom , display : 'flex', flexDirection : 'column' , justifyContent : 'space-around', alignItems : 'center',}}>
                 <Box
                     sx={{
                     overflow : 'hidden',    
-                    width: '85%',
+                    width: props.width,
                     height: '70%',
                     display : 'flex',
-                    flexDirection : {lg : 'row' , md : 'column'},
+                    flexDirection : {lg : 'row' , md : 'column' , sm:'column' , xs:'column'},
                     justifyContent : 'space-around',
                     alignItems : 'center',
                     background : '#F8F9FD',

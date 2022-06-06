@@ -11,6 +11,8 @@ import {CgUnavailable} from 'react-icons/cg'
 import Cart from 'components/Cart';
 import { useDispatch } from 'react-redux';
 import { addToCart } from 'redux/cartSlice';
+import PN from "persian-number";
+
 
 const Product = () => {
 
@@ -32,7 +34,7 @@ const Product = () => {
     //add product to card when click on button
     const handleAddToCard = (item) => {
         dispatch(addToCart(item));
-        navigate('/card');
+        navigate('/cart');
     }
 
     //find single product with filter
@@ -48,7 +50,7 @@ const Product = () => {
         {product?.map(item =>{
             return (
             <>
-                <Cart padding='75px'>
+                <Cart width='85%' padding='75px' mbottom = '150px'>
                     <Box sx={{textAlign : 'right'}}>
                         <Typography variant="h5" sx={{fontWeight : 'bold' , paddingY : '10px'}} component="div">
                             {item.name} 
@@ -66,7 +68,7 @@ const Product = () => {
                         })}
                     </Typography>
                         <Typography color='success.main' variant="h6" component="div" sx={{paddingY : '5px' , fontWeight : 'bold'}}>
-                            قیمت : {item.price} تومان
+                            قیمت : {PN.convertEnToPe(PN.sliceNumber(item.price))} تومان
                         </Typography>
                         <Typography variant="h7" component="div" sx={{paddingY : '5px' , fontWeight : 'bold'}}>
                             برند : {item.brand} 
@@ -75,7 +77,7 @@ const Product = () => {
                             گونه حیوان : {item.type} 
                         </Typography>
                         <Typography variant="h7" component="div" sx={{paddingY : '5px' , fontWeight : 'bold'}}>
-                            وزن  : {`${item.weight} گرم`} 
+                            وزن  : {`${PN.convertEnToPe(item.weight)} گرم`} 
                         </Typography>
                         {item.detailes && <Typography variant="h7" component="div" sx={{paddingY : '15px'}}>
                            : سایر مشخصات 

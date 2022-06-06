@@ -1,6 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { setcartItems } from 'utils/Common';
 
 const initialState = {
     cartItems : [] ,
