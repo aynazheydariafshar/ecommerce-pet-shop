@@ -23,9 +23,13 @@ const cartSlice = createSlice({
                 toast.success(`محصول ${action.payload.name} به سبد خرید شما اضافه شد`)
             }
         },
+        removeFromCart(state , action){
+          const nextCart = state.cartItems.filter(item => item.id !== action.payload.id);
+          state.cartItems = nextCart;
+        }
     },
 });
 
-export const {addToCart} = cartSlice.actions;
+export const {addToCart , removeFromCart} = cartSlice.actions;
 
 export default cartSlice.reducer;

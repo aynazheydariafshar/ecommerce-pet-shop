@@ -10,6 +10,7 @@ import { BiMinus } from "react-icons/bi";
 import PN from "persian-number";
 import { increaseCount } from "redux/counterSlice";
 import { Box } from "@mui/system";
+import { removeFromCart } from "redux/cartSlice";
 
 const CartProducts = () => {
   //select cart from redux
@@ -21,6 +22,11 @@ const CartProducts = () => {
   const handleaddCounter = () => {
     dispatch(increaseCount);
   };
+
+  //remove product from cart
+  const handleRemoveProduct = (item) => {
+    dispatch(removeFromCart(item))
+  }
 
   return (
     <div>
@@ -38,15 +44,16 @@ const CartProducts = () => {
             return <Cart mbottom='20px' width="75%" padding="10px">
               <div style={{position : 'relative', display : 'flex' , flexDirection : 'column' , justifyContent : 'space-around' , alignItems : 'center'}}>
                 <IconButton
-                  style={{
+                  sx={{
                     position: "absolute",
                     top: 0,
                     fontSize: "30px",
                     opacity: 0.5,
                     left: 10,
                   }}
+                  onClick={() => handleRemoveProduct(item)}
                 >
-                  <GrClose className="icon-navbar" />
+                  <GrClose />
                 </IconButton>
                 <CardMedia
                   component="img"
