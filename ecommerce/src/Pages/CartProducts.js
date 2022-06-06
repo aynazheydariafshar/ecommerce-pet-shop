@@ -8,9 +8,8 @@ import CardMedia from "@mui/material/CardMedia";
 import { GrFormAdd, GrClose } from "react-icons/gr";
 import { BiMinus } from "react-icons/bi";
 import PN from "persian-number";
-import { increaseCount } from "redux/counterSlice";
 import { Box } from "@mui/system";
-import { removeFromCart } from "redux/cartSlice";
+import { addToCart, decreaseCount, removeFromCart } from "redux/cartSlice";
 
 const CartProducts = () => {
   //select cart from redux
@@ -19,13 +18,18 @@ const CartProducts = () => {
   //get state from redux
   const dispatch = useDispatch();
 
-  const handleaddCounter = () => {
-    dispatch(increaseCount);
+  //low count product
+  const handlelowerCounter = (item) => {
+    dispatch(decreaseCount(item));
   };
 
   //remove product from cart
   const handleRemoveProduct = (item) => {
     dispatch(removeFromCart(item))
+  }
+
+  const handleaddCounter = (item) => {
+    dispatch(addToCart(item))
   }
 
   return (
@@ -94,12 +98,16 @@ const CartProducts = () => {
                     <IconButton
                       size="small"
                       sx={{ marginRight: "10px" }}
-                      onClick={handleaddCounter}
+                      onClick={() => handleaddCounter(item)}
                     >
                       <GrFormAdd />
                     </IconButton>
                     <span>{PN.convertEnToPe(item.cartQuantity)}</span>
-                    <IconButton size="small" sx={{ marginLeft: "10px" }}>
+                    <IconButton 
+                      size="small" 
+                      sx={{ marginLeft: "10px" }}
+                      onClick={() => handlelowerCounter(item)}
+                    >
                       <BiMinus />
                     </IconButton>
                   </Typography>
