@@ -1,6 +1,5 @@
-import { Button, Typography } from '@mui/material';
+import { Button,IconButton, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import axios from 'axios';
 import useCategory from 'hooks/useCategory';
 import useFetch from 'hooks/useFetch';
 import CustomerLayout from 'layout/CustomerLayout';
@@ -9,14 +8,18 @@ import { useNavigate, useParams } from 'react-router';
 import {MdOutlineAddCircleOutline} from 'react-icons/md'
 import {CgUnavailable} from 'react-icons/cg'
 import Cart from 'components/Cart';
-import { useDispatch } from 'react-redux';
-import { addToCart } from 'redux/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, decreaseCount, removeFromCart } from 'redux/cartSlice';
 import PN from "persian-number";
-
+import { GrFormAdd } from "react-icons/gr";
+import { BiMinus } from "react-icons/bi";
 
 const Product = () => {
 
     const navigate = useNavigate();
+
+    //select cart from redux
+    const cart = useSelector((state) => state.cart);
 
     //get state from redux
     const dispatch = useDispatch();
@@ -33,13 +36,27 @@ const Product = () => {
 
     //add product to card when click on button
     const handleAddToCard = (item) => {
-        dispatch(addToCart(item));
-        navigate('/cart');
+        navigate('/cart')
     }
 
     //find single product with filter
     const filterData = () => {
         return data.filter(item => item.id === +dataParams.id)
+    }
+
+    //low count product
+    const handlelowerCounter = (item) => {
+        dispatch(decreaseCount(item));
+    };
+
+    //add product from cart
+    const handleaddCounter = (item) => {
+        dispatch(addToCart(item))
+    }
+
+    //find count product
+    const findproduct = (item)=> {
+        return cart.cartItems.findIndex(el => item.id === el.id)
     }
     
     useEffect(() => {
@@ -100,6 +117,35 @@ const Product = () => {
                             >
                                 افزودن به سبد خرید
                             </Button>
+                            <Typography
+                                sx={{
+                                display: "flex",
+                                borderRadius: "50px",
+                                boxShadow:
+                                    "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
+                                }}
+                                padding="5px"
+                                marginX = '50px'
+                                marginTop='26px'
+                                variant="h6"
+                                fontWeight="bold"
+                            >
+                                <IconButton
+                                size="small"
+                                sx={{ marginRight: "10px" }}
+                                onClick={() => handleaddCounter(item)}
+                                >
+                                    <GrFormAdd />
+                                </IconButton>
+                                <span>{cart.cartItems[findproduct(item)]?.cartQuantity ? PN.convertEnToPe(cart.cartItems[findproduct(item)].cartQuantity) : PN.convertEnToPe(0)}</span>
+                                <IconButton 
+                                size="small" 
+                                sx={{ marginLeft: "10px" }}
+                                onClick={() => handlelowerCounter(item)}
+                                >
+                                    <BiMinus />
+                                </IconButton>
+                            </Typography>
                         </Box>}
                     </Box>
                     <Box padding='10px'>

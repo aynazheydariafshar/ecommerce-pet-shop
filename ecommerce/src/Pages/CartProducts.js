@@ -28,6 +28,7 @@ const CartProducts = () => {
     dispatch(removeFromCart(item))
   }
 
+  //add product from cart
   const handleaddCounter = (item) => {
     dispatch(addToCart(item))
   }
