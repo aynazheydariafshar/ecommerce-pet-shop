@@ -156,14 +156,13 @@ export default function AddProductes({open , handleClose}) {
             aria-describedby="keep-mounted-modal-description"
         >
             <Box sx={style}>
-                <form onSubmit={formik.handleSubmit}>
+                <form dir='rtl' onSubmit={formik.handleSubmit}>
                     <Typography variant='h5' align='center' fontWeight='bold'>
                         افزودن کالا
                     </Typography>
                     <Box sx={{display : 'flex'}}>
                         <TextField 
                             fullWidth
-                            sx={{marginRight : '20px'}}
                             variant="standard" 
                             type='text' 
                             label='نام کالا' 
@@ -192,7 +191,6 @@ export default function AddProductes({open , handleClose}) {
                     </Box>    
                     <Box sx={{display : 'flex'}}>
                         <TextField
-                            sx={{marginRight : '20px'}}
                             fullWidth 
                             variant="standard" 
                             type='text' 
@@ -220,6 +218,7 @@ export default function AddProductes({open , handleClose}) {
                             helperText={formik.touched.price && formik.errors.price}
                         />
                         <TextField
+                            sx={{marginRight : '20px'}}
                             fullWidth 
                             variant="standard" 
                             type='number' 
@@ -235,7 +234,6 @@ export default function AddProductes({open , handleClose}) {
                     </Box>
                     <Box sx={{display : 'flex'}}>
                         <TextField 
-                            sx={{marginRight : '20px'}}
                             select
                             SelectProps={{
                             native: true,
@@ -296,7 +294,7 @@ export default function AddProductes({open , handleClose}) {
                         </TextField>} 
                         <TextField
                             hidden
-                            sx={{marginBottom : '20px'}}
+                            sx={{marginBottom : '20px' , marginRight : '20px'}}
                             inputProps={{ accept: 'image/*' }} 
                             fullWidth 
                             variant="standard" 

@@ -15,9 +15,6 @@ import { GrFormAdd } from "react-icons/gr";
 import { BiMinus } from "react-icons/bi";
 
 const Product = () => {
-
-    const navigate = useNavigate();
-
     //select cart from redux
     const cart = useSelector((state) => state.cart);
 
