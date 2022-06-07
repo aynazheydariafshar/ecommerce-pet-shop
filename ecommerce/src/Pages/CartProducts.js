@@ -10,8 +10,12 @@ import { BiMinus } from "react-icons/bi";
 import PN from "persian-number";
 import { Box } from "@mui/system";
 import { addToCart, clearAllProduct, decreaseCount, getTotalOfPrice, removeFromCart } from "redux/cartSlice";
+import { useNavigate } from "react-router";
 
 const CartProducts = () => {
+
+  const navigate = useNavigate();
+
   //select cart from redux
   const cart = useSelector((state) => state.cart);
 
@@ -132,7 +136,13 @@ const CartProducts = () => {
             </Cart>
           })}
           <div style={{display: "flex",flexDirection : {lg : 'row' , md : 'column' , sm:'column' , xs:'column'}, justifyContent : 'space-around' , alignItems : 'baseline'}}>
-          <Button variant="contained" color='success' sx={{marginBottom : '200px' , marginLeft : '100px' , marginTop : '20px' , fontSize : '17px'}}>نهایی کردن سبد خرید</Button>
+          <Button 
+            onClick={() => navigate('/finalize')} 
+            variant="contained" color='success' 
+            sx={{marginBottom : '200px' , marginLeft : '100px' , marginTop : '20px' , fontSize : '17px'}}
+          >
+            نهایی کردن سبد خرید
+          </Button>
           <Button variant="contained" color='error' sx={{marginTop : '20px' , fontSize : '17px'}} onClick={handleclearAll}>حذف تمام محصولات </Button>
             <Typography variant="h5" fontWeight='bold' marginX='30px'>
               جمع تمام محصولات : {PN.convertEnToPe(PN.sliceNumber(cart.cartTotalAmount))}
