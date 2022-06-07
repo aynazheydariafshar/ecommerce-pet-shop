@@ -12,8 +12,8 @@ import Logo from 'assets/images/logo.png';
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 import {Link} from 'react-router-dom';
-import { Menu, MenuItem } from "@mui/material";
-import MoreIcon from '@mui/icons-material/MoreVert';
+import { useSelector } from "react-redux";
+import PN from "persian-number";
 
 
 const Search = styled("div")(({ theme }) => ({
@@ -63,87 +63,13 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+ //select cart from redux
+ const cart = useSelector((state) => state.cart);
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={1} color="error">
-            <ShoppingBasketRoundedIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <ManageAccountsRoundedIcon />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
   return (
     <Box sx={{ flexGrow: 1 , overflowX : 'hidden'}}>
       <AppBar position="static">
@@ -154,9 +80,11 @@ export default function Header() {
                 aria-label="show 17 new notifications"
                 color="inherit"
               >
-                <Badge badgeContent={1} color="error">
-                  <ShoppingBasketRoundedIcon  className="icon-navbar"/>
-                </Badge>
+                <Link to='/cart' className="link">
+                  <Badge badgeContent={cart.cartItems.length !== 0 ? PN.convertEnToPe(cart.cartItems.length) : PN.convertEnToPe(0)} color="error">
+                    <ShoppingBasketRoundedIcon  className="icon-navbar"/>
+                  </Badge>
+                </Link>
               </IconButton>
               <IconButton
                 sx={{mt : '8px'}}
@@ -193,8 +121,6 @@ export default function Header() {
             </Box>
           </Box>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
     </Box>
   );
 }

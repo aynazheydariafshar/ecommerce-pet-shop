@@ -15,6 +15,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import {Link} from 'react-router-dom';
 import { removeUserSession } from 'utils/Common';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function NavbarManagment() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -42,6 +43,7 @@ export default function NavbarManagment() {
 const handleLogOut = () => {
     removeUserSession();
     navigate('/login');
+    toast.success('شما با موفقیت از حساب کاربری خود خارج شدید')
   }
 
   const menuId = 'primary-search-account-menu';

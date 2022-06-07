@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import PropTypes from 'prop-types';
+import PN from "persian-number";
 
 export default function CardProduct({imageSrc , titleCard , price , brand}) {
   return (
@@ -25,7 +26,7 @@ export default function CardProduct({imageSrc , titleCard , price , brand}) {
             برند : {brand}
           </Typography>
           <Typography variant="body2" sx={{ color: 'error.main' }} padding='10px'>
-          قیمت : {price} تومان
+          قیمت : {PN.convertEnToPe(PN.sliceNumber(price))} تومان
           </Typography>
         </CardContent>
       </CardActionArea>

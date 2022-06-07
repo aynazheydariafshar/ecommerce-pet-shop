@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 export const getUser = () => {
     const user = localStorage.getItem('user');
     if(user) return JSON.parse(user)
@@ -16,4 +18,27 @@ export const setUserSession = (token , user) => {
 export const removeUserSession = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+}
+
+
+export const loadState = () => {
+    try {
+        const serializedState = localStorage.getItem('state');
+        if (serializedState === null) {
+            return undefined;
+        }
+        return JSON.parse(serializedState);
+    } catch (err) {
+        return undefined;
+    }
+};
+
+
+export const setcartItems = (state) => {
+    try {
+        const serializedState = JSON.stringify(state);
+        localStorage.setItem('state', serializedState);
+      } catch {
+        toast.error('خطایی رخ داده است');
+      }
 }

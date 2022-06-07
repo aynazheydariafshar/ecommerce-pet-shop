@@ -1,9 +1,11 @@
 import './styles/App.css';
+import 'react-toastify/dist/ReactToastify.css';
 import RoutePages from 'routes/RoutePages';
 import { useEffect, useState } from 'react';
 import { getToken, removeUserSession, setUserSession } from 'utils/Common';
 import axios from 'axios';
 import { DataContext } from 'Context/DataContext';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
@@ -59,6 +61,17 @@ function App() {
   return (
     <DataContext.Provider value={{ data , getdata , dataOrders , getOrders}}>
       <div className="App">
+        <ToastContainer 
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover 
+        />
         <RoutePages />
       </div>
     </DataContext.Provider>

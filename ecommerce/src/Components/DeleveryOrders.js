@@ -18,6 +18,8 @@ import { Box } from "@mui/system";
 import { BiDetail } from "react-icons/bi";
 import OrderCheck from "./modal/OrderCheck";
 import { DataContext } from "Context/DataContext";
+import PN from "persian-number";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -100,7 +102,7 @@ const DeleveryOrders = () => {
                 if(row.orderStatus === 1){
                    return <StyledTableRow key={row.id}>
                       <StyledTableCell component="th" scope="row">
-                        {index+1}
+                        {PN.convertEnToPe(index+1)}
                       </StyledTableCell>
                       <StyledTableCell align="right" component="th" scope="row">
                         {row.customerDetail?.firstName}
@@ -109,7 +111,7 @@ const DeleveryOrders = () => {
                         {row.customerDetail?.lastName}
                       </StyledTableCell>
                       <StyledTableCell align="right" component="th" scope="row">
-                        {row.purchaseTotal}
+                        {PN.convertEnToPe(PN.sliceNumber(row.purchaseTotal))}
                       </StyledTableCell>
                       <StyledTableCell align="right" component="th" scope="row">
                         {new Date(row.orderDate).toLocaleDateString('fa-IR')}

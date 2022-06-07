@@ -1,5 +1,5 @@
 import Category from "pages/Category";
-import Card from "pages/Card";
+import Card from "pages/CartProducts";
 import Finalize from "pages/Finalize ";
 import Home from "pages/Home";
 import Inventory from "pages/Inventory";
@@ -12,13 +12,14 @@ import Successful from "pages/Successful";
 import Unsuccessful from "pages/Unsuccessful";
 import { Routes , Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
+import CartProducts from "pages/CartProducts";
 
 const RoutePages = () => {
     return <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/products/:id' element={<Product /> }/>
         <Route path='/category/:idcategory' element={<Category /> }/>
-        <Route path='/card' element={<Card />} />
+        <Route path='/cart' element={<CartProducts />} />
         <Route path='/finalize' element={<Finalize />} />
         <Route path='/successful' element={<Successful />} />
         <Route path='/Unsuccessful' element={<Unsuccessful />} />
