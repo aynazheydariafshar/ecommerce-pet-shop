@@ -12,9 +12,8 @@ import Logo from 'assets/images/logo.png';
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 import {Link} from 'react-router-dom';
-import { Menu, MenuItem } from "@mui/material";
-import MoreIcon from '@mui/icons-material/MoreVert';
 import { useSelector } from "react-redux";
+import PN from "persian-number";
 
 
 const Search = styled("div")(({ theme }) => ({
@@ -82,7 +81,7 @@ export default function Header() {
                 color="inherit"
               >
                 <Link to='/cart' className="link">
-                  <Badge badgeContent={cart.cartItems.length} color="error">
+                  <Badge badgeContent={cart.cartItems.length !== 0 ? PN.convertEnToPe(cart.cartItems.length) : PN.convertEnToPe(0)} color="error">
                     <ShoppingBasketRoundedIcon  className="icon-navbar"/>
                   </Badge>
                 </Link>

@@ -5,7 +5,7 @@ import useFetch from 'hooks/useFetch';
 import CustomerLayout from 'layout/CustomerLayout';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import {VscEye} from 'react-icons/vsc'
+import {MdOutlineAddCircleOutline} from 'react-icons/md'
 import {CgUnavailable} from 'react-icons/cg'
 import Cart from 'components/Cart';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,7 +36,7 @@ const Product = () => {
 
     //add product to card when click on button
     const handleAddToCard = (item) => {
-        navigate('/cart')
+        dispatch(addToCart(item))
     }
 
     //find single product with filter
@@ -112,11 +112,12 @@ const Product = () => {
                                 color = "secondary"  
                                 variant="contained" 
                                 sx={{float : 'left' , marginTop : '20px' }} 
-                                endIcon={<VscEye />}
+                                endIcon={<MdOutlineAddCircleOutline />}
                                 onClick = {() => handleAddToCard(item)}
                             >
-                                 مشاهده سبد خرید 
+                                افزودن به سبد خرید
                             </Button>
+                            {cart.cartItems[findproduct(item)]?.cartQuantity >0 &&
                             <Typography
                                 sx={{
                                 display: "flex",
@@ -137,7 +138,7 @@ const Product = () => {
                                 >
                                     <GrFormAdd />
                                 </IconButton>
-                                <span>{cart.cartItems[findproduct(item)]?.cartQuantity ? PN.convertEnToPe(cart.cartItems[findproduct(item)].cartQuantity) : PN.convertEnToPe(0)}</span>
+                                <span>{PN.convertEnToPe(cart.cartItems[findproduct(item)].cartQuantity)}</span>
                                 <IconButton 
                                 size="small" 
                                 sx={{ marginLeft: "10px" }}
@@ -145,7 +146,7 @@ const Product = () => {
                                 >
                                     <BiMinus />
                                 </IconButton>
-                            </Typography>
+                            </Typography>}
                         </Box>}
                     </Box>
                     <Box padding='10px'>
