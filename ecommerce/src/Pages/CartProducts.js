@@ -40,7 +40,7 @@ const CartProducts = () => {
 
   useEffect(() => {
     dispatch(getTotalOfPrice())
-  }, [cart])
+  }, [cart , dispatch])
 
   return (
     <div>
