@@ -1,6 +1,6 @@
 import Cart from "components/Cart";
 import CustomerLayout from "layout/CustomerLayout";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Emptycart from "assets/images/emptycart.png";
 import { Button, IconButton, Typography } from "@mui/material";
@@ -9,7 +9,7 @@ import { GrFormAdd, GrClose } from "react-icons/gr";
 import { BiMinus } from "react-icons/bi";
 import PN from "persian-number";
 import { Box } from "@mui/system";
-import { addToCart, clearAllProduct, decreaseCount, removeFromCart } from "redux/cartSlice";
+import { addToCart, clearAllProduct, decreaseCount, getTotalOfPrice, removeFromCart } from "redux/cartSlice";
 
 const CartProducts = () => {
   //select cart from redux
@@ -33,9 +33,14 @@ const CartProducts = () => {
     dispatch(addToCart(item))
   }
 
+  //clear all of products
   const handleclearAll = () => {
     dispatch(clearAllProduct())
   }
+
+  useEffect(() => {
+    dispatch(getTotalOfPrice())
+  }, [cart])
 
   return (
     <div>
@@ -130,7 +135,7 @@ const CartProducts = () => {
           <Button variant="contained" color='success' sx={{marginBottom : '200px' , marginLeft : '100px' , marginTop : '20px' , fontSize : '17px'}}>نهایی کردن سبد خرید</Button>
           <Button variant="contained" color='error' sx={{marginTop : '20px' , fontSize : '17px'}} onClick={handleclearAll}>حذف تمام محصولات </Button>
             <Typography variant="h5" fontWeight='bold' marginX='30px'>
-              جمع تمام محصولات : {cart.cartTotalQuantity}
+              جمع تمام محصولات : {PN.convertEnToPe(PN.sliceNumber(cart.cartTotalAmount))}
             </Typography>
           </div>
         </>

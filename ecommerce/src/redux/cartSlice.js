@@ -1,3 +1,4 @@
+import { getTableSortLabelUtilityClass } from '@mui/material';
 import {createSlice} from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
@@ -55,10 +56,27 @@ const cartSlice = createSlice({
         clearAllProduct(state , action){
             state.cartItems = [];
             toast.error('تمام محصولات از سبد خرید شما حذف شد')
+        },
+
+        //save total of price
+        getTotalOfPrice(state , action){
+            let {total , quantity} = state.cartItems.reduce((cartTotal , cartItemes) => {
+                const {price , cartQuantity} = cartItemes;
+                const itemTotal = price * cartQuantity;
+                cartTotal.total += itemTotal;
+                cartTotal.quantity += cartQuantity;
+                return cartTotal;
+            },{
+                total : 0,
+                quantity : 0
+            });
+
+            state.cartTotalAmount = total;
+            state.cartTotalQuantity = quantity;
         }
     },
 });
 
-export const {addToCart , removeFromCart , decreaseCount , clearAllProduct} = cartSlice.actions;
+export const {addToCart , removeFromCart , decreaseCount , clearAllProduct , getTotalOfPrice} = cartSlice.actions;
 
 export default cartSlice.reducer;
