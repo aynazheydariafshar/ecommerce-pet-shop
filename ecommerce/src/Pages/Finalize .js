@@ -6,10 +6,12 @@ import * as yup from 'yup';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import {Button, IconButton, InputAdornment, TextField } from '@mui/material';
-import DatePicker, { Calendar, DateObject } from "react-multi-date-picker";
+import { Calendar, DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
-import {FaCalendar} from 'react-icons/fa'
+import {FaCalendar} from 'react-icons/fa';
+import NumberFormat from 'react-number-format';
+
 
 const Finalize  = () => {
 
@@ -57,7 +59,7 @@ const Finalize  = () => {
     return <>
         <Cart width="75%" padding="15px">
             <form dir='rtl' onSubmit={formik.handleSubmit}>
-                <Typography variant='h5' align='right' fontWeight='bold'>
+                <Typography variant='h5' marginTop='30px' align='right' fontWeight='bold'>
                      ثبت اطلاعات شما
                 </Typography>
                 <Box sx={{display : 'flex'}}>
@@ -110,11 +112,13 @@ const Finalize  = () => {
                               </InputAdornment>
                         ),}}
                         />
-                    <TextField 
-                        sx={{marginRight : '40px'}}
+                    <NumberFormat 
+                        dir='ltr'
+                        customInput={TextField}
                         fullWidth
+                        format="#### ### ## ##"
+                        sx={{marginRight : '40px'}}
                         variant="standard" 
-                        type='number' 
                         label='شماره موبایل ' 
                         margin='normal'
                         id="phone"
