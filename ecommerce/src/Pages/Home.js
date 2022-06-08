@@ -9,12 +9,13 @@ import { Link } from "react-router-dom";
 import MuiImageSlider from 'mui-image-slider';
 import sliderone from 'assets/images/64db75339029419da19ec981fdbb1053.w_1140,h_393,r_k.jpg (1).webp';
 import slidertwo from 'assets/images/795da0b917d8406cb8917af71870af9c.w_1140,h_393,r_k.png.webp';
+import sliderthree from 'assets/images/47de6c9bcccb4d15b34da84a2903cf1c.w_1140,h_393,r_k.jpg.webp'
 
 const Home = () => {
   //data from products database
   const { data, loading, error } = useFetch("products");
 
-  const images = [sliderone , slidertwo];
+  const images = [sliderone , slidertwo , sliderthree];
 
   //pagination data
   let [page, setPage] = useState(1);
