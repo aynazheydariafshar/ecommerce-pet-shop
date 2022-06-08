@@ -8,10 +8,10 @@ import {TextField } from '@mui/material';
 import useCategory from 'hooks/useCategory';
 import * as yup from 'yup';
 import axios from 'axios';
-import useFetch from 'hooks/useFetch';
 import { CKEditor } from 'ckeditor4-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { DataContext } from 'Context/DataContext';
+import { toast } from 'react-toastify';
 
 
 const style = {
@@ -75,6 +75,7 @@ export default function EditeProduct({open , handleClose , employee}) {
 
     })
 
+    //find group for every product
     const findGroupOfProduct = (subgroup) => {
         let resault = category.find(item =>item.subgroup ? item.subgroup === subgroup : 5);
         return resault.id
@@ -89,6 +90,7 @@ export default function EditeProduct({open , handleClose , employee}) {
         formik.setFieldValue('image' , filename.data.filename , false)
     }
 
+    //find type of animal
     const findType = (group) => {
         if(group === "محصولات گربه"){
             return 'گربه';
@@ -99,6 +101,7 @@ export default function EditeProduct({open , handleClose , employee}) {
         }
     }
 
+    //edit data and post data
     const editeData = (values) => {
         setErrortwo(null);
         setLoadingtwo(false);
@@ -117,7 +120,8 @@ export default function EditeProduct({open , handleClose , employee}) {
             setLoadingtwo(true);
         }).catch(error => {
             setLoadingtwo(true);
-            setErrortwo('دوباره تلاش کنید')
+            setErrortwo('دوباره تلاش کنید');
+            toast.error('خطایی رخ داده است');
         })
     }
 
@@ -132,6 +136,7 @@ export default function EditeProduct({open , handleClose , employee}) {
     // }, [])
 
 
+    //formik
     const formik = useFormik({
         initialValues: {
           Name: employee.name,
@@ -150,6 +155,7 @@ export default function EditeProduct({open , handleClose , employee}) {
             setTimeout(() => {
                 setShow(!show)
             }, 700);
+            toast.success('محصول با موفقیت ویرایش شد')
         },
       });
 
