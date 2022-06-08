@@ -11,9 +11,11 @@ import Badge from "@mui/material/Badge";
 import Logo from "assets/images/logo.png";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 import ManageAccountsRoundedIcon from "@mui/icons-material/ManageAccountsRounded";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import PN from "persian-number";
+import useFetch from "hooks/useFetch";
+import {MdClose} from 'react-icons/md';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,12 +61,38 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
-  
+
   //select cart from redux
   const cart = useSelector((state) => state.cart);
 
+  //  //data from products database
+    const { data, loading, error } = useFetch("products");
+    const [filterData, setfilterData] = React.useState([]);
+    const [search, setSearch] = useSearchParams();
+
+     //filter serach box
+     const handleFilter = (e) => {
+      const searchWord = e.target.value;
+      setSearch({ name : searchWord});
+      const newFilter = data.filter(item => {
+          return item.name.toLowerCase().includes(searchWord.toLowerCase());
+        });
+
+      if(searchWord === ""){
+          setfilterData([]);
+      }else{
+          setfilterData(newFilter);
+      }
+  }
+
+  const handleCloseSearch = ()=> {
+    setfilterData([]);
+    setSearch("");
+  }
+
+
   return (
-    <Box sx={{ flexGrow: 1, overflowX: "hidden" }}>
+    <Box sx={{ flexGrow: 1  }}>
       <AppBar position="static">
         <Box
           sx={{
@@ -101,12 +129,27 @@ export default function Header() {
             </IconButton>
             <Search>
               <SearchIconWrapper>
-                <SearchIcon />
+                {filterData?.length === 0 ? <SearchIcon /> : <IconButton onClick={handleCloseSearch}><MdClose /></IconButton>}
               </SearchIconWrapper>
               <StyledInputBase
+                onChange={handleFilter}
                 placeholder="...جتسجو"
                 inputProps={{ "aria-label": "search" }}
+                value={search.get('name')}
+                // search-div-select
               />
+              {filterData?.length !== 0 && (
+                <div className="search-data">
+                  {filterData?.slice(0, 5).map((item) => {
+                    return (<Box sx={{marginTop : '10px'}}>
+                      <Link className="link search" to={`/products/${item.id}`}>
+                        {item.name}
+                      </Link>
+                    </Box>
+                    );
+                  })}
+                </div>
+              )}
             </Search>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>

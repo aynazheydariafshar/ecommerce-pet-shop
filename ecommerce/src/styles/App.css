@@ -45,3 +45,20 @@ td {
   padding: 5px !important;
   text-align: center !important;
 }
+
+.search-data{
+  width: 250px;
+  height: 100px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 5px 8px 0px;
+  position: absolute;
+  top: 30;
+  background-color:#f8f9fd ;
+  overflow: hidden;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.search:hover{
+  color: #652ad2;
+}
+

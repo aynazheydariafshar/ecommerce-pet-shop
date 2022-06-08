@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import useCategory from "hooks/useCategory";
 import useFetch from "hooks/useFetch";
 import CustomerLayout from "layout/CustomerLayout";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { CgUnavailable } from "react-icons/cg";
@@ -38,9 +38,9 @@ const Product = () => {
   };
 
   //find single product with filter
-  const filterData = () => {
+  const filterData = useMemo(() => {
     return data.filter((item) => item.id === +dataParams.id);
-  };
+  });
 
   //low count product
   const handlelowerCounter = (item) => {
@@ -59,7 +59,7 @@ const Product = () => {
 
   useEffect(() => {
     setProduct(filterData);
-  }, [data]);
+  }, [data , dataParams]);
 
   return (
     <>
