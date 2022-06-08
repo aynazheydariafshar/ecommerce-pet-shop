@@ -13,6 +13,7 @@ import Unsuccessful from "pages/Unsuccessful";
 import { Routes , Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import CartProducts from "pages/CartProducts";
+import BankFake from "pages/BankFake";
 
 const RoutePages = () => {
     return <Routes>
@@ -21,6 +22,7 @@ const RoutePages = () => {
         <Route path='/category/:idcategory' element={<Category /> }/>
         <Route path='/cart' element={<CartProducts />} />
         <Route path='/finalize' element={<Finalize />} />
+        <Route path='/bank-fake' element={<BankFake />} />
         <Route path='/successful' element={<Successful />} />
         <Route path='/Unsuccessful' element={<Unsuccessful />} />
         <Route path='/login' element={<Login />} />    
