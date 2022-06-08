@@ -24,7 +24,7 @@ const RoutePages = () => {
         <Route path='/finalize' element={<Finalize />} />
         <Route path='/bank-fake' element={<BankFake />} />
         <Route path='/successful' element={<Successful />} />
-        <Route path='/Unsuccessful' element={<Unsuccessful />} />
+        <Route path='/unsuccessful' element={<Unsuccessful />} />
         <Route path='/login' element={<Login />} />    
 
         <Route element={<PrivateRoute />}>

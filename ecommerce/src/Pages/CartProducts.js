@@ -11,6 +11,7 @@ import PN from "persian-number";
 import { Box } from "@mui/system";
 import { addToCart, clearAllProduct, decreaseCount, getTotalOfPrice, removeFromCart } from "redux/cartSlice";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const CartProducts = () => {
 
@@ -40,6 +41,7 @@ const CartProducts = () => {
   //clear all of products
   const handleclearAll = () => {
     dispatch(clearAllProduct())
+    toast.error('تمام محصولات از سبد خرید شما حذف شد')
   }
 
   useEffect(() => {

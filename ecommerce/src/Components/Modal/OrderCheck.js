@@ -73,7 +73,6 @@ export default function OrderCheck({ open, handleClose, employee }) {
           phone: employee.customerDetail.phone,
           billingAddress: employee.customerDetail.billingAddress,
         },
-        orderNumber: employee.orderNumber,
         orderDate: employee.orderDate,
         purchaseTotal: employee.purchaseTotal,
         orderStatus: 1,

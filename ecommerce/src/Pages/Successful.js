@@ -1,3 +1,4 @@
+import CustomerLayout from 'layout/CustomerLayout';
 import React from 'react';
 
 const Successful = () => {
@@ -5,4 +6,4 @@ const Successful = () => {
 }
 
 
-export default Successful;
+export default CustomerLayout(Successful);

@@ -11,15 +11,13 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/layouts/prime.css";
 import {GrUserExpert} from 'react-icons/gr'
+import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const Finalize  = () => {
-
-    const [show , setShow] = useState(false);
-    let [date, setDate] = useState(new DateObject());
-
-    const handleCalender = () => {
-        setShow(!show);
-    }
+    //select cart from redux
+    const navigate = useNavigate();
+    const cart = useSelector((state) => state.cart);
    
      //validation
      const validationSchema = yup.object().shape({
@@ -48,6 +46,7 @@ const Finalize  = () => {
             .required('پر کردن این فیلد الزامی می باشد'),
         })
 
+    //formik
     const formik = useFormik({
         initialValues: {
           firstName: '',
@@ -58,9 +57,34 @@ const Finalize  = () => {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
+            const customerOrder = {
+                customerDetail: {
+                    firstName: values.firstName,
+                    lastName: values.lastName,
+                    phone: +values.phone,
+                    billingAddress: values.billingAddress
+                  },
+                  orderDate: new Date(),
+                  purchaseTotal: cart.cartTotalAmount,
+                  orderStatus: 3,
+                  delivery: values.delivery,
+                  deliveredAt: null,
+                  orderItems: cart.cartItems.map(item => {
+                    return {
+                        productId: item.id,
+                        quantity: item.cartQuantity
+                    }}    
+                ),
+            }
+
+            localStorage.setItem('order' , JSON.stringify(customerOrder));
+            setTimeout(() => {
+                navigate('/bank-fake');
+            }, 500);
+
+            // alert(JSON.stringify(values, null, 2));
         },
-      });     
+    });     
 
 
     return <>
@@ -100,60 +124,37 @@ const Finalize  = () => {
                     />
                 </Box>  
                 <Box sx={{display : 'flex'}}>
-                    {/* <TextField 
+                    <DatePicker        
+                        style={{
+                            textAlign:'left',
+                            width: "100%",
+                            height: "40px",
+                            border : 0,
+                            backgroundColor : 'transparent',
+                            borderBottom : '1px solid #8C8D8F',
+                            marginTop : '24px',
+                            borderRadius : 0,
+                            fontSize : '16px'
+                        }}
                         fullWidth
                         variant="standard" 
-                        label='تاریخ تحویل' 
                         margin='normal'
                         id="delivery"
                         name="delivery"
-                        value={date.format()}
-                        onChange={(e) => {
-                            formik.setFieldValue('delivery', e.target , false);
-                            console.log(formik.values.delivery)
+                        containerStyle={{
+                            width: "100%",
                         }}
-                        error={formik.touched.delivery && Boolean(formik.errors.delivery)}
-                        helperText={formik.touched.delivery && formik.errors.delivery}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment  position="start">
-                                  <IconButton onClick={handleCalender}>
-                                    <FaCalendar />
-                                  </IconButton>
-                              </InputAdornment>
-                        ),}}
-                        /> */}
-                        <DatePicker        
-                            style={{
-                                textAlign:'left',
-                                width: "100%",
-                                height: "40px",
-                                border : 0,
-                                backgroundColor : 'transparent',
-                                borderBottom : '1px solid #8C8D8F',
-                                marginTop : '24px',
-                                borderRadius : 0,
-                                fontSize : '16px'
-                            }}
-                            fullWidth
-                            variant="standard" 
-                            margin='normal'
-                            id="delivery"
-                            name="delivery"
-                            containerStyle={{
-                                width: "100%",
-                            }}
-                            calendarPosition="bottom-center"
-                            calendar={persian}
-                            locale={persian_fa}
-                            placeholder={"تاریخ تحویل"}
-                            weekPicker={false}
-                            onChange={(e) =>
-                                formik.setFieldValue("delivery", e.unix * 1000, true)
-                            }
-                            value={formik.values.delivery}
-                            minDate={new DateObject({ calendar: persian })}  
-                        />
+                        calendarPosition="bottom-center"
+                        calendar={persian}
+                        locale={persian_fa}
+                        placeholder={"تاریخ تحویل"}
+                        weekPicker={false}
+                        onChange={(e) =>
+                            formik.setFieldValue("delivery", e.unix * 1000, true)
+                        }
+                        value={formik.values.delivery}
+                        minDate={new DateObject({ calendar: persian })}  
+                    />
                     <TextField 
                         customInput={TextField}
                         fullWidth

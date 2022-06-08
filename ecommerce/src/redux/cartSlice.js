@@ -55,9 +55,8 @@ const cartSlice = createSlice({
         //clear all of product on cart
         clearAllProduct(state , action){
             state.cartItems = [];
-            toast.error('تمام محصولات از سبد خرید شما حذف شد')
         },
-
+        
         //save total of price
         getTotalOfPrice(state , action){
             let {total , quantity} = state.cartItems.reduce((cartTotal , cartItemes) => {
