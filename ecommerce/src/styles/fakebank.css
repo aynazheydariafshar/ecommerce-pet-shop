@@ -2,11 +2,14 @@
 	width: 100%;
 	display: flex;
     padding: 100px;
+    background-color: #F8F9FD ;
+    height: 100vh;
 }
 
 h1{
     text-align: center;
     margin: 20px 0;
+    font-size: 50px;
 }
 
 .form-v1-content .wizard-form {

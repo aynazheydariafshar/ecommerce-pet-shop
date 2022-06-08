@@ -1,3 +1,5 @@
+import { Button } from '@mui/material';
+import { Box } from '@mui/system';
 import 'styles/fakebank.css'
 const BankFake = () => {
     return (
@@ -74,7 +76,22 @@ const BankFake = () => {
 			            </section>
 		        	</div>
 		        </form>
- 
+                <Box sx={{display : 'flex' , justifyContent : 'center'}}>
+                    <Button
+                        color="success"
+                        variant="contained"
+                        sx={{marginX : '50px' , paddingX : '40px' , fontSize:'15px'}}
+                    >
+                        پرداخت
+                    </Button>
+                    <Button
+                     color="error"
+                     variant="contained"
+                     sx={{marginX : '50px' , paddingX : '40px' , fontSize:'15px'}}
+                    >
+                    انصراف
+                    </Button>
+                </Box>
 			</div>
 		</div>
     )
