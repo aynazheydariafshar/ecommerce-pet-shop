@@ -11,6 +11,7 @@ import axios from 'axios';
 import { CKEditor } from 'ckeditor4-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { DataContext } from 'Context/DataContext';
+import { toast } from 'react-toastify';
 
 
 const style = {
@@ -119,11 +120,13 @@ export default function AddProductes({open , handleClose}) {
             productContext.getdata();
         }).catch(error => {
             setLoadingtwo(true);
-            setErrortwo('دوباره تلاش کنید')
+            setErrortwo('دوباره تلاش کنید');
+            toast.error('خطایی رخ داده است');
         })
     }
 
 
+    //formik
     const formik = useFormik({
         initialValues: {
           Name: '',
@@ -142,6 +145,7 @@ export default function AddProductes({open , handleClose}) {
             setTimeout(() => {
                 setShow(!show)
             }, 700);
+            toast.success('محصول با موفقیت ثبت شد')
         },
       });     
 
@@ -176,7 +180,7 @@ export default function AddProductes({open , handleClose}) {
                         />
                         <TextField 
                             fullWidth
-                            sx={{marginRight : '20px'}}
+                            sx={{marginRight : '40px'}}
                             variant="standard" 
                             type='text' 
                             label='برند' 
@@ -204,7 +208,7 @@ export default function AddProductes({open , handleClose}) {
                             helperText={formik.touched.weight && formik.errors.weight}
                         />
                         <TextField
-                            sx={{marginRight : '20px'}}
+                            sx={{marginRight : '40px'}}
                             fullWidth 
                             variant="standard" 
                             type='number' 
@@ -218,7 +222,7 @@ export default function AddProductes({open , handleClose}) {
                             helperText={formik.touched.price && formik.errors.price}
                         />
                         <TextField
-                            sx={{marginRight : '20px'}}
+                            sx={{marginRight : '40px'}}
                             fullWidth 
                             variant="standard" 
                             type='number' 
@@ -263,7 +267,7 @@ export default function AddProductes({open , handleClose}) {
                         </TextField>   
                         {formik.values.group !== 'محصولات پرندگان' &&
                         <TextField
-                            sx={{marginRight : '20px'}}
+                            sx={{marginRight : '40px'}}
                             select
                             SelectProps={{
                             native: true,
@@ -294,7 +298,7 @@ export default function AddProductes({open , handleClose}) {
                         </TextField>} 
                         <TextField
                             hidden
-                            sx={{marginBottom : '20px' , marginRight : '20px'}}
+                            sx={{marginBottom : '20px' , marginRight : '40px'}}
                             inputProps={{ accept: 'image/*' }} 
                             fullWidth 
                             variant="standard" 
