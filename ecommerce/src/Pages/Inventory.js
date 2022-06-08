@@ -1,4 +1,4 @@
-import ManagementLayout from 'layout/ManagementLayout';
+import ManagementLayout from "layout/ManagementLayout";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -8,46 +8,45 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button, Pagination, Stack } from "@mui/material";
+import { Pagination, Stack } from "@mui/material";
 import PaginationPage from "components/PaginationPage";
 import { Box } from "@mui/system";
-import EasyEdit from 'react-easy-edit';
-import { DataContext } from 'Context/DataContext';
-import axios from 'axios';
+import EasyEdit from "react-easy-edit";
+import { DataContext } from "Context/DataContext";
+import axios from "axios";
 import PN from "persian-number";
-
+import { toast } from "react-toastify";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
 const Inventory = () => {
-
   //context data
   const productContext = React.useContext(DataContext);
 
   //check for api
-  const [loadingtwo , setLoadingtwo] = React.useState(true);
-  const [errortwo , setErrortwo] = React.useState(null);
+  const [loadingtwo, setLoadingtwo] = React.useState(true);
+  const [errortwo, setErrortwo] = React.useState(null);
 
   //edit state price
-  const [editePrice , seteditePrice] = React.useState()
+  const [editePrice, seteditePrice] = React.useState();
 
   // //pagination data
   let [page, setPage] = React.useState(1);
@@ -62,55 +61,63 @@ const Inventory = () => {
   };
 
   //update price on data
-  const savePriceEdite = (value , row) => {
+  const savePriceEdite = (value, row) => {
     setErrortwo(null);
     setLoadingtwo(false);
-    axios.put(`http://localhost:3002/products/${row.id}` , {
-      name : row.name,
-      brand : row.brand,
-      image: row.image,
-      price : +value,
-      category : row.category,
-      count : row.count,
-      type : row.type,
-      weight : row.weight,
-      description : row.description,
-    }).then(response => {
+    axios
+      .put(`http://localhost:3002/products/${row.id}`, {
+        name: row.name,
+        brand: row.brand,
+        image: row.image,
+        price: +value,
+        category: row.category,
+        count: row.count,
+        type: row.type,
+        weight: row.weight,
+        description: row.description,
+      })
+      .then((response) => {
         productContext.getdata();
         setLoadingtwo(true);
-    }).catch(error => {
+      })
+      .catch((error) => {
         setLoadingtwo(true);
-        setErrortwo('دوباره تلاش کنید')
-    })
-  }
+        setErrortwo("دوباره تلاش کنید");
+        toast.error("خطایی رخ داده است");
+      });
+    toast.success("ویرایش با موفقیت انجام شد");
+  };
 
   //update price on data
-  const saveCountEdite = (value , row) => {
+  const saveCountEdite = (value, row) => {
     setErrortwo(null);
     setLoadingtwo(false);
-    axios.put(`http://localhost:3002/products/${row.id}` , {
-      name : row.name,
-      brand : row.brand,
-      image: row.image,
-      price : row.price,
-      category : row.category,
-      count : +value,
-      type : row.type,
-      weight : row.weight,
-      description : row.description,
-    }).then(response => {
+    axios
+      .put(`http://localhost:3002/products/${row.id}`, {
+        name: row.name,
+        brand: row.brand,
+        image: row.image,
+        price: row.price,
+        category: row.category,
+        count: +value,
+        type: row.type,
+        weight: row.weight,
+        description: row.description,
+      })
+      .then((response) => {
         productContext.getdata();
         setLoadingtwo(true);
-    }).catch(error => {
+      })
+      .catch((error) => {
         setLoadingtwo(true);
-        setErrortwo('دوباره تلاش کنید')
-    })
-  }
+        setErrortwo("دوباره تلاش کنید");
+        toast.error("خطایی رخ داده است");
+      });
+    toast.success("ویرایش با موفقیت انجام شد");
+  };
 
-
-
-
-  return <>
+  return (
+    <>
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
@@ -125,10 +132,10 @@ const Inventory = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-            {product.currentData()?.map((row , index) => (
+              {product.currentData()?.map((row, index) => (
                 <StyledTableRow key={row.id}>
                   <StyledTableCell component="th" scope="row">
-                    {PN.convertEnToPe(index+1)}
+                    {PN.convertEnToPe(index + 1)}
                   </StyledTableCell>
                   <StyledTableCell align="right" component="th" scope="row">
                     {row.name}
@@ -136,21 +143,21 @@ const Inventory = () => {
                   <StyledTableCell align="right" component="th" scope="row">
                     <EasyEdit
                       type="number"
-                      onSave={(value) => savePriceEdite(value , row)}
+                      onSave={(value) => savePriceEdite(value, row)}
                       onCancel={() => {}}
                       saveButtonLabel="ذخیره"
                       cancelButtonLabel="خروج"
-                      value={PN.convertEnToPe(PN.sliceNumber(row.price))}                      
+                      value={PN.convertEnToPe(PN.sliceNumber(row.price))}
                     />
                   </StyledTableCell>
                   <StyledTableCell align="right" component="th" scope="row">
                     <EasyEdit
                       type="number"
-                      onSave={(value) => saveCountEdite(value , row)}
+                      onSave={(value) => saveCountEdite(value, row)}
                       onCancel={() => {}}
                       saveButtonLabel="ذخیره"
                       cancelButtonLabel="خروج"
-                      value= {PN.convertEnToPe(row.count)}
+                      value={PN.convertEnToPe(row.count)}
                     />
                   </StyledTableCell>
                 </StyledTableRow>
@@ -159,7 +166,7 @@ const Inventory = () => {
           </Table>
         </TableContainer>
 
-        <Stack className='pager' padding="30px">
+        <Stack className="pager" padding="30px">
           <Pagination
             size="large"
             count={count}
@@ -170,7 +177,7 @@ const Inventory = () => {
         </Stack>
       </Box>
     </>
+  );
 };
-
 
 export default ManagementLayout(Inventory);

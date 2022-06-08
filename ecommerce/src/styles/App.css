@@ -13,30 +13,30 @@
 }
 
 .icon-navbar:hover {
-  color: #652AD2 !important;
+  color: #652ad2 !important;
   cursor: pointer;
 }
 
-.icon-trash:hover{
-  color:red !important;
+.icon-trash:hover {
+  color: red !important;
   cursor: pointer;
 }
 
-.btn-color{
+.btn-color {
   color: black !important;
 }
 
-.link{
+.link {
   color: black;
   text-decoration: none;
 }
 
-.menu:hover{
-  background-color: #F8F9FD !important;
-  color: #652AD2 !important;
+.menu:hover {
+  background-color: #f8f9fd !important;
+  color: #652ad2 !important;
 }
 
-.pager{
+.pager {
   margin-bottom: 150px;
 }
 

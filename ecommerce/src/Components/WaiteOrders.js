@@ -7,11 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import {
-  IconButton,
-  Pagination,
-  Stack,
-} from "@mui/material";
+import { IconButton, Pagination, Stack } from "@mui/material";
 import PaginationPage from "components/PaginationPage";
 import { Box } from "@mui/system";
 import { BiDetail } from "react-icons/bi";
@@ -40,23 +36,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const WaiteOrders = () => {
-
   //get token
   const token = localStorage.getItem("token");
 
   //see data
-  const [see , setsee] = React.useState(null)
+  const [see, setsee] = React.useState(null);
 
-  //show modal  
-  const [showModal,setShowModal] = React.useState(false);
-  const productContext = React.useContext(DataContext)
-
+  //show modal
+  const [showModal, setShowModal] = React.useState(false);
+  const productContext = React.useContext(DataContext);
 
   //show detailes
   const handleShowDetailes = (row) => {
     setShowModal(!showModal);
-    setsee(row)
-  }
+    setsee(row);
+  };
 
   //pagination waite
   let [page, setPage] = React.useState(1);
@@ -72,9 +66,8 @@ const WaiteOrders = () => {
 
   //filter product
   const filterProduct = () => {
-    return product.currentData()?.filter(item => item.orderStatus === 3)
-  }
-
+    return product.currentData()?.filter((item) => item.orderStatus === 3);
+  };
 
   React.useEffect(() => {
     productContext.getOrders();
@@ -85,8 +78,14 @@ const WaiteOrders = () => {
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        {showModal ? <OrderCheck employee={see} open={showModal} handleClose={() => setShowModal(false)}/>: null }
-        <TableContainer dir="rtl" component={Paper} sx={{ padding: "30px"}}>
+        {showModal ? (
+          <OrderCheck
+            employee={see}
+            open={showModal}
+            handleClose={() => setShowModal(false)}
+          />
+        ) : null}
+        <TableContainer dir="rtl" component={Paper} sx={{ padding: "30px" }}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
@@ -99,29 +98,34 @@ const WaiteOrders = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filterProduct()?.map((row , index) => {
-                 return <StyledTableRow key={row.id}>
-                  <StyledTableCell component="th" scope="row">
-                    {PN.convertEnToPe(index+1)}
-                  </StyledTableCell>
-                  <StyledTableCell align="right" component="th" scope="row">
-                    {row.customerDetail?.firstName}
-                  </StyledTableCell>
-                  <StyledTableCell align="right" component="th" scope="row">
-                    {row.customerDetail?.lastName}
-                  </StyledTableCell>
-                  <StyledTableCell align="right" component="th" scope="row">
-                    {PN.convertEnToPe(PN.sliceNumber(row.purchaseTotal))}
-                  </StyledTableCell>
-                  <StyledTableCell align="right" component="th" scope="row">
-                        {new Date(row.orderDate).toLocaleDateString('fa-IR')}
-                      </StyledTableCell>
-                  <StyledTableCell align="right" component="th" scope="row">
-                    <IconButton className="icon-navbar"  onClick={() => handleShowDetailes(row)}>
-                      <BiDetail />
-                    </IconButton>
-                  </StyledTableCell>
-                </StyledTableRow>
+              {filterProduct()?.map((row, index) => {
+                return (
+                  <StyledTableRow key={row.id}>
+                    <StyledTableCell component="th" scope="row">
+                      {PN.convertEnToPe(index + 1)}
+                    </StyledTableCell>
+                    <StyledTableCell align="right" component="th" scope="row">
+                      {row.customerDetail?.firstName}
+                    </StyledTableCell>
+                    <StyledTableCell align="right" component="th" scope="row">
+                      {row.customerDetail?.lastName}
+                    </StyledTableCell>
+                    <StyledTableCell align="right" component="th" scope="row">
+                      {PN.convertEnToPe(PN.sliceNumber(row.purchaseTotal))}
+                    </StyledTableCell>
+                    <StyledTableCell align="right" component="th" scope="row">
+                      {new Date(row.orderDate).toLocaleDateString("fa-IR")}
+                    </StyledTableCell>
+                    <StyledTableCell align="right" component="th" scope="row">
+                      <IconButton
+                        className="icon-navbar"
+                        onClick={() => handleShowDetailes(row)}
+                      >
+                        <BiDetail />
+                      </IconButton>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                );
               })}
             </TableBody>
           </Table>

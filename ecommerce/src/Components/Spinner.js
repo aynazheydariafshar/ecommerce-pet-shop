@@ -1,13 +1,15 @@
-import 'styles/spinner.css'
+import "styles/spinner.css";
 const Spinner = () => {
-    return <div class="loader">
-    <div class="face">
-      <div class="circle"></div>
+  return (
+    <div class="loader">
+      <div class="face">
+        <div class="circle"></div>
+      </div>
+      <div class="face">
+        <div class="circle"></div>
+      </div>
     </div>
-    <div class="face">
-      <div class="circle"></div>
-    </div>
-  </div>
-}
+  );
+};
 
-export default Spinner
+export default Spinner;
