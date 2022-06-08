@@ -18,6 +18,7 @@
     "form-data": "^4.0.0",
     "formik": "^2.2.9",
     "jalali-react-datepicker": "^1.2.1",
+    "mui-image-slider": "^1.0.7",
     "persian-number": "^1.5.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

@@ -1,4 +1,4 @@
-import { Box, Pagination, Stack } from "@mui/material";
+import { Box, Pagination, Stack, Typography } from "@mui/material";
 import CardProduct from "components/CardProduct";
 import PaginationPage from "components/PaginationPage";
 import Spinner from "components/Spinner";
@@ -6,10 +6,15 @@ import useFetch from "hooks/useFetch";
 import CustomerLayout from "layout/CustomerLayout";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import MuiImageSlider from 'mui-image-slider';
+import sliderone from 'assets/images/64db75339029419da19ec981fdbb1053.w_1140,h_393,r_k.jpg (1).webp';
+import slidertwo from 'assets/images/795da0b917d8406cb8917af71870af9c.w_1140,h_393,r_k.png.webp';
 
 const Home = () => {
   //data from products database
   const { data, loading, error } = useFetch("products");
+
+  const images = [sliderone , slidertwo];
 
   //pagination data
   let [page, setPage] = useState(1);
@@ -39,6 +44,10 @@ const Home = () => {
             alignItems: "center",
           }}
         >
+          <Box width='100%' marginLeft='25px'>
+            <MuiImageSlider fitToImageHeight='true' autoPlay='true' images={images}/>
+          </Box>
+          <Typography variant="h4" fontWeight='bold' paddingY='50px' marginTop='40px'> " تمام محصولات "</Typography>
           <Box
             sx={{
               display: "flex",
