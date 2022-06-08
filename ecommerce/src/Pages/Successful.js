@@ -6,7 +6,7 @@ import { Typography } from '@mui/material';
 
 const Successful = () => {
     return <Cart width='75%' padding='25px'>
-        <img src={successful} width='400px' height='400px'/>
+        <img src={successful} width='400px' height='400px' alt='successful'/>
         <Typography fontWeight='bold' variant='h6' align='right'>
              با تشکر از پرداخت شما ،
             سفارش شما ثبت شده و جهت هماهنگی ارسال با شما تماس گرفته خواهد شد
