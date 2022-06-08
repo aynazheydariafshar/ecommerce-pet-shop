@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState , useEffect} from "react"
+import { toast } from "react-toastify";
 
 const useCategory = () => {
     const [loadingcategory , setLoadingcategory] = useState(true);
@@ -12,8 +13,16 @@ const useCategory = () => {
             .then(response => {
                 setcategory(response.data)
             })
-            .catch(err => setErrorcategory("لطفا دوباره تلاش کنید"))
-            .finally(res =>setLoadingcategory(false))
+            .catch(err => {
+                setErrorcategory("لطفا دوباره تلاش کنید");
+                toast.error('خطایی رخ داده است')
+            })
+            .finally(res =>{
+                setTimeout(() => {
+                    setLoadingcategory(false)
+                }, 2000);
+            }
+            )
     }, [])
 
     return {category , loadingcategory , errorcategory}
