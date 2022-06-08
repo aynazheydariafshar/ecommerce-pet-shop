@@ -60,7 +60,7 @@ const WaiteOrders = () => {
 
   //pagination waite
   let [page, setPage] = React.useState(1);
-  const perPage = 10;
+  const perPage = 5;
 
   const count = Math.ceil(productContext.dataOrders.length / perPage);
   const product = PaginationPage(productContext.dataOrders, perPage);
@@ -69,6 +69,11 @@ const WaiteOrders = () => {
     setPage(p);
     product.jump(p);
   };
+
+  //filter product
+  const filterProduct = () => {
+    return product.currentData()?.filter(item => item.orderStatus === 3)
+  }
 
 
   React.useEffect(() => {
@@ -81,7 +86,7 @@ const WaiteOrders = () => {
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         {showModal ? <OrderCheck employee={see} open={showModal} handleClose={() => setShowModal(false)}/>: null }
-        <TableContainer dir="rtl" component={Paper} sx={{ padding: "30px" , margin : '30px' }}>
+        <TableContainer dir="rtl" component={Paper} sx={{ padding: "30px"}}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
@@ -94,8 +99,7 @@ const WaiteOrders = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {product.currentData()?.map((row , index) => {
-                if(row.orderStatus === 3){
+              {filterProduct()?.map((row , index) => {
                  return <StyledTableRow key={row.id}>
                   <StyledTableCell component="th" scope="row">
                     {PN.convertEnToPe(index+1)}
@@ -118,7 +122,6 @@ const WaiteOrders = () => {
                     </IconButton>
                   </StyledTableCell>
                 </StyledTableRow>
-                }
               })}
             </TableBody>
           </Table>

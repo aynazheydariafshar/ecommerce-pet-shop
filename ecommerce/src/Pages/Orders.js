@@ -35,7 +35,7 @@ const Orders = () => {
           value="waite" 
           control={<Radio onClick={handleClick} color="secondary"/>}
           label="سفارش های درانتظار ارسال"
-          sx={{ paddingX :'30px'}}
+          sx={{ padding :'30px'}}
         />
       </RadioGroup>
       {value === 'delevery' ? <DeleveryOrders /> : <WaiteOrders />}
