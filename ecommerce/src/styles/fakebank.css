@@ -2,13 +2,15 @@
 	width: 100%;
 	display: flex;
     padding: 100px;
-    background-color: #F8F9FD ;
+}
+
+.bank{
     height: 100vh;
+    background-color: #F8F9FD ;
 }
 
 h1{
     text-align: center;
-    margin: 20px 0;
     font-size: 50px;
 }
 
