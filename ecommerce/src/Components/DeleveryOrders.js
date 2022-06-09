@@ -18,6 +18,8 @@ import { Box } from "@mui/system";
 import { BiDetail } from "react-icons/bi";
 import OrderCheck from "./modal/OrderCheck";
 import { DataContext } from "Context/DataContext";
+import PN from "persian-number";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -53,6 +55,7 @@ const DeleveryOrders = () => {
   //show modal  
   const [showModal,setShowModal] = React.useState(false);
 
+  //get context
   const productContext = React.useContext(DataContext);
 
   //show detailes
@@ -63,7 +66,7 @@ const DeleveryOrders = () => {
 
   //pagination delevery
   let [page, setPage] = React.useState(1);
-  const perPage = 10;
+  const perPage = 6;
 
   const count = Math.ceil(productContext.dataOrders.length / perPage);
   const product = PaginationPage(productContext.dataOrders, perPage);
@@ -72,6 +75,11 @@ const DeleveryOrders = () => {
     setPage(p);
     product.jump(p);
   };
+
+  //filter product
+  const filterProduct = () => {
+    return product.currentData()?.filter(item => item.orderStatus === 1)
+  }
 
   React.useEffect(() => {
     productContext.getOrders();
@@ -96,11 +104,10 @@ const DeleveryOrders = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {product.currentData()?.map((row, index) => {
-                if(row.orderStatus === 1){
+              {filterProduct()?.map((row, index) => {
                    return <StyledTableRow key={row.id}>
                       <StyledTableCell component="th" scope="row">
-                        {index+1}
+                        {PN.convertEnToPe(index+1)}
                       </StyledTableCell>
                       <StyledTableCell align="right" component="th" scope="row">
                         {row.customerDetail?.firstName}
@@ -109,7 +116,7 @@ const DeleveryOrders = () => {
                         {row.customerDetail?.lastName}
                       </StyledTableCell>
                       <StyledTableCell align="right" component="th" scope="row">
-                        {row.purchaseTotal}
+                        {PN.convertEnToPe(PN.sliceNumber(row.purchaseTotal))}
                       </StyledTableCell>
                       <StyledTableCell align="right" component="th" scope="row">
                         {new Date(row.orderDate).toLocaleDateString('fa-IR')}
@@ -120,7 +127,6 @@ const DeleveryOrders = () => {
                         </IconButton>
                       </StyledTableCell>
                     </StyledTableRow>
-                }
               })}
             </TableBody>
           </Table>

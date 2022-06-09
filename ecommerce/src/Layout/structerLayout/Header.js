@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, alpha} from "@mui/material/styles";
+import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,14 +7,15 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import Badge from '@mui/material/Badge';
-import Logo from 'assets/images/logo.png';
-import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
-import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
-import {Link} from 'react-router-dom';
-import { Menu, MenuItem } from "@mui/material";
-import MoreIcon from '@mui/icons-material/MoreVert';
-
+import Badge from "@mui/material/Badge";
+import Logo from "assets/images/logo.png";
+import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
+import ManageAccountsRoundedIcon from "@mui/icons-material/ManageAccountsRounded";
+import { Link, useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import PN from "persian-number";
+import useFetch from "hooks/useFetch";
+import {MdClose} from 'react-icons/md';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -25,13 +26,13 @@ const Search = styled("div")(({ theme }) => ({
   },
   marginRight: theme.spacing(2),
   marginLeft: 20,
-  border : '1px solid #eeeeee',
+  border: "1px solid #eeeeee",
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
     width: "auto",
   },
-  backgroundColor : '#F5F0FF',
+  backgroundColor: "#F5F0FF",
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -46,7 +47,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
-  fontSize : '15px',
+  fontSize: "15px",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -60,141 +61,124 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  //select cart from redux
+  const cart = useSelector((state) => state.cart);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  //  //data from products database
+    const { data, loading, error } = useFetch("products");
+    const [filterData, setfilterData] = React.useState([]);
+    const [search, setSearch] = useSearchParams();
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+     //filter serach box
+     const handleFilter = (e) => {
+      const searchWord = e.target.value;
+      setSearch({ name : searchWord});
+      const newFilter = data.filter(item => {
+          return item.name.toLowerCase().includes(searchWord.toLowerCase());
+        });
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
+      if(searchWord === ""){
+          setfilterData([]);
+      }else{
+          setfilterData(newFilter);
+      }
+  }
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+  const handleCloseSearch = ()=> {
+    setfilterData([]);
+    setSearch("");
+  }
 
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={1} color="error">
-            <ShoppingBasketRoundedIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <ManageAccountsRoundedIcon />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
   return (
-    <Box sx={{ flexGrow: 1 , overflowX : 'hidden'}}>
+    <Box sx={{ flexGrow: 1  }}>
       <AppBar position="static">
-          <Box sx={{display: "flex" , justifyContent: 'space-between' , backgroundColor : '#F8F9FD', color : 'black' , padding :'12px'}}>
-            <Box sx={{ display:"flex" , alignItems : 'center'}}>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={1} color="error">
-                  <ShoppingBasketRoundedIcon  className="icon-navbar"/>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            backgroundColor: "#F8F9FD",
+            color: "black",
+            padding: "12px",
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Link to="/cart" className="link">
+                <Badge
+                  badgeContent={
+                    cart.cartItems.length !== 0
+                      ? PN.convertEnToPe(cart.cartItems.length)
+                      : PN.convertEnToPe(0)
+                  }
+                  color="error"
+                >
+                  <ShoppingBasketRoundedIcon className="icon-navbar" />
                 </Badge>
-              </IconButton>
-              <IconButton
-                sx={{mt : '8px'}}
-                color="inherit"
-              >
-                <Link to='/management-productes' className="link">
-                  <ManageAccountsRoundedIcon className="icon-navbar"/>
-                </Link>
-              </IconButton>
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="...جتسجو"
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </Search>
-            </Box>  
-            <Box sx={{ display: "flex" , alignItems : 'center' }}>
-              <Typography
-                variant="h5"
-                noWrap
-                component="div"
-                sx={{marginRight : {xs : '55px' , sm : '0px'} , fontWeight : 'bold'}}
-              >
-              Pet Store <span style={{color : '#9e64ff'}}>Dr Afshar</span>
-              </Typography>
-              <Toolbar sx={{ display: { sm: "none" , md: 'block' } , padding : '5px' , mt : '10px' }}>
-                <Link to='/'>
-                  <img src={Logo} alt="logo" width='50px' height='50px'/>
-                </Link>
-              </Toolbar>
-            </Box>
+              </Link>
+            </IconButton>
+            <IconButton sx={{ mt: "8px" }} color="inherit">
+              <Link to="/management-productes" className="link">
+                <ManageAccountsRoundedIcon className="icon-navbar" />
+              </Link>
+            </IconButton>
+            <Search>
+              <SearchIconWrapper>
+                {filterData?.length === 0 ? <SearchIcon /> : <IconButton onClick={handleCloseSearch}><MdClose /></IconButton>}
+              </SearchIconWrapper>
+              <StyledInputBase
+                onChange={handleFilter}
+                placeholder="...جتسجو"
+                inputProps={{ "aria-label": "search" }}
+                value={search.get('name')}
+                // search-div-select
+              />
+              {filterData?.length !== 0 && (
+                <div className="search-data">
+                  {filterData?.slice(0, 5).map((item) => {
+                    return (<Box sx={{marginTop : '10px'}}>
+                      <Link className="link search" to={`/products/${item.id}`}>
+                        {item.name}
+                      </Link>
+                    </Box>
+                    );
+                  })}
+                </div>
+              )}
+            </Search>
           </Box>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography
+              variant="h5"
+              noWrap
+              component="div"
+              sx={{
+                marginRight: { xs: "55px", sm: "0px" },
+                fontWeight: "bold",
+                display : {xs : 'none' , sm:'block'}
+              }}
+            >
+              Pet Store <span style={{ color: "#9e64ff" }}>Dr Afshar</span>
+            </Typography>
+            <Toolbar
+              sx={{
+                display: { sm: "none", md: "block" },
+                padding: "5px",
+                mt: "10px",
+              }}
+            >
+              <Link to="/">
+                <img src={Logo} alt="logo" width="50px" height="50px" />
+              </Link>
+            </Toolbar>
+          </Box>
+        </Box>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
     </Box>
   );
 }
