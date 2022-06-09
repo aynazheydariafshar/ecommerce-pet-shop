@@ -24,12 +24,12 @@ const style = {
   p: 4,
 };
 
-export default function AddProductes({ open, handleClose }) {
-  //category
-  const { category, loadingcategory, errorcategory } = useCategory();
-
+export default function EditeProduct({ open, handleClose, employee }) {
   //context data
   const productContext = React.useContext(DataContext);
+
+  //category
+  const { category, loadingcategory, errorcategory } = useCategory();
 
   //show
   const [show, setShow] = React.useState(true);
@@ -43,8 +43,8 @@ export default function AddProductes({ open, handleClose }) {
     Name: yup.string().required("پر کردن این فیلد الزامی می باشد"),
     price: yup.number().min(0,"تعداد نمی تواند منفی باشد").required("پر کردن این فیلد الزامی می باشد"),
     count: yup.number().min(0,"تعداد نمی تواند منفی باشد").required("پر کردن این فیلد الزامی می باشد"),
-    brand: yup.string().required("پر کردن این فیلد الزامی می باشد"),
-    weight: yup.number().min(0,"تعداد نمی تواند منفی باشد").required("پر کردن این فیلد الزامی می باشد"),
+    brand: yup.string().min(0,"تعداد نمی تواند منفی باشد").required("پر کردن این فیلد الزامی می باشد"),
+    weight: yup.number().required("پر کردن این فیلد الزامی می باشد"),
     image: yup
       .mixed()
       .test("required", "پر کردن این فیلد الزامی می باشد", (file) => {
@@ -58,7 +58,7 @@ export default function AddProductes({ open, handleClose }) {
     }),
   });
 
-  //find category data
+  //find group for every product
   const findGroupOfProduct = (subgroup) => {
     let resault = category.find((item) =>
       item.subgroup ? item.subgroup === subgroup : 5
@@ -68,14 +68,14 @@ export default function AddProductes({ open, handleClose }) {
 
   //post image
   const handleChangeimage = async (e) => {
-    const dataimage = e.target.files[0];
+    const data = e.target.files[0];
     const formData = new FormData();
-    formData.append("image", dataimage);
+    formData.append("image", data);
     const filename = await axios.post("http://localhost:3002/upload", formData);
     formik.setFieldValue("image", filename.data.filename, false);
   };
 
-  //find type data
+  //find type of animal
   const findType = (group) => {
     if (group === "محصولات گربه") {
       return "گربه";
@@ -86,12 +86,12 @@ export default function AddProductes({ open, handleClose }) {
     }
   };
 
-  //post data
-  const postData = (values) => {
+  //edit data and post data
+  const editeData = (values) => {
     setErrortwo(null);
     setLoadingtwo(false);
     axios
-      .post("http://localhost:3002/products", {
+      .put(`http://localhost:3002/products/${employee.id}`, {
         name: values.Name,
         brand: values.brand,
         image: values.image,
@@ -103,8 +103,8 @@ export default function AddProductes({ open, handleClose }) {
         description: values.description,
       })
       .then((response) => {
-        setLoadingtwo(true);
         productContext.getdata();
+        setLoadingtwo(true);
       })
       .catch((error) => {
         setLoadingtwo(true);
@@ -113,25 +113,35 @@ export default function AddProductes({ open, handleClose }) {
       });
   };
 
+  // const findCategoryOfProduct = () => {
+  //     let res = category.filter(item => item.id === employee.category);
+  //     formik.setFieldValue('group' , res[0]?.group , false)
+  //     formik.setFieldValue('subgroup' , res[0]?.subgroup , false)
+  // }
+
+  // React.useEffect(() => {
+  //     findCategoryOfProduct()
+  // }, [])
+
   //formik
   const formik = useFormik({
     initialValues: {
-      Name: "",
-      group: "",
-      subgroup: "",
-      image: "",
-      weight: 0,
-      brand: "",
-      price: 0,
-      count: 0,
-      description: "",
+      Name: employee.name,
+      group: " ",
+      subgroup: " ",
+      image: employee.image,
+      weight: employee.weight,
+      brand: employee.brand,
+      price: employee.price,
+      count: employee.count,
+      description: employee.description,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      postData(values);
+      editeData(values);
       setTimeout(() => {
         setShow(!show);
-        toast.success("محصول با موفقیت ثبت شد");
+        toast.success("محصول با موفقیت ویرایش شد");
       }, 700);
     },
   });
@@ -150,7 +160,7 @@ export default function AddProductes({ open, handleClose }) {
             <Box sx={style}>
               <form dir="rtl" onSubmit={formik.handleSubmit}>
                 <Typography variant="h5" align="center" fontWeight="bold">
-                  افزودن کالا
+                  ویرایش کالا
                 </Typography>
                 <Box sx={{ display: "flex" }}>
                   <TextField
@@ -168,7 +178,7 @@ export default function AddProductes({ open, handleClose }) {
                   />
                   <TextField
                     fullWidth
-                    sx={{ marginRight: "40px" }}
+                    sx={{ marginRight: "20px" }}
                     variant="standard"
                     type="text"
                     label="برند"
@@ -198,7 +208,7 @@ export default function AddProductes({ open, handleClose }) {
                     helperText={formik.touched.weight && formik.errors.weight}
                   />
                   <TextField
-                    sx={{ marginRight: "40px" }}
+                    sx={{ marginRight: "20px" }}
                     fullWidth
                     variant="standard"
                     type="number"
@@ -212,7 +222,7 @@ export default function AddProductes({ open, handleClose }) {
                     helperText={formik.touched.price && formik.errors.price}
                   />
                   <TextField
-                    sx={{ marginRight: "40px" }}
+                    sx={{ marginRight: "20px" }}
                     fullWidth
                     variant="standard"
                     type="number"
@@ -251,7 +261,7 @@ export default function AddProductes({ open, handleClose }) {
                   </TextField>
                   {formik.values.group !== "محصولات پرندگان" && (
                     <TextField
-                      sx={{ marginRight: "40px" }}
+                      sx={{ marginRight: "20px" }}
                       select
                       SelectProps={{
                         native: true,
@@ -291,7 +301,7 @@ export default function AddProductes({ open, handleClose }) {
                   )}
                   <TextField
                     hidden
-                    sx={{ marginBottom: "20px", marginRight: "40px" }}
+                    sx={{ marginRight: "20px", marginBottom: "20px" }}
                     inputProps={{ accept: "image/*" }}
                     fullWidth
                     variant="standard"
@@ -320,11 +330,11 @@ export default function AddProductes({ open, handleClose }) {
                 />
                 <Button
                   type="submit"
-                  color="success"
+                  color="secondary"
                   variant="contained"
                   sx={{ marginY: "10px", paddingX: "40px", fontSize: "15px" }}
                 >
-                  افزودن
+                  ویرایش
                 </Button>
               </form>
             </Box>

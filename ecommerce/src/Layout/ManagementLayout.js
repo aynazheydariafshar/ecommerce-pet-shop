@@ -1,14 +1,17 @@
-import React from 'react';
-import NavbarManagment from '../Components/NavbarManagment';
-import Footer from '../Components/Footer';
+import React from "react";
+import NavbarManagment from "layout/structerLayout/NavbarManagment";
+import Footer from "layout/structerLayout/Footer";
 
-const ManagementLayout = ({children}) => {
-    return <>
+const ManagementLayout = (Component) => {
+  return function (...props) {
+    return (
+      <>
         <NavbarManagment />
-        <main>{children}</main>
+        <Component>{props}</Component>
         <Footer />
-    </>;
-}
-
+      </>
+    );
+  };
+};
 
 export default ManagementLayout;
