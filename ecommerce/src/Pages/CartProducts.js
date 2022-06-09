@@ -17,6 +17,7 @@ import {
   removeFromCart,
 } from "redux/cartSlice";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const CartProducts = () => {
@@ -66,88 +67,94 @@ const CartProducts = () => {
         <>
           {cart.cartItems?.map((item) => {
             return (
-              <Cart mbottom="20px" width="75%" padding="10px">
-                <div
-                  style={{
-                    position: "relative",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                  }}
-                >
-                  <IconButton
-                    sx={{
-                      position: "absolute",
-                      top: 0,
-                      fontSize: "30px",
-                      opacity: 0.5,
-                      left: 10,
-                    }}
-                    onClick={() => handleRemoveProduct(item)}
-                  >
-                    <GrClose />
-                  </IconButton>
-                  <CardMedia
-                    component="img"
-                    height="170"
-                    image={`http://localhost:3002/files/${item.image}`}
-                    alt={item.name}
-                    sx={{ objectFit: "contain" }}
-                  />
-                  <Box
-                    key={item.id}
-                    sx={{
+              <Link className="link" to={`/products/${item.id}`}>
+                <Cart mbottom="20px" width="75%" padding="10px">
+                  <div
+                    style={{
+                      position: "relative",
                       display: "flex",
-                      flexDirection: { md: "row", sm: "column", xs: "column" },
-                      padding: "20px",
+                      flexDirection: "column",
+                      justifyContent: "space-around",
                       alignItems: "center",
-                      marginLeft: "45px",
                     }}
                   >
-                    <Typography padding="20px" variant="h6">
-                      قیمت کل :
-                      {PN.convertEnToPe(
-                        PN.sliceNumber(item.price * item.cartQuantity)
-                      )}
-                      تومان
-                    </Typography>
-                    <Typography
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: 0,
+                        fontSize: "30px",
+                        opacity: 0.5,
+                        left: 10,
+                      }}
+                      onClick={() => handleRemoveProduct(item)}
+                    >
+                      <GrClose />
+                    </IconButton>
+                    <CardMedia
+                      component="img"
+                      height="170"
+                      image={`http://localhost:3002/files/${item.image}`}
+                      alt={item.name}
+                      sx={{ objectFit: "contain" }}
+                    />
+                    <Box
+                      key={item.id}
                       sx={{
                         display: "flex",
-                        borderRadius: "50px",
-                        boxShadow:
-                          "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
+                        flexDirection: {
+                          md: "row",
+                          sm: "column",
+                          xs: "column",
+                        },
+                        padding: "20px",
+                        alignItems: "center",
+                        marginLeft: "45px",
                       }}
-                      padding="5px"
-                      margin="20px"
-                      variant="h6"
-                      fontWeight="bold"
                     >
-                      <IconButton
-                        size="small"
-                        sx={{ marginRight: "10px" }}
-                        onClick={() => handleaddCounter(item)}
+                      <Typography padding="20px" variant="h6">
+                        قیمت کل :
+                        {PN.convertEnToPe(
+                          PN.sliceNumber(item.price * item.cartQuantity)
+                        )}
+                        تومان
+                      </Typography>
+                      <Typography
+                        sx={{
+                          display: "flex",
+                          borderRadius: "50px",
+                          boxShadow:
+                            "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
+                        }}
+                        padding="5px"
+                        margin="20px"
+                        variant="h6"
+                        fontWeight="bold"
                       >
-                        <GrFormAdd />
-                      </IconButton>
-                      <span>{PN.convertEnToPe(item.cartQuantity)}</span>
-                      <IconButton
-                        size="small"
-                        sx={{ marginLeft: "10px" }}
-                        onClick={() => handlelowerCounter(item)}
-                      >
-                        <BiMinus />
-                      </IconButton>
-                    </Typography>
-                    <Typography padding="20px" variant="h6">
-                      قیمت هر عدد :{" "}
-                      {PN.convertEnToPe(PN.sliceNumber(item.price))}
-                      تومان
-                    </Typography>
-                  </Box>
-                </div>
-              </Cart>
+                        <IconButton
+                          size="small"
+                          sx={{ marginRight: "10px" }}
+                          onClick={() => handleaddCounter(item)}
+                        >
+                          <GrFormAdd />
+                        </IconButton>
+                        <span>{PN.convertEnToPe(item.cartQuantity)}</span>
+                        <IconButton
+                          size="small"
+                          sx={{ marginLeft: "10px" }}
+                          onClick={() => handlelowerCounter(item)}
+                        >
+                          <BiMinus />
+                        </IconButton>
+                      </Typography>
+                      <Typography padding="20px" variant="h6">
+                        قیمت هر عدد :{" "}
+                        {PN.convertEnToPe(PN.sliceNumber(item.price))}
+                        تومان
+                      </Typography>
+                    </Box>
+                  </div>
+                </Cart>
+              </Link>
             );
           })}
           <div
@@ -161,6 +168,7 @@ const CartProducts = () => {
               },
               justifyContent: "space-around",
               alignItems: "baseline",
+              marginRight : '50px'
             }}
           >
             <Button
@@ -179,7 +187,7 @@ const CartProducts = () => {
             <Button
               variant="contained"
               color="error"
-              sx={{ marginTop: "20px", fontSize: "17px" }}
+              sx={{ marginTop: "20px", fontSize: "17px"}}
               onClick={handleclearAll}
             >
               حذف تمام محصولات{" "}

@@ -46,7 +46,7 @@ const Home = () => {
             alignItems: "center",
           }}
         >
-          <Box width='100%' padding='30px'>
+          <Box width='100%' marginLeft='25px'>
             <MuiImageSlider fitToImageHeight='true' autoPlay='true' images={images}/>
           </Box>
           <Typography variant="h4" fontWeight='bold' paddingY='50px' marginTop='40px'> " تمام محصولات "</Typography>

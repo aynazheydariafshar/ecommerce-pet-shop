@@ -31,7 +31,7 @@ const Cart = (props) => {
           borderRadius: 2,
           padding: props.padding,
           marginTop: "30px",
-          marginLeft: { md: "100px", sm: "50px" },
+          marginLeft: { md: "100px", sm: "50px"},
           marginRight: "30px",
         }}
       >

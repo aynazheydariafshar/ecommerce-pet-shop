@@ -160,6 +160,7 @@ export default function Header() {
               sx={{
                 marginRight: { xs: "55px", sm: "0px" },
                 fontWeight: "bold",
+                display : {xs : 'none' , sm:'block'}
               }}
             >
               Pet Store <span style={{ color: "#9e64ff" }}>Dr Afshar</span>
