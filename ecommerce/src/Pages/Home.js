@@ -1,54 +1,94 @@
-import { Box, Pagination, Stack } from '@mui/material';
-import CardProduct from 'components/CardProduct';
-import PaginationPage from 'components/PaginationPage';
-import useFetch from 'hooks/useFetch';
-import CustomerLayout from 'layout/CustomerLayout';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Box, Pagination, Stack, Typography } from "@mui/material";
+import CardProduct from "components/CardProduct";
+import PaginationPage from "components/PaginationPage";
+import Spinner from "components/Spinner";
+import useFetch from "hooks/useFetch";
+import CustomerLayout from "layout/CustomerLayout";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import MuiImageSlider from 'mui-image-slider';
+import sliderone from 'assets/images/64db75339029419da19ec981fdbb1053.w_1140,h_393,r_k.jpg (1).webp';
+import slidertwo from 'assets/images/795da0b917d8406cb8917af71870af9c.w_1140,h_393,r_k.png.webp';
+import sliderthree from 'assets/images/47de6c9bcccb4d15b34da84a2903cf1c.w_1140,h_393,r_k.jpg.webp'
+import Cart from "components/Cart";
 
 const Home = () => {
+  //data from products database
+  const { data, loading, error } = useFetch("products");
 
-    //data from products database
-    const {data , loading , error} = useFetch('products');
+  const images = [sliderone , slidertwo , sliderthree];
 
-    //pagination data
-    let [page, setPage] = useState(1);
-    const perPage = 6;
-  
-    const count = Math.ceil(data.length / perPage);
-    const product = PaginationPage(data, perPage);
-  
-    const handleChange = (e, p) => {
-      setPage(p);
-        product.jump(p);
-    };
+  //pagination data
+  let [page, setPage] = useState(1);
+  const perPage = 6;
 
+  const count = Math.ceil(data.length / perPage);
+  const product = PaginationPage(data, perPage);
 
-    return <Box sx={{display : 'flex' , flexDirection : 'column' , alignItems : 'center'}}>
-        <Box sx={{display : 'flex' , flexDirection : {md : 'row' , sm : 'column'} , justifyContent : 'space-around' , alignItems : 'center' , flexWrap : 'wrap' , py : '30px'}}>
-        {product.currentData().map(item => {
-            return <Link className='link' to={`/products/${item.id}`}>
-                    <CardProduct 
-                        imageSrc={`http://localhost:3002/files/${item.image}`}
-                        titleCard={item.name}
-                        price = {item.price}
-                        brand = {item.brand}
+  const handleChange = (e, p) => {
+    setPage(p);
+    product.jump(p);
+  };
+
+  return (
+    <>
+      {loading ? (
+        <Box
+          sx={{ display: "flex", justifyContent: "center", marginY: "150px" }}
+        >
+          <Spinner />
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Box width='100%' marginLeft='25px'>
+            <MuiImageSlider fitToImageHeight='true' autoPlay='true' images={images}/>
+          </Box>
+          <Typography variant="h4" fontWeight='bold' paddingY='50px' marginTop='40px'> " تمام محصولات "</Typography>
+          <Cart>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { md: "row", sm: "column" },
+                justifyContent: "space-around",
+                alignItems: "center",
+                flexWrap: "wrap",
+                py: "30px",
+              }}
+            >
+              {product.currentData().map((item) => {
+                return (
+                  <Link className="link" to={`/products/${item.id}`}>
+                    <CardProduct
+                      imageSrc={`http://localhost:3002/files/${item.image}`}
+                      titleCard={item.name}
+                      price={item.price}
+                      brand={item.brand}
                     />
-                </Link>
-        }) 
-        }
-        </Box> 
-        <Stack className='pager' padding='30px'>
-            <Pagination 
-                size="large" 
-                count={count} 
-                color="secondary" 
-                onChange={handleChange}
-                page={page}
+                  </Link>
+                );
+              })}
+            </Box>
+
+          </Cart>
+          <Stack className="pager" padding="30px">
+            <Pagination
+              size="large"
+              count={count}
+              color="secondary"
+              onChange={handleChange}
+              page={page}
             />
-        </Stack>
-    </Box>
+          </Stack>
+        </Box>
+      )}
+    </>
+  );
 };
 
-
-export default CustomerLayout(Home) ;
+export default CustomerLayout(Home);

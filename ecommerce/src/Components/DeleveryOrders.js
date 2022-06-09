@@ -55,6 +55,7 @@ const DeleveryOrders = () => {
   //show modal  
   const [showModal,setShowModal] = React.useState(false);
 
+  //get context
   const productContext = React.useContext(DataContext);
 
   //show detailes
@@ -65,7 +66,7 @@ const DeleveryOrders = () => {
 
   //pagination delevery
   let [page, setPage] = React.useState(1);
-  const perPage = 10;
+  const perPage = 6;
 
   const count = Math.ceil(productContext.dataOrders.length / perPage);
   const product = PaginationPage(productContext.dataOrders, perPage);
@@ -74,6 +75,11 @@ const DeleveryOrders = () => {
     setPage(p);
     product.jump(p);
   };
+
+  //filter product
+  const filterProduct = () => {
+    return product.currentData()?.filter(item => item.orderStatus === 1)
+  }
 
   React.useEffect(() => {
     productContext.getOrders();
@@ -98,8 +104,7 @@ const DeleveryOrders = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {product.currentData()?.map((row, index) => {
-                if(row.orderStatus === 1){
+              {filterProduct()?.map((row, index) => {
                    return <StyledTableRow key={row.id}>
                       <StyledTableCell component="th" scope="row">
                         {PN.convertEnToPe(index+1)}
@@ -122,7 +127,6 @@ const DeleveryOrders = () => {
                         </IconButton>
                       </StyledTableCell>
                     </StyledTableRow>
-                }
               })}
             </TableBody>
           </Table>
