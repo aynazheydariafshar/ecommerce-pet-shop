@@ -67,8 +67,7 @@ const CartProducts = () => {
         <>
           {cart.cartItems?.map((item) => {
             return (
-              <Link className="link" to={`/products/${item.id}`}>
-                <Cart mbottom="20px" width="75%" padding="10px">
+              <Cart mbottom="20px" width="75%" padding="10px">
                   <div
                     style={{
                       position: "relative",
@@ -90,6 +89,7 @@ const CartProducts = () => {
                     >
                       <GrClose />
                     </IconButton>
+                    <Link className="link" to={`/products/${item.id}`}>
                     <CardMedia
                       component="img"
                       height="170"
@@ -97,6 +97,7 @@ const CartProducts = () => {
                       alt={item.name}
                       sx={{ objectFit: "contain" }}
                     />
+                     </Link>
                     <Box
                       key={item.id}
                       sx={{
@@ -154,7 +155,6 @@ const CartProducts = () => {
                     </Box>
                   </div>
                 </Cart>
-              </Link>
             );
           })}
           <div
