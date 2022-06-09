@@ -41,10 +41,10 @@ export default function AddProductes({ open, handleClose }) {
   //validation
   const validationSchema = yup.object().shape({
     Name: yup.string().required("پر کردن این فیلد الزامی می باشد"),
-    price: yup.number().required("پر کردن این فیلد الزامی می باشد"),
-    count: yup.number().required("پر کردن این فیلد الزامی می باشد"),
+    price: yup.number().min(0,"تعداد نمی تواند منفی باشد").required("پر کردن این فیلد الزامی می باشد"),
+    count: yup.number().min(0,"تعداد نمی تواند منفی باشد").required("پر کردن این فیلد الزامی می باشد"),
     brand: yup.string().required("پر کردن این فیلد الزامی می باشد"),
-    weight: yup.number().required("پر کردن این فیلد الزامی می باشد"),
+    weight: yup.number().min(0,"تعداد نمی تواند منفی باشد").required("پر کردن این فیلد الزامی می باشد"),
     image: yup
       .mixed()
       .test("required", "پر کردن این فیلد الزامی می باشد", (file) => {
