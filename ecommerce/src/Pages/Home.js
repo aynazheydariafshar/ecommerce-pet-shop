@@ -10,6 +10,7 @@ import MuiImageSlider from 'mui-image-slider';
 import sliderone from 'assets/images/64db75339029419da19ec981fdbb1053.w_1140,h_393,r_k.jpg (1).webp';
 import slidertwo from 'assets/images/795da0b917d8406cb8917af71870af9c.w_1140,h_393,r_k.png.webp';
 import sliderthree from 'assets/images/47de6c9bcccb4d15b34da84a2903cf1c.w_1140,h_393,r_k.jpg.webp'
+import Cart from "components/Cart";
 
 const Home = () => {
   //data from products database
@@ -45,33 +46,36 @@ const Home = () => {
             alignItems: "center",
           }}
         >
-          <Box width='100%' marginLeft='25px'>
+          <Box width='100%' padding='30px'>
             <MuiImageSlider fitToImageHeight='true' autoPlay='true' images={images}/>
           </Box>
           <Typography variant="h4" fontWeight='bold' paddingY='50px' marginTop='40px'> " تمام محصولات "</Typography>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: { md: "row", sm: "column" },
-              justifyContent: "space-around",
-              alignItems: "center",
-              flexWrap: "wrap",
-              py: "30px",
-            }}
-          >
-            {product.currentData().map((item) => {
-              return (
-                <Link className="link" to={`/products/${item.id}`}>
-                  <CardProduct
-                    imageSrc={`http://localhost:3002/files/${item.image}`}
-                    titleCard={item.name}
-                    price={item.price}
-                    brand={item.brand}
-                  />
-                </Link>
-              );
-            })}
-          </Box>
+          <Cart>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { md: "row", sm: "column" },
+                justifyContent: "space-around",
+                alignItems: "center",
+                flexWrap: "wrap",
+                py: "30px",
+              }}
+            >
+              {product.currentData().map((item) => {
+                return (
+                  <Link className="link" to={`/products/${item.id}`}>
+                    <CardProduct
+                      imageSrc={`http://localhost:3002/files/${item.image}`}
+                      titleCard={item.name}
+                      price={item.price}
+                      brand={item.brand}
+                    />
+                  </Link>
+                );
+              })}
+            </Box>
+
+          </Cart>
           <Stack className="pager" padding="30px">
             <Pagination
               size="large"

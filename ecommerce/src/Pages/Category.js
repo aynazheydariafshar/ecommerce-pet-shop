@@ -1,4 +1,5 @@
 import { Box, Pagination, Stack } from "@mui/material";
+import Cart from "components/Cart";
 import PaginationPage from "components/PaginationPage";
 import Spinner from "components/Spinner";
 import useFetch from "hooks/useFetch";
@@ -52,6 +53,7 @@ const Category = () => {
             alignItems: "center",
           }}
         >
+          <Cart>
           <Box
             sx={{
               display: "flex",
@@ -75,6 +77,7 @@ const Category = () => {
               );
             })}
           </Box>
+            </Cart>
           <Stack className="pager" padding="30px">
             <Pagination
               size="large"
