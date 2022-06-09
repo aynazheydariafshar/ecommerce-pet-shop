@@ -88,6 +88,10 @@ function ManagementProductes() {
     toast.error("محصول از لیست کالاها حذف شد");
   };
 
+  React.useEffect(() => {
+    productContext.getdata()
+  }, [])
+
   return (
     <>
       <Button
