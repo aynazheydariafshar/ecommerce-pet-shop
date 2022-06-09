@@ -4,7 +4,7 @@ import useCategory from "hooks/useCategory";
 import useFetch from "hooks/useFetch";
 import CustomerLayout from "layout/CustomerLayout";
 import React, { useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { CgUnavailable } from "react-icons/cg";
 import Cart from "components/Cart";
@@ -14,10 +14,13 @@ import PN from "persian-number";
 import { GrFormAdd } from "react-icons/gr";
 import { BiMinus } from "react-icons/bi";
 import Spinner from "components/Spinner";
+import { BiArrowBack } from "react-icons/bi";
 
 const Product = () => {
   //select cart from redux
   const cart = useSelector((state) => state.cart);
+
+  const navigate = useNavigate();
 
   //get state from redux
   const dispatch = useDispatch();
@@ -59,7 +62,7 @@ const Product = () => {
 
   useEffect(() => {
     setProduct(filterData);
-  }, [data , dataParams]);
+  }, [data, dataParams]);
 
   return (
     <>
@@ -71,6 +74,15 @@ const Product = () => {
         </Box>
       ) : (
         <>
+          <Button
+            variant="contained"
+            onClick={() => navigate(-1)}
+            sx={{ padding: "10px", margin: "20px" }}
+            color="warning"
+            startIcon={<BiArrowBack />}
+          >
+            بازگشت
+          </Button>
           {product?.map((item) => {
             return (
               <>
