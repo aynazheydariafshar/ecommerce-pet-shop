@@ -1,4 +1,4 @@
-import { Button, Grid, InputAdornment, TextField } from "@mui/material";
+import { Button, Grid, IconButton, InputAdornment, TextField } from "@mui/material";
 import React, { useState } from "react";
 import LoginImage from "assets/images/24237-Cat-Dog-CorgiCat-Dog-HD-Wallpaper.jpg";
 import Logo from "assets/images/logo.png";
@@ -11,13 +11,22 @@ import axios from "axios";
 import { setUserSession } from "utils/Common";
 import HomeIcon from "@mui/icons-material/Home";
 import { toast } from "react-toastify";
+import {RiEye2Line , RiEyeCloseLine} from 'react-icons/ri'
+
 
 const Login = (props) => {
   //check for api
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const [show , setShow] = useState(false);
+
   const navigate = useNavigate();
+
+  //show password
+  const handleClickShowPassword = () => setShow(!show);
+  const handleMouseDownPassword = () => setShow(!show);
+
 
   //validation
   const validationSchema = yup.object({
@@ -120,7 +129,7 @@ const Login = (props) => {
               <TextField
                 fullWidth
                 variant="standard"
-                type="password"
+                type={show ? "text" : "password"}
                 label="رمز عبور"
                 margin="normal"
                 InputProps={{
@@ -129,6 +138,12 @@ const Login = (props) => {
                       <KeyRoundedIcon />
                     </InputAdornment>
                   ),
+                  endAdornment:( <IconButton
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {show ? <RiEye2Line /> : <RiEyeCloseLine />}
+                    </IconButton>)
                 }}
                 id="password"
                 name="password"
